@@ -9,4 +9,4 @@ RUN python -m spacy.en.download
 RUN pip install textacy
 
 # Pattern
-RUN pip install -U pattern
+# RUN pip install -U pattern
