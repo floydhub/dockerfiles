@@ -1,4 +1,4 @@
-FROM floydhub/spacy:3.6
+FROM floydhub/spacy:latest
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip install textacy
