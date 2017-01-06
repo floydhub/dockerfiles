@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
 		liblcms2-dev \
 		libopenblas-dev \
 		liblapack-dev \
-		libopenjpeg2 \
         libpng12-dev \
 		libtiff5-dev \
 		libzmq3-dev \
