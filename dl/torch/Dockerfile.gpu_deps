@@ -27,9 +27,8 @@ ENV LUA_CPATH='/root/torch/install/lib/?.so;'$LUA_CPATH
 
 RUN luarocks install nn && \
     luarocks install rnn && \
-    luarocks install penlight
+    luarocks install penlight && \
 # Install iTorch
-        \
         cd /root && git clone https://github.com/facebook/iTorch.git && \
         cd iTorch && \
         luarocks make
