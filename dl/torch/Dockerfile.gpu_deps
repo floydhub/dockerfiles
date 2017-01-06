@@ -1,11 +1,18 @@
-FROM floydhub/dl-base:latest
+FROM floydhub/dl-base-gpu:latest
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Run Torch7 installation scripts
 RUN git clone https://github.com/torch/distro.git /root/torch --recursive && \
 	cd /root/torch && \
-	bash install-deps && \
-	yes no | ./install.sh
+	bash install-deps
+
+RUN cd /root/torch && \
+# Run without nvcc to prevent timeouts
+    sed -i 's/path_to_nvcc=$(which nvcc)/path_to_nvcc=$(which no_nvcc)/g' install.sh && \
+    sed -i 's,path_to_nvcc=/usr/local/cuda/bin/nvcc,path_to_nvcc=,g' install.sh && \
+	yes no | ./install.sh && \
+# Restore Torch7 installation script
+    sed -i 's/path_to_nvcc=$(which no_nvcc)/path_to_nvcc=$(which nvcc)/g' install.sh
 
 # Install Jupyter Notebook for iTorch
 RUN pip install notebook ipywidgets
@@ -20,7 +27,7 @@ ENV LUA_CPATH='/root/torch/install/lib/?.so;'$LUA_CPATH
 
 RUN luarocks install nn && \
     luarocks install rnn && \
-    luarocks install penlight && \
+    luarocks install penlight
 # Install iTorch
         \
         cd /root && git clone https://github.com/facebook/iTorch.git && \
