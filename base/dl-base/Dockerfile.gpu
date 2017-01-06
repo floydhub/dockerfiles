@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 		libhdf5-dev \
 		liblcms2-dev \
 		libopenblas-dev \
-		liblapack-dev \
+        liblapack-dev \
 		libopenjpeg2 \
         libpng12-dev \
 		libtiff5-dev \
