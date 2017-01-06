@@ -12,7 +12,6 @@ RUN pip --no-cache-dir install \
         path.py \
         scipy \
         six \
-        skimage \
         sklearn \
         sympy \
         Pillow \
