@@ -7,5 +7,6 @@ RUN apt-get install -y \
 
 ADD http://nlp.stanford.edu/software/stanford-ner-2015-01-29.zip ner.zip
 RUN unzip ner.zip
+RUN MV /stanford-ner-2015-01-30 /stanford-ner
 
-WORKDIR /stanford-ner-2015-01-30
+WORKDIR /stanford-ner
