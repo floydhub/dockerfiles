@@ -9,3 +9,5 @@ RUN luarocks install tds && \
 RUN git clone https://github.com/opennmt/opennmt.git && \
 		cd opennmt && \
 		luarocks make rocks/opennmt-scm-1.rockspec
+
+WORKDIR "/opennmt"
