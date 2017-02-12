@@ -36,7 +36,19 @@ RUN cd ~/ &&\
     cd opencv && \
     mkdir build && \
     cd build && \
-    cmake  -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON .. && \
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -DWITH_QT=ON \
+        -DWITH_OPENGL=ON \
+        -D WITH_CUDA=ON \
+        -D ENABLE_FAST_MATH=1 \
+        -D CUDA_FAST_MATH=1 \
+        -D WITH_CUBLAS=1 \
+        -DFORCE_VTK=ON \
+        -DWITH_TBB=ON \
+        -DWITH_GDAL=ON \
+        -DWITH_XINE=ON \
+        -DBUILD_EXAMPLES=ON \
+        .. && \
     make -j"$(nproc)" && \
     make install && \
     ldconfig && \
