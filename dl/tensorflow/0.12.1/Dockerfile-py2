@@ -1,0 +1,7 @@
+FROM floydhub/dl-opencv:latest-py2
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+ARG TENSORFLOW_VERSION=0.12.1
+ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
+
+RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}
