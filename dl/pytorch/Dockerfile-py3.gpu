@@ -1,0 +1,22 @@
+FROM floydhub/dl-opencv:latest-gpu-py3
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+# From https://github.com/pytorch/pytorch/blob/master/Dockerfile
+
+RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh  && \
+     chmod +x ~/miniconda.sh && \
+     ~/miniconda.sh -b -p /opt/conda && \     
+     rm ~/miniconda.sh && \
+     /opt/conda/bin/conda install conda-build && \
+     /opt/conda/bin/conda create -y --name pytorch-py35 python=3.5.2 cffi numpy scipy ipython mkl && \
+     /opt/conda/bin/conda clean -ya 
+ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
+# Add LAPACK support for the GPU
+RUN conda install --name pytorch-py35 -c soumith magma-cuda80
+# This must be done before pip so that requirements.txt is available
+WORKDIR /opt/pytorch
+
+RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+    CMAKE_LIBRARY_PATH=/opt/conda/envs/pytorch-py35/lib \
+    CMAKE_INCLUDE_PATH=/opt/conda/envs/pytorch-py35/include \
+    pip install -v .
