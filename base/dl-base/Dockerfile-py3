@@ -1,4 +1,4 @@
-FROM floydhub/python-base-gpu:3.6
+FROM floydhub/python-base:latest-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Install some dependencies
@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 		libhdf5-dev \
 		liblcms2-dev \
 		libopenblas-dev \
-        liblapack-dev \
+		liblapack-dev \
         libpng12-dev \
 		libtiff5-dev \
 		libzmq3-dev \

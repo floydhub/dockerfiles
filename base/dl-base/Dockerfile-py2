@@ -1,4 +1,4 @@
-FROM floydhub/python-base:3.6
+FROM floydhub/python-base:latest-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Install some dependencies
