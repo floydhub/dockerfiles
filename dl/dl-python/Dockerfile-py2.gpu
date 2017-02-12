@@ -10,6 +10,7 @@ RUN pip --no-cache-dir install \
         numpy \
         pandas \
         path.py \
+        pyyaml \
         scipy \
         six \
         sklearn \
