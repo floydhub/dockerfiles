@@ -1,4 +1,4 @@
-FROM floydhub/dl-base-gpu:latest
+FROM floydhub/dl-opencv:latest-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Run Torch7 installation scripts
