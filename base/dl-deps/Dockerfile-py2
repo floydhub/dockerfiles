@@ -3,11 +3,15 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Install some dependencies
 RUN apt-get update && apt-get install -y \
+		ant \
 		apt-utils \
 		bc \
 		build-essential \
 		cmake \
+		default-jdk \
+		doxygen \
 		gfortran \
+		libeigen3-dev \
 		libfreetype6-dev \
 		libhdf5-dev \
 		liblcms2-dev \
@@ -20,6 +24,7 @@ RUN apt-get update && apt-get install -y \
 		nano \
 		pkg-config \
 		python-dev \
+		python-tk \
         rsync \
 		software-properties-common \
 		unzip \
