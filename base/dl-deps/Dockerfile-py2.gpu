@@ -1,26 +1,40 @@
-FROM floydhub/python-base:latest-gpu-py3
+FROM floydhub/python-base:latest-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Install some dependencies
 RUN apt-get update && apt-get install -y \
+		apt-utils \
 		bc \
 		build-essential \
 		cmake \
 		gfortran \
+		libavcodec-dev \
+		libavformat-dev \
+		libav-tools \
+		libdc1394-22-dev \
 		libfreetype6-dev \
+		libgtk2.0-dev \
 		libhdf5-dev \
+		libjasper-dev \
 		liblcms2-dev \
 		libopenblas-dev \
-        liblapack-dev \
+		liblapack-dev \
         libpng12-dev \
+		libswscale-dev \
+		libtbb2 \
+		libtbb-dev \
+		libtiff-dev \
 		libtiff5-dev \
+		libvtk6-dev \
 		libzmq3-dev \
 		nano \
 		pkg-config \
+		qt5-default \
         rsync \
 		software-properties-common \
 		unzip \
 		vim \
+		webp \
 		&& \
 	apt-get clean && \
 	apt-get autoremove && \
