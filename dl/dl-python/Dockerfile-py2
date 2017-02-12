@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:latest
+FROM floydhub/dl-base:latest-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \

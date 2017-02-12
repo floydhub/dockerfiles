@@ -1,0 +1,20 @@
+FROM floydhub/dl-base:latest-gpu-py3
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+RUN pip --no-cache-dir install \
+        Cython \
+        h5py \
+        ipykernel \
+        jupyter \
+        matplotlib \
+        numpy \
+        pandas \
+        path.py \
+        scipy \
+        six \
+        sklearn \
+        sympy \
+        Pillow \
+        zmq \
+        && \
+    python -m ipykernel.kernelspec
