@@ -6,8 +6,10 @@ RUN apt-get update && apt-get install -y \
         libavcodec-dev \
 		libavformat-dev \
 		libav-tools \
+        libavresample-dev \
 		libdc1394-22-dev \
         libgdal-dev \
+        libgphoto2-dev \
         libgtk2.0-dev \
         libjasper-dev \
         libopencore-amrnb-dev \

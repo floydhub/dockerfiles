@@ -6,8 +6,10 @@ RUN apt-get update && apt-get install -y \
         libavcodec-dev \
 		libavformat-dev \
 		libav-tools \
+        libavresample-dev \
 		libdc1394-22-dev \
         libgdal-dev \
+        libgphoto2-dev \
         libgtk2.0-dev \
         libjasper-dev \
         libopencore-amrnb-dev \
@@ -32,14 +34,16 @@ RUN apt-get update && apt-get install -y \
 
 RUN cd ~/ &&\
     git clone https://github.com/Itseez/opencv.git &&\
-    git clone https://github.com/Itseez/opencv_contrib.git &&\
-    cd opencv && \
+    git clone https://github.com/Itseez/opencv_contrib.git
+
+RUN cd ~/opencv && \
     mkdir build && \
     cd build && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
         -D WITH_CUDA=ON \
+        -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
         -D ENABLE_FAST_MATH=1 \
         -D CUDA_FAST_MATH=1 \
         -D WITH_CUBLAS=1 \
