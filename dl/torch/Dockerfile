@@ -1,4 +1,4 @@
-FROM floydhub/opencv:latest-py3
+FROM floydhub/dl-opencv:latest-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Run Torch7 installation scripts
