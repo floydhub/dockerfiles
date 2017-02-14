@@ -1,4 +1,4 @@
-FROM floydhub/torch-gpu-deps:latest
+FROM floydhub/torch-gpu-deps-py3:latest
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Install CUDA libraries

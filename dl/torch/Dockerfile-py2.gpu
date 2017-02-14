@@ -1,0 +1,7 @@
+FROM floydhub/torch-gpu-deps-py2:latest
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+# Install CUDA libraries
+RUN luarocks install cutorch && \
+    luarocks install cunn && \
+    luarocks install cudnn
