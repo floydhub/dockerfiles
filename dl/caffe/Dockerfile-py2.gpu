@@ -1,8 +1,7 @@
 FROM floydhub/dl-opencv:latest-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-# FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
-ENV CAFFE_VERSION=rc4
+ARG CAFFE_VERSION=rc4
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libboost-all-dev \
@@ -24,7 +23,7 @@ RUN git clone -b ${CAFFE_VERSION} --depth 1 https://github.com/BVLC/caffe.git . 
     cd python && for req in $(cat requirements.txt) pydot; do pip install $req; done && cd .. && \
     git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
     mkdir build && cd build && \
-    cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 .. && \
+    cmake -DUSE_CUDNN=1 -DUSE_NCCL=1 -DBLAS=Open .. && \
     make -j"$(nproc)"
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python

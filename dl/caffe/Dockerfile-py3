@@ -1,8 +1,7 @@
 FROM floydhub/dl-opencv:latest-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-# FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
-ENV CAFFE_VERSION=rc4
+ARG CAFFE_VERSION=rc4
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libboost-all-dev \
@@ -22,7 +21,7 @@ WORKDIR $CAFFE_ROOT
 RUN git clone -b ${CAFFE_VERSION} --depth 1 https://github.com/BVLC/caffe.git . && \
     for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
     mkdir build && cd build && \
-    cmake -DCPU_ONLY=1 .. && \
+    cmake -DCPU_ONLY=1 -DBLAS=Open .. && \
     make -j"$(nproc)"
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
