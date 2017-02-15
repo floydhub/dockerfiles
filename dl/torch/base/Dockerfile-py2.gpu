@@ -6,13 +6,13 @@ RUN git clone https://github.com/torch/distro.git /root/torch --recursive && \
 	cd /root/torch && \
 	bash install-deps
 
-RUN cd /root/torch && \
-# Run without nvcc to prevent timeouts
-    sed -i 's/path_to_nvcc=$(which nvcc)/path_to_nvcc=$(which no_nvcc)/g' install.sh && \
-    sed -i 's,path_to_nvcc=/usr/local/cuda/bin/nvcc,path_to_nvcc=,g' install.sh && \
-	yes no | ./install.sh && \
-# Restore Torch7 installation script
-    sed -i 's/path_to_nvcc=$(which no_nvcc)/path_to_nvcc=$(which nvcc)/g' install.sh
+# RUN cd /root/torch && \
+# # Run without nvcc to prevent timeouts
+#     sed -i 's/path_to_nvcc=$(which nvcc)/path_to_nvcc=$(which no_nvcc)/g' install.sh && \
+#     sed -i 's,path_to_nvcc=/usr/local/cuda/bin/nvcc,path_to_nvcc=,g' install.sh && \
+# 	yes no | ./install.sh && \
+# # Restore Torch7 installation script
+#     sed -i 's/path_to_nvcc=$(which no_nvcc)/path_to_nvcc=$(which nvcc)/g' install.sh
 
 # Install Jupyter Notebook for iTorch
 RUN pip install notebook ipywidgets
@@ -37,3 +37,6 @@ RUN luarocks install nn && \
 RUN luarocks install cutorch && \
     luarocks install cunn && \
     luarocks install cudnn
+
+# TODO: Move this to floydhub/dl-python
+RUN chmod +x /run_jupyter.sh

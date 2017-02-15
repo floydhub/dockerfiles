@@ -20,3 +20,6 @@ RUN pip --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git@${LASAGN
 
 # Install Keras
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
+
+# TODO: Move this to floydhub/dl-python
+RUN chmod +x /run_jupyter.sh
