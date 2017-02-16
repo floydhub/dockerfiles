@@ -8,3 +8,6 @@ RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}
 
 # TODO: Move this to floydhub/dl-python
 RUN chmod +x /run_jupyter.sh
+
+# TODO: Move this to dl-python
+COPY /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py 
