@@ -1,0 +1,10 @@
+FROM floydhub/dl-opencv:latest-py3
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+RUN pip install --upgrade tensorflow==1.0.0
+
+# TODO: Move this to floydhub/dl-python
+RUN chmod +x /run_jupyter.sh
+
+# TODO: Move this to dl-python
+RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py 
