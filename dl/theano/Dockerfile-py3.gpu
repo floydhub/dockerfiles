@@ -2,7 +2,7 @@ FROM floydhub/dl-opencv:latest-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG THEANO_VERSION=rel-0.8.2
-ARG LASAGNE_VERSION=v0.1
+# ARG LASAGNE_VERSION=v0.1
 ARG KERAS_VERSION=1.2.2
 
 # Install Theano and set up Theano config (.theanorc) for CUDA and OpenBLAS
@@ -16,7 +16,7 @@ RUN pip --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_V
 	> /root/.theanorc
 
 # Install Lasagne
-RUN pip --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
+RUN pip --no-cache-dir install --upgrade --no-deps https://github.com/Lasagne/Lasagne/archive/master.zip
 
 # Install Keras
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
@@ -26,3 +26,6 @@ ENV KERAS_BACKEND='theano'
 
 # TODO: Move this to floydhub/dl-python
 RUN chmod +x /run_jupyter.sh
+
+# TODO: Move this to dl-python
+RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py
