@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:latest-py3
+FROM floydhub/dl-opencv:latest-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG THEANO_VERSION=rel-0.8.2
