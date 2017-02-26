@@ -37,6 +37,3 @@ RUN luarocks install nn && \
 RUN luarocks install cutorch && \
     luarocks install cunn && \
     luarocks install cudnn
-
-# TODO: Move this to floydhub/dl-python
-RUN chmod +x /run_jupyter.sh

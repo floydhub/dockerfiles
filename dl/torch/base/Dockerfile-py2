@@ -26,6 +26,3 @@ RUN luarocks install nn && \
         cd /root && git clone https://github.com/facebook/iTorch.git && \
         cd iTorch && \
         luarocks make
-
-# TODO: Move this to floydhub/dl-python
-RUN chmod +x /run_jupyter.sh
