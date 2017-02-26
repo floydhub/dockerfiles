@@ -47,6 +47,7 @@ RUN cd ~/ &&\
         -DWITH_GDAL=ON \
         -DWITH_XINE=ON \
         -DBUILD_EXAMPLES=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
         .. && \
     make -j"$(nproc)" && \
     make install && \
