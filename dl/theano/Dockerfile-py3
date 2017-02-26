@@ -23,9 +23,3 @@ RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_V
 
 # Set Backed to Theano
 ENV KERAS_BACKEND='theano'
-
-# TODO: Move this to floydhub/dl-python
-RUN chmod +x /run_jupyter.sh
-
-# TODO: Move this to dl-python
-RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py 
