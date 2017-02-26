@@ -14,9 +14,19 @@ ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
 # Add LAPACK support for the GPU
 RUN conda install --name pytorch-py35 -c soumith magma-cuda80
 # This must be done before pip so that requirements.txt is available
+
+# Git clone the latest master
+RUN git clone https://github.com/pytorch/pytorch.git /opt/pytorch
+
 WORKDIR /opt/pytorch
 
-RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+RUN ls -lah
+
+RUN cat requirements.txt | xargs -n1 pip install --no-cache-dir && \
+    TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_LIBRARY_PATH=/opt/conda/envs/pytorch-py35/lib \
     CMAKE_INCLUDE_PATH=/opt/conda/envs/pytorch-py35/include \
     pip install -v .
+
+WORKDIR /workspace
+RUN chmod -R a+w /workspace
