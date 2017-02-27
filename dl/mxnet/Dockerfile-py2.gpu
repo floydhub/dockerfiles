@@ -1,8 +1,9 @@
 FROM floydhub/dl-opencv:latest-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
+COPY config.mk /
+
 RUN git clone --recursive https://github.com/dmlc/mxnet && cd mxnet && \
-  cp config.mk . && \
   sed -i 's/USE_BLAS = atlas/USE_BLAS = openblas/g' config.mk && \
   sed -i 's/USE_CUDA = 0/USE_CUDA = 1/g' config.mk && \
   sed -i 's/USE_CUDA_PATH = NONE/USE_CUDA_PATH = \/usr\/local\/cuda/g' config.mk && \
