@@ -1,0 +1,16 @@
+FROM floydhub/dl-opencv:latest-gpu-py2
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+RUN pip --no-cache-dir install \
+        gym[all] \
+        incremental \
+        nltk \
+        pattern \
+        spacy \
+        textacy \
+        tqdm
+
+# Install OpenAI Universe
+RUN git clone https://github.com/openai/universe.git && \
+    cd universe && \
+    pip install -e .
