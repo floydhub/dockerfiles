@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
 		libtiff5-dev \
 		libzmq3-dev \
 		nano \
+		openmpi-bin \
 		pkg-config \
 		python3-dev \
 		python-opengl \
