@@ -16,11 +16,13 @@ RUN apt-get update && apt-get install -y \
 		default-jdk \
 		doxygen \
 		gfortran \
+		golang \
 		libav-tools \
 		libboost-all-dev \
 		libeigen3-dev \
 		libfreetype6-dev \
 		libhdf5-dev \
+		libjpeg-turbo8-dev \
 		liblcms2-dev \
 		libopenblas-dev \
 		liblapack-dev \
