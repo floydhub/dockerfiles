@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
 		default-jdk \
 		doxygen \
 		gfortran \
+		libav-tools \
+		libboost-all-dev \
 		libeigen3-dev \
 		libfreetype6-dev \
 		libhdf5-dev \
@@ -23,19 +25,24 @@ RUN apt-get update && apt-get install -y \
 		libopenblas-dev \
 		liblapack-dev \
         libpng12-dev \
+		libsdl2-dev \
 		libtiff-dev \
 		libtiff5-dev \
 		libzmq3-dev \
 		nano \
 		pkg-config \
 		python-dev \
+		python-opengl \
 		python-software-properties \
 		python-tk \
         rsync \
 		software-properties-common \
+		swig \
 		unzip \
 		vim \
 		webp \
+		xorg-dev \
+		xvfb \
 		&& \
 	apt-get clean && \
 	apt-get autoremove && \
