@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
 		doxygen \
 		gfortran \
 		golang \
+		iptables \
 		libav-tools \
 		libboost-all-dev \
 		libeigen3-dev \
@@ -30,8 +31,10 @@ RUN apt-get update && apt-get install -y \
 		libsdl2-dev \
 		libtiff-dev \
 		libtiff5-dev \
+		libvncserver-dev \
 		libzmq3-dev \
 		nano \
+		net-tools \
 		openmpi-bin \
 		pkg-config \
 		python-dev \

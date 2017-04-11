@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
 		doxygen \
 		gfortran \
 		golang \
+		iptables \
 		libav-tools \
 		libboost-all-dev \
 		libeigen3-dev \
@@ -31,12 +32,14 @@ RUN apt-get update && apt-get install -y \
 		libpython3-dev \
 		libtiff-dev \
 		libtiff5-dev \
+		libvncserver-dev \
 		libzmq3-dev \
 		nano \
+		net-tools \
 		openmpi-bin \
 		pkg-config \
 		python3-dev \
-		python-opengl \
+		python3-opengl \
 		python-software-properties \
 		python3-tk \
         rsync \
