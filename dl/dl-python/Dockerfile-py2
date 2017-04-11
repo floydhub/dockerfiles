@@ -3,10 +3,12 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \
         Cython \
+        gym[all] \
         h5py \
         ipykernel \
         jupyter \
         matplotlib \
+        nltk \
         numpy \
         pandas \
         path.py \
@@ -15,6 +17,7 @@ RUN pip --no-cache-dir install \
         six \
         sklearn \
         sympy \
+        tqdm \
         Pillow \
         zmq \
         && \
