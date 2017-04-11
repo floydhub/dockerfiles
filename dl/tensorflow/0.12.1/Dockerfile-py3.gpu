@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:latest-gpu-py3
+FROM floydhub/dl-base:latest-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=0.12.1

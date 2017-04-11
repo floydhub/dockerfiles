@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:latest-py2
+FROM floydhub/dl-base:latest-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG CHAINER_VERSION=1.21.0

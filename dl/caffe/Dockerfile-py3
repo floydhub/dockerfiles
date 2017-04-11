@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:latest-py3
+FROM floydhub/dl-base:latest-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG CAFFE_VERSION=rc4

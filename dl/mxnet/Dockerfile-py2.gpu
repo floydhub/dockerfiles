@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:latest-gpu-py2
+FROM floydhub/dl-base:latest-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN git clone --recursive https://github.com/dmlc/mxnet && cd mxnet && \
