@@ -7,7 +7,6 @@ RUN pip --no-cache-dir install \
         nltk \
         pattern \
         spacy \
-        textacy \
         tqdm
 
 # Install OpenAI Universe
