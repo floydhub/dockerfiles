@@ -2,9 +2,11 @@ FROM floydhub/dl-opencv:latest-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \
+        dlib \
         gym[all] \
         incremental \
         nltk \
+        scikit-image \
         spacy \
         textacy \
         tqdm

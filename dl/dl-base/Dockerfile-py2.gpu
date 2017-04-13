@@ -2,10 +2,12 @@ FROM floydhub/dl-opencv:latest-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \
+        dlib \
         gym[all] \
         incremental \
         nltk \
         pattern \
+        scikit-image \
         spacy \
         tqdm
 
