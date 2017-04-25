@@ -12,7 +12,7 @@ To build Docker image locally (Note: takes a few hours):
 * Python 3 GPU: `docker build -t floydhub/tensorflow:1.0-gpu-py3 -f Dockerfile-py3.gpu .`
 
 To push images to Docker registry:
-* Python 2: `docker push floydhub/tensorflow:latest-py2`
-* Python 2 GPU: `docker push floydhub/tensorflow:latest-gpu-py2`
-* Python 3: `docker push floydhub/tensorflow:latest-py3`
-* Python 3 GPU: `docker push floydhub/tensorflow:latest-gpu-py3`
+* Python 2: `docker push floydhub/tensorflow:1.0-py2`
+* Python 2 GPU: `docker push floydhub/tensorflow:1.0-gpu-py2`
+* Python 3: `docker push floydhub/tensorflow:1.0-py3`
+* Python 3 GPU: `docker push floydhub/tensorflow:1.0-gpu-py3`
