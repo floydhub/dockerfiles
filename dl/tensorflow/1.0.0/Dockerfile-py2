@@ -1,8 +1,0 @@
-FROM floydhub/dl-base:latest-py2
-MAINTAINER Floyd Labs "support@floydhub.com"
-
-ARG KERAS_VERSION=1.2.2
-
-RUN pip install --upgrade tensorflow==1.0.0
-
-RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
