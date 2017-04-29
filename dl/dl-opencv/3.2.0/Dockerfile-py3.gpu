@@ -1,5 +1,7 @@
-FROM floydhub/dl-python:latest-py2
+FROM floydhub/dl-python:latest-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
+
+ARG OPENCV_VERSION=3.2.0
 
 RUN apt-get update && apt-get install -y \
         python-opencv \
@@ -33,15 +35,20 @@ RUN apt-get update && apt-get install -y \
 	rm -rf /var/lib/apt/lists/*
 
 RUN cd ~/ &&\
-    git clone https://github.com/Itseez/opencv.git &&\
-    git clone https://github.com/Itseez/opencv_contrib.git &&\
-    cd opencv && \
+    git clone https://github.com/Itseez/opencv.git --branch ${OPENCV_VERSION} --single-branch &&\
+    git clone https://github.com/Itseez/opencv_contrib.git --branch ${OPENCV_VERSION} --single-branch
+
+RUN cd ~/opencv && \
     mkdir build && \
     cd build && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
+        -D WITH_CUDA=ON \
+        -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
         -D ENABLE_FAST_MATH=1 \
+        -D CUDA_FAST_MATH=1 \
+        -D WITH_CUBLAS=1 \
         -DFORCE_VTK=ON \
         -DWITH_TBB=ON \
         -DWITH_GDAL=ON \
