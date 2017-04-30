@@ -1,0 +1,7 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+ARG CHAINER_VERSION={{ _version }}
+
+RUN pip --no-cache-dir install --upgrade chainer==${CHAINER_VERSION}
+{% endblock %}

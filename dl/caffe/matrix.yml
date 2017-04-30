@@ -1,0 +1,27 @@
+1_x: &1_x
+  _tpl: caffe-1.x.jinja
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+    cpver: cp27-none
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py3
+    cpver: cp35-cp35m
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+    cpver: cp27-none
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py3
+    cpver: cp35-cp35m
+
+# end of templates
+
+'1.0':
+  <<: *1_x
+  _version: '1.0'
+
+build:
+  - '1.0'

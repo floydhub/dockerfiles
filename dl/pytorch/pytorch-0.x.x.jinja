@@ -1,0 +1,7 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-{{ _version }}.post5-{{ cpver }}-linux_x86_64.whl
+
+RUN pip --no-cache-dir install --upgrade torchvision
+{% endblock %}

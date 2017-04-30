@@ -1,0 +1,28 @@
+0.x.x: &0_x_x
+  _tpl: pytorch-0.x.x.jinja
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+    cpver: cp27-none
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py3
+    cpver: cp35-cp35m
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+    cpver: cp27-none
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py3
+    cpver: cp35-cp35m
+
+# end of templates
+
+0.1.11:
+  <<: *0_x_x
+  _version: 0.1.11
+
+
+build:
+  - 0.1.11

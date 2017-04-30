@@ -1,0 +1,37 @@
+0.x.x: &0_x_x
+  _tpl: theano-0.x.x.jinja
+  _lasagne_version: v0.1
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+    cpver: cp27-none
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py3
+    cpver: cp35-cp35m
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+    cpver: cp27-none
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py3
+    cpver: cp35-cp35m
+
+
+# end of templates
+
+0.8.2:
+  <<: *0_x_x
+  _version: rel-0.8.2
+  _keras_version: 1.2.2
+
+0.9.0:
+  <<: *0_x_x
+  _version: rel-0.9.0
+  _keras_version: 2.0.3
+
+
+build:
+  - 0.8.2
+  - 0.9.0

@@ -1,0 +1,45 @@
+1.x.x: &1_x_x
+  _tpl: tensorflow-1.x.x.jinja
+  _keras_version: 2.0.3
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+    cpver: cp27-none
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py3
+    cpver: cp35-cp35m
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+    cpver: cp27-none
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py3
+    cpver: cp35-cp35m
+
+
+0.x.x: &0_x_x
+  <<: *1_x_x
+  _tpl: tensorflow-0.x.x.jinja
+  _keras_version: 1.2.2
+
+# end of templates
+
+0.12.1:
+  <<: *0_x_x
+  _version: 0.12.1
+
+1.1.0:
+  <<: *1_x_x
+  _version: 1.1.0
+
+1.0.1:
+  <<: *1_x_x
+  _version: 1.0.1
+
+
+build:
+  - 0.12.1
+  - 1.0.1
+  - 1.1.0

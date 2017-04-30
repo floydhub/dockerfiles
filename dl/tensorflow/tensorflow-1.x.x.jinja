@@ -1,0 +1,37 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+ARG TENSORFLOW_VERSION=v{{ _version }}
+ARG KERAS_VERSION={{ _keras_version }}
+
+RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
+WORKDIR /tensorflow
+
+ENV CI_BUILD_PYTHON python
+{% if arch == 'gpu' -%}
+{% set EXTRA_BUILD_CFG = '--config=cuda ' -%}
+# Configure the build for our CUDA configuration.
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+ENV TF_NEED_CUDA 1
+ENV TF_CUDA_COMPUTE_CAPABILITIES=3.0,3.5,5.2,6.0,6.1
+
+RUN tensorflow/tools/ci_build/builds/configured GPU
+{% else %}
+{% set EXTRA_BUILD_CFG = '' -%}
+RUN tensorflow/tools/ci_build/builds/configured CPU
+{% endif %}
+# NOTE: This command uses special flags to build an optimized image for AWS machines.
+# This image might *NOT* work on other machines
+RUN bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 --copt=-mfma {{ EXTRA_BUILD_CFG }}tensorflow/tools/pip_package:build_pip_package
+
+RUN bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip && \
+    pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl && \
+    rm -rf /tmp/pip && \
+    rm -rf /root/.cache
+# Clean up pip wheel and Bazel cache when done.
+
+WORKDIR /
+
+# Install Keras
+RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
+{% endblock %}

@@ -1,0 +1,23 @@
+1.x.x: &1_x_x
+  _tpl: chainer-1.x.x.jinja
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py3
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py3
+
+# end of templates
+
+1.23.0:
+  <<: *1_x_x
+  _version: 1.23.0
+
+build:
+  - 1.23.0

@@ -1,0 +1,17 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+ARG TENSORFLOW_VERSION={{ _version }}
+{% if arch == 'gpu' -%}
+ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-{{ cpver }}-linux_x86_64.whl
+{% else -%}
+ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-{{ cpver }}-linux_x86_64.whl
+{% endif -%}
+
+ARG KERAS_VERSION={{ _keras_version }}
+
+RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}
+
+# Install Keras
+RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
+{% endblock %}

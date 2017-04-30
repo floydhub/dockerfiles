@@ -1,0 +1,32 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+ARG THEANO_VERSION={{ _version }}
+ARG LASAGNE_VERSION={{ _lasagne_version }}
+ARG KERAS_VERSION={{ _keras_version }}
+
+{% set EXTRA_CONFIG = '' -%}
+{% if arch == 'gpu' -%}
+{% set EXTRA_CONFIG = 'optimizer_including=cudnn\\n' -%}
+# Install Theano and set up Theano config (.theanorc) for CUDA and OpenBLAS
+{% else -%}
+# Install Theano and set up Theano config (.theanorc) OpenBLAS
+{% endif -%}
+RUN pip --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_VERSION} && \
+	\
+	echo "[global]\ndevice={{ arch }}\nfloatX=float32\n{{ EXTRA_CONFIG }}mode=FAST_RUN \
+		\n[lib]\ncnmem=0.95 \
+		\n[nvcc]\nfastmath=True \
+		\n[blas]\nldflag = -L/usr/lib/openblas-base -lopenblas \
+		\n[DebugMode]\ncheck_finite=1" \
+	> /root/.theanorc
+
+# Install Lasagne
+RUN pip --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
+
+# Install Keras
+RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
+
+# Set Backed to Theano
+ENV KERAS_BACKEND='theano'
+{% endblock %}
