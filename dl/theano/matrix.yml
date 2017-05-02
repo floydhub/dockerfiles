@@ -30,6 +30,7 @@
   <<: *0_x_x
   _version: rel-0.9.0
   _keras_version: 2.0.3
+  _lasagne_version: e71bc59b509d2c0cf67622b0d94c69f51b588bd4
 
 
 build:
