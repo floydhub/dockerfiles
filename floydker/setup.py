@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from setuptools import setup, find_packages
+
+setup(
+    name="floydker",
+    version="0.0.1",
+    author="Floyd",
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    include_package_data=True,
+    install_requires=[
+        "click>=6.7",
+        "click-log",
+        "pyyaml",
+        "jinja2",
+    ],
+    entry_points={
+        "console_scripts": [
+            "floydker = floydker:cli",
+            "floydker-render = floydker.render:render",
+        ]
+    }
+)

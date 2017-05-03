@@ -23,5 +23,5 @@
   <<: *1_x
   _version: '1.0'
 
-build:
+$render:
   - '1.0'

@@ -19,5 +19,5 @@
   <<: *1_x_x
   _version: 1.23.0
 
-build:
+$render:
   - 1.23.0
