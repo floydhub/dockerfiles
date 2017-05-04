@@ -9,6 +9,6 @@ if [ -z "${jobfiles}" ]; then
 else
     while read -r line; do
         echo "[*] Node ${CIRCLE_NODE_INDEX} running test for job ${line}..."
-        python .ci/test_image.py "${line}"
+        floydker test $(cat "${line}")
     done <<< "${jobfiles}"
 fi

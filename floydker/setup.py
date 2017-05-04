@@ -16,6 +16,7 @@ setup(
         "pyyaml",
         "jinja2",
     ],
+    tests_require=["pytest"],
     entry_points={
         "console_scripts": [
             "floydker = floydker:cli",

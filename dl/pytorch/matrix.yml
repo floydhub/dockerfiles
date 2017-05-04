@@ -4,6 +4,7 @@
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2
     cpver: cp27-none
+    _test: tests/py2_test.sh
   py3:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py3
@@ -12,6 +13,7 @@
     arch: gpu
     baseimg: floydhub/dl-base:latest-gpu-py2
     cpver: cp27-none
+    _test: tests/py2_test.sh
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:latest-gpu-py3
