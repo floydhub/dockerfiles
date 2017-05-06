@@ -1,5 +1,5 @@
 1_x: &1_x
-  _tpl: caffe-1.x.jinja
+  _template: caffe-1.x.jinja
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2

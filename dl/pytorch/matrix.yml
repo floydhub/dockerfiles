@@ -1,5 +1,5 @@
 0.x.x: &0_x_x
-  _tpl: pytorch-0.x.x.jinja
+  _template: pytorch-0.x.x.jinja
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2

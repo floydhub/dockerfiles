@@ -21,14 +21,14 @@ class FilesLoader(jinja2.BaseLoader):
         self.files = files
 
     def get_source(self, environment, template):
-        for tpl_file in self.files:
-            if os.path.basename(tpl_file) == template:
-                with open(tpl_file) as f:
+        for template_file in self.files:
+            if os.path.basename(template_file) == template:
+                with open(template_file) as f:
                     contents = f.read().decode('utf-8')
-                mtime = os.path.getmtime(tpl_file)
+                mtime = os.path.getmtime(template_file)
                 return (contents,
-                        tpl_file,
-                        lambda: mtime == os.path.getmtime(tpl_file))
+                        template_file,
+                        lambda: mtime == os.path.getmtime(template_file))
         else:
             raise jinja2.TemplateNotFound(template)
 
@@ -67,7 +67,7 @@ def render_matrix(jinja2_env, matrix_dir):
     Sample matrix.yml:
 
     target_1.1.1:
-      _tpl: foo.jinja
+      _template: foo.jinja
       py2:
         key1: foo
         key2: bar
@@ -97,8 +97,8 @@ def render_matrix(jinja2_env, matrix_dir):
         # target_cfg here describes how to render multiple images for a given
         # version of a project
         target_cfg = matrix[target]
-        tpl_name = target_cfg['_tpl']
-        tpl = jinja2_env.get_template(tpl_name)
+        template_name = target_cfg['_template']
+        template = jinja2_env.get_template(template_name)
 
         # create target directory for Dockerfiles
         target_dir = os.path.join(matrix_dir, target)
@@ -118,7 +118,7 @@ def render_matrix(jinja2_env, matrix_dir):
             logger.debug('[%s] Rendering template with context %s',
                          project_name, target_env_cfg)
             with open(dockerfile_path, 'w') as f:
-                f.write(tpl.render(**target_env_cfg))
+                f.write(template.render(**target_env_cfg))
             logger.debug('[%s] after wrote matrix: %s', project_name, matrix)
 
 
@@ -128,7 +128,7 @@ def render_matrix(jinja2_env, matrix_dir):
 @click_log.simple_verbosity_option()
 @click_log.init(__name__)
 def render(search_root, project):
-    tpl_paths = []
+    template_paths = []
     matrix_dirs = []
 
     for cur_dir, dirs, files in os.walk(search_root):
@@ -138,9 +138,9 @@ def render(search_root, project):
                 logger.info('Found matrix in %s', cur_dir)
                 matrix_dirs.append(cur_dir)
             elif f.endswith('.jinja'):
-                tpl_paths.append(os.path.join(cur_dir, f))
+                template_paths.append(os.path.join(cur_dir, f))
 
-    jinja2_env = jinja2.Environment(loader=FilesLoader(tpl_paths))
+    jinja2_env = jinja2.Environment(loader=FilesLoader(template_paths))
 
     for d in matrix_dirs:
         if project and os.path.basename(d) != project:

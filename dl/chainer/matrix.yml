@@ -1,5 +1,5 @@
 1.x.x: &1_x_x
-  _tpl: chainer-1.x.x.jinja
+  _template: chainer-1.x.x.jinja
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2

@@ -1,5 +1,5 @@
 1.x.x: &1_x_x
-  _tpl: tensorflow-1.x.x.jinja
+  _template: tensorflow-1.x.x.jinja
   _keras_version: 2.0.3
   py2:
     arch: cpu
@@ -21,7 +21,7 @@
 
 0.x.x: &0_x_x
   <<: *1_x_x
-  _tpl: tensorflow-0.x.x.jinja
+  _template: tensorflow-0.x.x.jinja
   _keras_version: 1.2.2
 
 # end of templates
