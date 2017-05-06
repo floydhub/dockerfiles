@@ -14,7 +14,17 @@ logger = logging.getLogger(__name__)
 
 class FilesLoader(jinja2.BaseLoader):
     """
-    FilesLoader takes a list of template files instead of search path
+    FilesLoader takes a list of template files instead of search path and
+    expose template files by filename.
+
+    Problem with the builtin loaders is there is no filtering support. For us,
+    we don't put all template files within one directory tree. So we need do
+    filter file types when traversing the filesystem. The caller of this class
+    is responsible for the filtering.
+
+    This class also enables us to lookup template file by filename instead of
+    file path, which makes matrix.yml easier to write and read. The downside is
+    we need to make sure all filenames are unique.
     """
 
     def __init__(self, files):
@@ -131,6 +141,7 @@ def render(search_root, project):
     template_paths = []
     matrix_dirs = []
 
+    # traverse filesystem once and find out all matrix.yml and templates
     for cur_dir, dirs, files in os.walk(search_root):
         # TODO: hornor .gitignore
         for f in files:
@@ -140,9 +151,10 @@ def render(search_root, project):
             elif f.endswith('.jinja'):
                 template_paths.append(os.path.join(cur_dir, f))
 
+    # register templates with jinja environment
     jinja2_env = jinja2.Environment(loader=FilesLoader(template_paths))
 
-    for d in matrix_dirs:
-        if project and os.path.basename(d) != project:
+    for maxtrix_dir in matrix_dirs:
+        if project and os.path.basename(maxtrix_dir) != project:
             continue
-        render_matrix(jinja2_env, d)
+        render_matrix(jinja2_env, maxtrix_dir)

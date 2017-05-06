@@ -30,6 +30,9 @@ def test(dockerfile):
         logger.info('No test found for image %s, skipped.', dockerfile)
         sys.exit(0)
 
+    # Spin up a docker container to test the given image. Here, we mount the
+    # directory where the test files live into /build_test path inside the
+    # container (-v) so the container has access to all test files
     cmds = ['docker', 'run',
             '-v', '%s:/build_test' % os.path.abspath(os.getcwd()),
             image_tag,
