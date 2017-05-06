@@ -7,7 +7,7 @@ import requests
 import os
 from shell import ex
 
-JOB_LIST_DIR = '.ci/jobs'
+JOB_LIST_DIR = 'ci/jobs'
 
 
 def find_changed_dockerfiles():

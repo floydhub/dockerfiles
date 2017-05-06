@@ -2,7 +2,7 @@
 
 echo "Testing..."
 
-jobfiles=$(find ./.ci/jobs -name "*.job" | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
+jobfiles=$(find ./ci/jobs -name "*.job" | sort | awk "NR % ${CIRCLE_NODE_TOTAL} == ${CIRCLE_NODE_INDEX}")
 
 if [ -z "${jobfiles}" ]; then
     echo "[*] More parallelism than tests"
