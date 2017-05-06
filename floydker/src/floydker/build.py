@@ -17,13 +17,12 @@ logger = logging.getLogger(__name__)
 @click_log.init(__name__)
 def build(dockerfile):
     dockerfile_dir = os.path.dirname(dockerfile)
-    dockerfile_name = os.path.basename(dockerfile)
-    os.chdir(dockerfile_dir)
-
     image_tag = gen_tag_from_filepath(dockerfile)
     logger.info('--------------------------------------------')
     logger.info('[*] Building %s with tag %s...', dockerfile, image_tag)
     logger.info('--------------------------------------------')
-    check_call('docker build -t %s -f %s .' % (image_tag, dockerfile_name),
+    check_call('docker build -t %s -f %s %s' % (image_tag,
+                                                dockerfile,
+                                                dockerfile_dir),
                shell=True)
     logger.info(check_output(['docker', 'images']))
