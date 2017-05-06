@@ -3,6 +3,7 @@
 
 import re
 import os
+import sys
 
 dockerfile_name_re = re.compile('Dockerfile-(?P<env>[^.]+)(?P<arch>(\.gpu)?)')
 
@@ -25,6 +26,9 @@ def gen_tag_from_filepath(dockerfile_path):
 
     dockerfile_name = path_parts[-1]
     match = dockerfile_name_re.match(dockerfile_name)
+    if not match:
+        return None
+
     if match.group('arch') == '.gpu':
         tag_components.append('gpu')
     tag_components.append(match.group('env'))
@@ -36,3 +40,17 @@ def find_matrix_from_dockerfile(dockerfile_path):
     abs_path = os.path.realpath(dockerfile_path)
     path_parts = abs_path.split(os.sep)
     return os.path.join(os.sep.join(path_parts[:-2]), 'matrix.yml')
+
+
+def assert_image_tag_from_dockerfile(logger, dockerfile):
+    if os.path.isdir(dockerfile):
+        logger.error('%s is a directory.', dockerfile)
+        sys.exit(1)
+
+    image_tag = gen_tag_from_filepath(dockerfile)
+    if not image_tag:
+        logger.error('Failed to generate image tag from filename: %s',
+                     dockerfile)
+        sys.exit(1)
+
+    return image_tag

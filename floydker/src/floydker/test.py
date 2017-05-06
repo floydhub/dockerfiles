@@ -7,7 +7,7 @@ import os
 import logging
 import click
 import click_log
-from .utils import gen_tag_from_filepath
+from .utils import assert_image_tag_from_dockerfile
 
 logger = logging.getLogger(__name__)
 
@@ -17,10 +17,10 @@ logger = logging.getLogger(__name__)
 @click_log.simple_verbosity_option()
 @click_log.init(__name__)
 def test(dockerfile):
+    image_tag = assert_image_tag_from_dockerfile(logger, dockerfile)
     dockerfile_dir = os.path.dirname(dockerfile)
     os.chdir(dockerfile_dir)
 
-    image_tag = gen_tag_from_filepath(dockerfile)
     logger.info('--------------------------------------------')
     logger.info('[*] Testing image %s...', image_tag)
     logger.info('--------------------------------------------')
