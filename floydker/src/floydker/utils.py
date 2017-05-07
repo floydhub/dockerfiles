@@ -54,3 +54,14 @@ def assert_image_tag_from_dockerfile(logger, dockerfile):
         sys.exit(1)
 
     return image_tag
+
+
+def gen_version_target_from_tag(img_tag):
+    """
+    sample input: 'tensorflow:1.0.1-gpu-py3'
+    sample output: ('1.0.1', 'py3.gpu')
+    """
+    img_commit = img_tag.split(':')[-1]
+    version, target = img_commit.split('-', 1)
+    target = '.'.join(reversed(target.split('-', 1)))
+    return version, target
