@@ -1,0 +1,29 @@
+machine:
+  python:
+    version: 2.7.11
+  services:
+    - docker
+
+dependencies:
+  override:
+    - bash ci/install.sh
+    - python ci/prepare.py
+
+
+compile:
+  override:
+    - bash ci/build_images.sh:
+        parallel: true
+
+
+test:
+  override:
+    - bash ci/test_images.sh:
+        parallel: true
+
+
+deployment:
+  dockerhub:
+    branch: master
+    commands:
+      - bash ci/push_dockerhub.sh
