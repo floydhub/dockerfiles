@@ -20,3 +20,5 @@ the above dockerfile paths:
 floydhub/PROJECT_NAME:VERSION-ENV
 floydhub/PROJECT_NAME:VERSION-ENV-gpu
 ```
+
+Contains docker images for popular deep learning frameworks including: Tensorflow, PyTorch and Torch.
