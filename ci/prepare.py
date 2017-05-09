@@ -5,6 +5,7 @@ import hashlib
 import sys
 import requests
 import os
+import glob
 from shell import ex
 
 JOB_LIST_DIR = 'ci/jobs'
@@ -25,7 +26,7 @@ def find_changed_dockerfiles():
         build_num
     )
 
-    print('Fetching build info from %s...' % info_api)
+    print('[*] Fetching build info from %s...' % info_api)
     re = requests.get(info_api)
     if re.status_code != 200:
         sys.exit('Failed to fetch metadata for current build!')
@@ -38,7 +39,7 @@ def find_changed_dockerfiles():
     # STEP 2: construct command to generate changed list
     changed_dockerfiles = []
 
-    print('List of changed files since last push (%s):' % git_compare)
+    print('[*] List of changed files since last push (%s):' % git_compare)
     # multiple commits will be in the form of '2d12a44065cc^...aa673a945a6a'
     if '...' in git_compare:
         # use git diff for multiple commits
@@ -46,6 +47,7 @@ def find_changed_dockerfiles():
     else:
         # use git show for single commit
         cmd = 'git show --name-only %s' % git_compare
+    print('Running comand: %s' % cmd)
 
     # STEP 3: iterate through list of changed files and filter
     # based on filename
@@ -73,3 +75,14 @@ for dockerfile_path in find_changed_dockerfiles():
     print('Creating jobs file %s for %s...' % (job_id, dockerfile_path))
     with open(os.path.join(JOB_LIST_DIR, job_id + '.job'), 'w') as f:
         f.write(dockerfile_path)
+
+rebuild_glob_pattern = os.environ.get('FORCE_REBUILD_GLOB')
+if rebuild_glob_pattern:
+    print(('[*] Found $FORCE_REBUILD_GLOB ENV VAR: %r, '
+           'search for list of files to rebuild...') % (rebuild_glob_pattern))
+    for matched_file in glob.glob(rebuild_glob_pattern):
+        if 'Dockerfile' in matched_file:
+            job_id = hashlib.sha224(matched_file).hexdigest()
+            print('Creating jobs file %s for %s...' % (job_id, matched_file))
+            with open(os.path.join(JOB_LIST_DIR, job_id + '.job'), 'w') as f:
+                f.write(matched_file)
