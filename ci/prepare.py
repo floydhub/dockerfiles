@@ -33,7 +33,10 @@ def find_changed_dockerfiles():
     build_info = re.json()
     # value of 'compare' key is a github compare URL, we are only interested in
     # the last part, i.e. the actual compare string
-    git_compare = build_info['compare'].split('/')[-1]
+    git_compare_url = build_info['compare']
+    if not git_compare_url:
+        return []
+    git_compare = git_compare_url.split('/')[-1]
 
     # STEP 2: construct command to generate changed list
     changed_dockerfiles = []
