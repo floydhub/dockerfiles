@@ -1,6 +1,7 @@
 tensorflow_pip: &tensorflow_pip
   _template: tensorflow-pip.jinja
   _keras_version: 2.0.4
+  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:v1-py2
@@ -22,6 +23,7 @@ tensorflow_pip: &tensorflow_pip
 tensorflow_bazel_aws: &tensorflow_bazel_aws
   _template: tensorflow-bazel_aws.jinja
   _keras_version: 2.0.4
+  _test: tests/run.sh
   py2_aws:
     arch: cpu
     baseimg: floydhub/dl-base:v1-py2
@@ -38,6 +40,7 @@ tensorflow_bazel_aws: &tensorflow_bazel_aws
   _version: 0.12.1
   _keras_version: 1.2.2
   _template: tensorflow-pip.jinja
+  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2
@@ -59,6 +62,7 @@ tensorflow_bazel_aws: &tensorflow_bazel_aws
   _version: 1.0.1
   _template: tensorflow-bazel_aws.jinja
   _keras_version: 2.0.3
+  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:latest-py2
