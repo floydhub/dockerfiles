@@ -11,7 +11,9 @@ import click_log
 from .utils import (
     assert_image_tag_from_dockerfile,
     find_matrix_from_dockerfile,
-    gen_version_target_from_tag
+    gen_target_env_from_tag,
+    gen_target_cfg_items,
+    gen_target_env_cfg
 )
 
 logger = logging.getLogger(__name__)
@@ -37,18 +39,30 @@ def test(dockerfile):
     with open(matrix_yml_path) as matrix_fobj:
         matrix = yaml.load(matrix_fobj)
 
-    version, target = gen_version_target_from_tag(image_tag)
-    if version not in matrix:
-        logger.error('version %s not found in matrix.', version)
+    target, env = gen_target_env_from_tag(image_tag)
+    if target not in matrix:
+        logger.error('target %s not found in matrix.', target)
         sys.exit(1)
 
-    version_cfg = matrix[version]
-    if target not in version_cfg:
-        logger.error('taget %s not found in version %s', target, version)
+    # look up target config
+    target_cfg = matrix[target]
+    target_cfg_items = gen_target_cfg_items(target_cfg)
+    if not target_cfg_items:
+        logger.error('Invalid type (%s) for target configuration.',
+                     type(target_cfg))
         sys.exit(1)
 
-    target_cfg = version_cfg[target]
-    test_script = target_cfg.get('_test')
+    env_cfg = None
+    for target_env, target_env_cfg in gen_target_env_cfg(target_cfg_items):
+        if target_env == env:
+            env_cfg = target_env_cfg
+            break
+
+    if not env_cfg:
+        logger.error('env %s not found in target %s', env, target)
+        sys.exit(1)
+
+    test_script = env_cfg.get('_test')
     if not test_script:
         logger.info('No test found for image %s, skipped.', dockerfile)
         sys.exit(0)

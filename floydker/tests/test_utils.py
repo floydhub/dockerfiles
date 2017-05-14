@@ -22,8 +22,8 @@ def test_find_matrix_from_dockerfile():
         matrix_path.split(os.sep)[-3:]) == 'dl/tensorflow/matrix.yml'
 
 
-def test_gen_version_target_from_tag():
-    from floydker.utils import gen_version_target_from_tag
-    ver, tag = gen_version_target_from_tag('tensorflow:1.0.1-gpu-py3')
-    assert ver == '1.0.1'
-    assert tag == 'py3.gpu'
+def test_gen_target_env_from_tag():
+    from floydker.utils import gen_target_env_from_tag
+    target, env = gen_target_env_from_tag('tensorflow:1.0.1-gpu-py3')
+    assert target == '1.0.1'
+    assert env == 'py3.gpu'

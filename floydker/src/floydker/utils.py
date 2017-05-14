@@ -4,8 +4,54 @@
 import re
 import os
 import sys
+import copy
 
 dockerfile_name_re = re.compile('Dockerfile-(?P<env>[^.]+)(?P<arch>(\.gpu)?)')
+
+
+def gen_target_cfg_items(target_cfg):
+    """
+    Convert target_cfg to list of target configs
+    """
+    if isinstance(target_cfg, list):
+        # list of templates defined for this target
+        return target_cfg
+    elif isinstance(target_cfg, dict):
+        # only one template defined for this target
+        return [target_cfg]
+    else:
+        return None
+
+
+def populate_target_env_cfg(target_cfg, target_env):
+    """
+    Read out context from target config then merge it with global magic context
+
+    All keys in target config that starts with `_` is considered magic context
+    and will be merged into each target_env config.
+    """
+    # we need to do deepcopy here because yaml extend operation is not a
+    # deepcopy and we will be injecting new keys in the following for loop
+    target_env_cfg = copy.deepcopy(target_cfg[target_env])
+    for dkey, dval in target_cfg.iteritems():
+        if dkey.startswith('_') and dkey not in target_env_cfg:
+            target_env_cfg[dkey] = dval
+    return target_env_cfg
+
+
+def gen_target_env_cfg(target_cfg_items):
+    """
+    Yield envs in given target_cfg list
+    """
+    for target_cfg_item in target_cfg_items:
+        for k in target_cfg_item:
+            if k.startswith('_'):
+                # skip reserved/magic keys
+                continue
+            target_env = k
+            target_env_cfg = populate_target_env_cfg(target_cfg_item,
+                                                     target_env)
+            yield target_env, target_env_cfg
 
 
 def gen_tag_from_filepath(dockerfile_path):
@@ -56,7 +102,7 @@ def assert_image_tag_from_dockerfile(logger, dockerfile):
     return image_tag
 
 
-def gen_version_target_from_tag(img_tag):
+def gen_target_env_from_tag(img_tag):
     """
     sample input: 'tensorflow:1.0.1-gpu-py3'
     sample output: ('1.0.1', 'py3.gpu')
