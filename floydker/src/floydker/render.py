@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from __future__ import absolute_import
+
 import click
 import yaml
 import jinja2
 import os
 import click_log
 import logging
-import copy
+
+from .utils import gen_target_cfg_items, gen_target_env_cfg
 
 logger = logging.getLogger(__name__)
 
@@ -47,20 +50,25 @@ class FilesLoader(jinja2.BaseLoader):
         return sorted(found)
 
 
-def populate_target_env_cfg(target_cfg, target_env):
-    """
-    Read out context from target config then merge it with global magic context
+def render_target(jinja2_env, target_dir, project_name, target, target_cfg):
+    target_cfg_items = gen_target_cfg_items(target_cfg)
+    if not target_cfg_items:
+        logger.error('[%s] Invalid type for target config: %s',
+                     project_name, type(target_cfg))
+        return
 
-    All keys in target config that starts with `_` is considered magic context
-    and will be merged into each target_env config.
-    """
-    # we need to do deepcopy here because yaml extend operation is not a
-    # deepcopy and we will be injecting new keys in the following for loop
-    target_env_cfg = copy.deepcopy(target_cfg[target_env])
-    for dkey, dval in target_cfg.iteritems():
-        if dkey.startswith('_') and dkey not in target_env_cfg:
-            target_env_cfg[dkey] = dval
-    return target_env_cfg
+    for target_env, target_env_cfg in gen_target_env_cfg(target_cfg_items):
+        dockerfile_name = 'Dockerfile-' + target_env
+        dockerfile_path = os.path.join(target_dir, dockerfile_name)
+        logger.info('[%s] Rendering target env <%s-%s> to %s...',
+                    project_name, target, target_env, dockerfile_path)
+        logger.debug('[%s] Rendering template with context %s',
+                     project_name, target_env_cfg)
+
+        template_name = target_env_cfg['_template']
+        template = jinja2_env.get_template(template_name)
+        with open(dockerfile_path, 'w') as f:
+            f.write(template.render(**target_env_cfg))
 
 
 def render_matrix(jinja2_env, matrix_dir):
@@ -106,30 +114,18 @@ def render_matrix(jinja2_env, matrix_dir):
         logger.info('[%s] Loading target <%s>...', project_name, target)
         # target_cfg here describes how to render multiple images for a given
         # version of a project
-        target_cfg = matrix[target]
-        template_name = target_cfg['_template']
-        template = jinja2_env.get_template(template_name)
+        target_cfg = matrix.get(target)
+        if not target_cfg:
+            logger.error('[%s] target (%s) configuration not found!',
+                         project_name, target)
+            continue
 
         # create target directory for Dockerfiles
         target_dir = os.path.join(matrix_dir, target)
         if not os.path.isdir(target_dir):
             os.mkdir(target_dir)
 
-        for k in target_cfg:
-            if k.startswith('_'):
-                # skip reserved/magic keys
-                continue
-            target_env = k
-            dockerfile_name = 'Dockerfile-' + target_env
-            dockerfile_path = os.path.join(target_dir, dockerfile_name)
-            logger.info('[%s] Rendering target env <%s-%s> to %s...',
-                        project_name, target, target_env, dockerfile_path)
-            target_env_cfg = populate_target_env_cfg(target_cfg, target_env)
-            logger.debug('[%s] Rendering template with context %s',
-                         project_name, target_env_cfg)
-            with open(dockerfile_path, 'w') as f:
-                f.write(template.render(**target_env_cfg))
-            logger.debug('[%s] after wrote matrix: %s', project_name, matrix)
+        render_target(jinja2_env, target_dir, project_name, target, target_cfg)
 
 
 @click.command()

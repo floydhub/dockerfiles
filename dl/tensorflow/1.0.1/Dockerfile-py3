@@ -4,11 +4,6 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 ARG TENSORFLOW_VERSION=v1.0.1
 ARG KERAS_VERSION=2.0.3
 
-# RUN pip install --upgrade tensorflow==${TENSORFLOW_VERSION}
-
-# Download and build TensorFlow.
-# Adapted from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile.devel
-
 RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
 WORKDIR /tensorflow
 
