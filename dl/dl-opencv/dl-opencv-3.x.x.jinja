@@ -1,7 +1,7 @@
-FROM floydhub/dl-python:latest-gpu-py2
-MAINTAINER Floyd Labs "support@floydhub.com"
+{% extends "base.jinja" %}
 
-ARG OPENCV_VERSION=3.2.0
+{% block content %}
+ARG OPENCV_VERSION={{ _version }}
 
 RUN apt-get update && apt-get install -y \
         python-opencv \
@@ -44,11 +44,15 @@ RUN cd ~/ && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
+        {%- if arch == 'gpu' %}
         -D WITH_CUDA=ON \
         -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
+        {%- endif %}
         -D ENABLE_FAST_MATH=1 \
+        {%- if arch == 'gpu' %}
         -D CUDA_FAST_MATH=1 \
         -D WITH_CUBLAS=1 \
+        {%- endif %}
         -DFORCE_VTK=ON \
         -DWITH_TBB=ON \
         -DWITH_GDAL=ON \
@@ -62,3 +66,4 @@ RUN cd ~/ && \
  # Remove the opencv folders to reduce image size
     rm -rf ~/opencv* && \
     echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
+{%- endblock %}

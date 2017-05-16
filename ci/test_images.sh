@@ -9,6 +9,10 @@ if [ -z "${jobfiles}" ]; then
 else
     while read -r line; do
         echo "[*] Node ${CIRCLE_NODE_INDEX} running test for job ${line}..."
-        floydker test $(cat "${line}")
+        dockerfile=$(cat "${line}")
+        floydker test "${dockerfile}" || {
+            echo "${dockerfile} test failed."
+            exit 1
+        }
     done <<< "${jobfiles}"
 fi
