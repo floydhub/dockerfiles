@@ -81,7 +81,7 @@ def test(dockerfile):
     # Spin up a docker container to test the given image. Here, we mount the
     # directory where the test files live into /build_test path inside the
     # container (-v) so the container has access to all test files
-    cmds = ['docker', 'run',
+    cmds = ['docker', 'run', '--rm',
             '-v', '%s:/build_test' % os.path.dirname(test_script),
             image_tag,
             'bash', '-c',
