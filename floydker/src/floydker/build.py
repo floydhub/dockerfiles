@@ -28,8 +28,8 @@ def build(dockerfile, show_tag_only):
     logger.info('--------------------------------------------')
     logger.info('[*] Building %s with tag %s...', dockerfile, image_tag)
     logger.info('--------------------------------------------')
-    check_call('docker build -t %s -f %s %s' % (image_tag,
-                                                dockerfile,
-                                                dockerfile_dir),
+    check_call('docker build --rm -t %s -f %s %s' % (image_tag,
+                                                     dockerfile,
+                                                     dockerfile_dir),
                shell=True)
     logger.info(check_output(['docker', 'images']))
