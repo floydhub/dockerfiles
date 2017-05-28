@@ -54,6 +54,15 @@ def gen_target_env_cfg(target_cfg_items):
             yield target_env, target_env_cfg
 
 
+def find_project_dirs(search_root):
+    for cur_dir, dirs, files in os.walk(search_root):
+        # TODO: hornor .gitignore
+        for f in files:
+            if f != 'matrix.yml':
+                continue
+            yield cur_dir
+
+
 def gen_tag_from_filepath(dockerfile_path):
     # sample input: dl/tensorflow/1.0.1/Dockerfile-py3.gpu
     # sample output: floydhub/tensorflow:1.0.1-gpu-py3
@@ -80,6 +89,13 @@ def gen_tag_from_filepath(dockerfile_path):
     tag_components.append(match.group('env'))
 
     return '-'.join(tag_components)
+
+
+def find_dockerfiles_in_project_dir(project_dir):
+    for cur_dir, dirs, files in os.walk(project_dir):
+        for f in files:
+            if f.startswith('Dockerfile'):
+                yield os.path.join(cur_dir, f)
 
 
 def find_matrix_from_dockerfile(dockerfile_path):
