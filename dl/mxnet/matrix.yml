@@ -1,0 +1,20 @@
+0.x.x: &0_x_x
+  _template: mxnet-0.x.x.jinja
+  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:latest-py2
+    extra_makefile_flags: ''
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:latest-gpu-py2
+    extra_makefile_flags: USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1
+
+# end of templates
+
+0.10.0:
+  <<: *0_x_x
+  _version: 0.10.0
+
+$render:
+  - 0.10.0
