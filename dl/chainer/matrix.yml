@@ -2,16 +2,16 @@
   _template: chainer-1.x.x.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:latest-py2
+    baseimg: floydhub/dl-base:v1-py2
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:latest-py3
+    baseimg: floydhub/dl-base:v1-py3
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:latest-gpu-py2
+    baseimg: floydhub/dl-base:v1-gpu-py2
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:latest-gpu-py3
+    baseimg: floydhub/dl-base:v1-gpu-py3
 
 # end of templates
 
