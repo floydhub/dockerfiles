@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:latest-py3
+FROM floydhub/dl-base:v1-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG THEANO_VERSION=rel-0.9.0
@@ -16,7 +16,7 @@ RUN pip --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_V
 	> /root/.theanorc
 
 # Install Lasagne
-RUN pip --no-cache-dir install git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
+RUN pip --no-cache-dir install --upgrade --no-deps git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
 
 # Install Keras
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}

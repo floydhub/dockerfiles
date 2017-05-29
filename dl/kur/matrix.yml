@@ -2,10 +2,10 @@
   _template: kur-0.x.x.jinja
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:latest-py3
+    baseimg: floydhub/dl-base:v1-py3
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:latest-gpu-py3
+    baseimg: floydhub/dl-base:v1-gpu-py3
 
 # end of templates
 
