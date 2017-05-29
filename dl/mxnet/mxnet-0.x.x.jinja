@@ -1,0 +1,8 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+RUN git clone --branch v{{ _version }} --recursive https://github.com/dmlc/mxnet/ && cd mxnet && \
+    make -j$(nproc) USE_OPENCV=1 USE_BLAS=openblas {{ extra_makefile_flags }}
+
+ENV PYTHONPATH /mxnet/python
+{%- endblock %}

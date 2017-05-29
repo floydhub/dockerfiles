@@ -62,7 +62,8 @@ def find_changed_dockerfiles():
             if 'dl/dl-base' in l:
                 print('FIXME: Skipping base image: %s' % l)
                 continue
-            changed_dockerfiles.append(l)
+            if os.path.exists(l.strip()):
+                changed_dockerfiles.append(l)
 
     return changed_dockerfiles
 
