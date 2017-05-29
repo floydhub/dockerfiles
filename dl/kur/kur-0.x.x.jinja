@@ -1,0 +1,6 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+# Install kur
+RUN pip --no-cache-dir install --ignore-installed kur=={{ _version }}
+{%- endblock %}
