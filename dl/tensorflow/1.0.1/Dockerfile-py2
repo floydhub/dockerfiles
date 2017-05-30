@@ -1,27 +1,11 @@
 FROM floydhub/dl-base:v1-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-ARG TENSORFLOW_VERSION=v1.0.1
-ARG KERAS_VERSION=2.0.3
+ARG TENSORFLOW_VERSION=1.0.1
+ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp27-none-linux_x86_64.whl
+ARG KERAS_VERSION=2.0.4
 
-RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
-WORKDIR /tensorflow
-
-ENV CI_BUILD_PYTHON python
-
-RUN tensorflow/tools/ci_build/builds/configured CPU
-
-# NOTE: This command uses special flags to build an optimized image for AWS machines.
-# This image might *NOT* work on other machines
-RUN bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 --copt=-mfma tensorflow/tools/pip_package:build_pip_package
-
-RUN bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip && \
-    pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl && \
-    rm -rf /tmp/pip && \
-    rm -rf /root/.cache
-# Clean up pip wheel and Bazel cache when done.
-
-WORKDIR /
+RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}
 
 # Install Keras
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
