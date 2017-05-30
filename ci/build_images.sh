@@ -13,7 +13,6 @@ retry_cmd() {
     set +e
 
     retry_cnt=2
-    shift 1
 
     while [ $count -le "${retry_cnt}" ]; do
         [ $result -ne 0 ] && {
