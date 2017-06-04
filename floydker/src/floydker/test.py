@@ -3,6 +3,7 @@
 
 from subprocess import check_call
 import sys
+import httplib
 import os
 import logging
 import yaml
@@ -21,9 +22,14 @@ logger = logging.getLogger(__name__)
 
 @click.command()
 @click.argument('dockerfile')
+@click.option('--use-nvidia-driver/--no-use-nvidia-driver',
+              help='Run test with nvidia docker driver (required for GPU image)',
+              default=False)
+@click.option('--extra-docker-args',
+              help='Extra arguments pass to docker run command')
 @click_log.simple_verbosity_option()
 @click_log.init(__name__)
-def test(dockerfile):
+def test(dockerfile, use_nvidia_driver, extra_docker_args):
     image_tag = assert_image_tag_from_dockerfile(logger, dockerfile)
     matrix_yml_path = find_matrix_from_dockerfile(dockerfile)
     project_dir = os.path.dirname(matrix_yml_path)
@@ -31,6 +37,17 @@ def test(dockerfile):
     if not os.path.exists(matrix_yml_path):
         logger.error('matrix.yml not found in project dir: %s', project_dir)
         sys.exit(1)
+
+    extra_args = []
+    if use_nvidia_driver:
+        conn = httplib.HTTPConnection('localhost:3476')
+        conn.request('GET', '/v1.0/docker/cli')
+        data = conn.getresponse().read()
+        conn.close()
+        extra_args += data.split(' ')
+
+    if extra_docker_args:
+        extra_args += extra_docker_args.split(' ')
 
     # switch to project dir where matrix.yml is located, we assume test files
     # are located relative matrix.yml
@@ -82,9 +99,10 @@ def test(dockerfile):
     # directory where the test files live into /build_test path inside the
     # container (-v) so the container has access to all test files
     cmds = ['docker', 'run', '--rm',
-            '-v', '%s:/build_test' % os.path.dirname(test_script),
-            image_tag,
-            'bash', '-c',
-            'cd /build_test && bash %s' % os.path.basename(test_script)]
-    logger.debug('running test docker command: %s', cmds)
+            '-v', '%s:/build_test' % os.path.dirname(test_script)]
+    cmds += extra_args
+    cmds += [image_tag,
+             'bash', '-c',
+             'cd /build_test && bash %s' % os.path.basename(test_script)]
+    logger.info('running test docker command: %s', cmds)
     check_call(cmds)
