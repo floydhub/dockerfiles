@@ -7,25 +7,51 @@ ARG KERAS_VERSION={{ _keras_version }}
 
 {% set EXTRA_CONFIG = '' -%}
 {% if arch == 'gpu' -%}
-{% set EXTRA_CONFIG = 'optimizer_including=cudnn\\n' -%}
+{% set EXTRA_CONFIG = '\\noptimizer_including=cudnn' -%}
 # Install Theano and set up Theano config (.theanorc) for CUDA and OpenBLAS
 {% else -%}
 # Install Theano and set up Theano config (.theanorc) OpenBLAS
 {% endif -%}
-RUN pip --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_VERSION} && \
-	\
-	echo "[global]\ndevice={{ arch }}\nfloatX=float32\n{{ EXTRA_CONFIG }}mode=FAST_RUN \
-		\n[lib]\ncnmem=0.95 \
-		\n[nvcc]\nfastmath=True \
-		\n[blas]\nldflag = -L/usr/lib/openblas-base -lopenblas \
-		\n[DebugMode]\ncheck_finite=1" \
-	> /root/.theanorc
+RUN pip --no-cache-dir install git+git://github.com/Theano/Theano.git@${THEANO_VERSION} \
+    \
+    && echo "[global]\
+        \ndevice={{ _device[arch] }}\
+        \nfloatX=float32\
+        {{ EXTRA_CONFIG }}\nmode=FAST_RUN\
+{%- if arch == 'gpu' %}
+        \n{{ _gpu_backend }}\
+{%- endif %}
+        \n[nvcc]\
+        \nfastmath=True\
+        \n[blas]\
+        \nldflag=-L/usr/lib/openblas-base -lopenblas\
+        \n[DebugMode]\
+        \ncheck_finite=1"\
+    > /root/.theanorc \
+    && rm -rf /tmp/* /var/tmp/*
+
+{%- if arch == 'gpu' and 'gpuarray' in _gpu_backend %}
+
+RUN git clone --branch v0.6.5 https://github.com/Theano/libgpuarray.git \
+    && cd libgpuarray \
+    && cmake . -DCMAKE_BUILD_TYPE=Release \
+    && make -j$(nproc) \
+    && make install \
+    && ldconfig \
+    && python setup.py build \
+    && python setup.py install \
+    && cd .. && rm -rf libgpuarray
+
+{%- endif %}
 
 # Install Lasagne
-RUN pip --no-cache-dir install --upgrade --no-deps git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION}
+RUN pip --no-cache-dir install --upgrade --no-deps \
+    git+git://github.com/Lasagne/Lasagne.git@${LASAGNE_VERSION} \
+    && rm -rf /tmp/* /var/tmp/*
 
 # Install Keras
-RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION}
+RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
+    && rm -rf /tmp/* /var/tmp/*
 
 # Set Backed to Theano
 ENV KERAS_BACKEND='theano'

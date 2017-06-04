@@ -1,6 +1,11 @@
 0.x.x: &0_x_x
   _template: theano-0.x.x.jinja
   _lasagne_version: v0.1
+  _device:
+    gpu: cuda
+    cpu: cpu
+  _gpu_backend: '[gpuarray]\npreallocate=0.95'
+  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:v1-py2
@@ -26,6 +31,10 @@
   <<: *0_x_x
   _version: rel-0.8.2
   _keras_version: 1.2.2
+  _gpu_backend: '[lib]\ncnmem=0.95'
+  _device:
+    gpu: gpu
+    cpu: cpu
 
 0.9.0:
   <<: *0_x_x
