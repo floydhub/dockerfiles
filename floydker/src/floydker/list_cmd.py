@@ -30,11 +30,11 @@ def tag(search_root, tag_only):
 
     ./dl/tensorflow:
             floydhub/tensorflow:1.1.0-py2_aws
-            floydhub/tensorflow:1.1.0-gpu-py2
+            floydhub/tensorflow:1.1.0-gpu-py2_aws
             floydhub/tensorflow:1.1.0-py2
             floydhub/tensorflow:1.1.0-py3_aws
             floydhub/tensorflow:1.1.0-py3
-            floydhub/tensorflow:1.1.0-gpu-py3
+            floydhub/tensorflow:1.1.0-gpu-py3_aws
     ./dl/caffe:
             floydhub/caffe:1.0-gpu-py2
             floydhub/caffe:1.0-py2
