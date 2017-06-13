@@ -23,6 +23,14 @@ RUN tensorflow/tools/ci_build/builds/configured CPU \
     && rm -rf /root/.cache \
     && cd / && rm -rf tensorflow
 
+# Add Tensorboard
+RUN apt-get update && apt-get install -y supervisor \
+  && apt-get clean \
+  && apt-get autoremove \
+  && rm -rf /var/cache/apt/archives/* \
+  && rm -rf /var/lib/apt/lists/*
+COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
+
 WORKDIR /
 
 # Install Keras
