@@ -6,7 +6,8 @@ import os
 import sys
 import copy
 
-dockerfile_name_re = re.compile('Dockerfile-(?P<env>[^.]+)(?P<arch>(\.gpu)?)')
+dockerfile_name_re = re.compile(
+    'Dockerfile-(?P<env>[^.]+)(?P<arch>(\.gpu)?)(?P<cloud>(_aws)?)')
 
 
 def gen_target_cfg_items(target_cfg):
@@ -87,8 +88,10 @@ def gen_tag_from_filepath(dockerfile_path):
     if match.group('arch') == '.gpu':
         tag_components.append('gpu')
     tag_components.append(match.group('env'))
-
-    return '-'.join(tag_components)
+    tag = '-'.join(tag_components)
+    if match.group('cloud'):
+        tag += match.group('cloud')
+    return tag
 
 
 def find_dockerfiles_in_project_dir(project_dir):
