@@ -20,20 +20,6 @@ tensorflow_pip: &tensorflow_pip
     cpver: cp35-cp35m
 
 
-tensorflow_bazel_aws: &tensorflow_bazel_aws
-  _template: tensorflow-bazel_aws.jinja
-  _keras_version: 2.0.4
-  _test: tests/run.sh
-  py2_aws:
-    arch: cpu
-    baseimg: floydhub/dl-base:v1-py2
-    cpver: cp27-none
-  py3_aws:
-    arch: cpu
-    baseimg: floydhub/dl-base:v1-py3
-    cpver: cp35-cp35m
-
-
 # end of templates
 
 0.12.1:
@@ -61,14 +47,41 @@ tensorflow_bazel_aws: &tensorflow_bazel_aws
 1.0.1:
   - <<: *tensorflow_pip
     _version: 1.0.1
-  - <<: *tensorflow_bazel_aws
+  # only build AWS optimized version for CPU because GPU build is broken
+  - _template: tensorflow-bazel_aws.jinja
     _version: 1.0.1
+    _keras_version: 2.0.4
+    _test: tests/run.sh
+    py2_aws:
+      arch: cpu
+      baseimg: floydhub/dl-base:v1-py2
+      cpver: cp27-none
+    py3_aws:
+      arch: cpu
+      baseimg: floydhub/dl-base:v1-py3
+      cpver: cp35-cp35m
 
 1.1.0:
-  - <<: *tensorflow_pip
-    _version: 1.1.0
-  - <<: *tensorflow_bazel_aws
-    _version: 1.1.0
+  _template: tensorflow-bazel_aws.jinja
+  _keras_version: 2.0.4
+  _test: tests/run.sh
+  _version: 1.1.0
+  py2_aws:
+    arch: cpu
+    baseimg: floydhub/dl-base:v1-py2
+    cpver: cp27-none
+  py3_aws:
+    arch: cpu
+    baseimg: floydhub/dl-base:v1-py3
+    cpver: cp35-cp35m
+  py2.gpu_aws:
+    arch: gpu
+    baseimg: floydhub/dl-base:v1-gpu-py2
+    cpver: cp27-none
+  py3.gpu_aws:
+    arch: gpu
+    baseimg: floydhub/dl-base:v1-gpu-py3
+    cpver: cp35-cp35m
 
 
 $render:
