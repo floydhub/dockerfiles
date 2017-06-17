@@ -7,7 +7,17 @@ import sys
 import copy
 
 dockerfile_name_re = re.compile(
-    'Dockerfile-(?P<env>[^.]+)(?P<arch>(\.gpu)?)(?P<cloud>(_aws)?)')
+    'Dockerfile'
+    '-(?P<env>[^.]+)'
+    '(\.(?P<arch>(gpu)))?'
+    '(_(?P<cloud>(aws)))?')
+
+docker_tag_re = re.compile(
+    '(?P<project>[a-z\/]+)'
+    ':(?P<version>[0-9.]+)'
+    '(-(?P<arch>gpu))?'
+    '-(?P<env>[^_]+)'
+    '(_(?P<cloud>(aws)))?')
 
 
 def gen_target_cfg_items(target_cfg):
@@ -85,12 +95,12 @@ def gen_tag_from_filepath(dockerfile_path):
     if not match:
         return None
 
-    if match.group('arch') == '.gpu':
-        tag_components.append('gpu')
+    if match.group('arch'):
+        tag_components.append(match.group('arch'))
     tag_components.append(match.group('env'))
     tag = '-'.join(tag_components)
     if match.group('cloud'):
-        tag += match.group('cloud')
+        tag += '_' + match.group('cloud')
     return tag
 
 
@@ -125,8 +135,16 @@ def gen_target_env_from_tag(img_tag):
     """
     sample input: 'tensorflow:1.0.1-gpu-py3'
     sample output: ('1.0.1', 'py3.gpu')
+
+    sample input: 'tensorflow:1.0.1-gpu-py3_aws'
+    sample output: ('1.0.1', 'py3.gpu_aws')
     """
-    img_commit = img_tag.split(':')[-1]
-    version, target = img_commit.split('-', 1)
-    target = '.'.join(reversed(target.split('-', 1)))
-    return version, target
+    match = docker_tag_re.match(img_tag)
+    if not match:
+        return None, None
+    target_env = match.group('env')
+    if match.group('arch'):
+        target_env += '.' + match.group('arch')
+    if match.group('cloud'):
+        target_env += '_' + match.group('cloud')
+    return match.group('version'), target_env
