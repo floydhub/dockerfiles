@@ -1,4 +1,4 @@
-1.x.x: &1_x_x
+generic: &generic
   _template: chainer-1.x.x.jinja
   py2:
     arch: cpu
@@ -16,8 +16,13 @@
 # end of templates
 
 1.23.0:
-  <<: *1_x_x
+  <<: *generic
   _version: 1.23.0
+
+2.0.0:
+  <<: *generic
+  _version: 2.0.0
 
 $render:
   - 1.23.0
+  - 2.0.0
