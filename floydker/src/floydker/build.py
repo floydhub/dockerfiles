@@ -25,11 +25,12 @@ def build(dockerfile, show_tag_only):
         return
 
     dockerfile_dir = os.path.dirname(dockerfile)
+    project_dir = os.path.dirname(dockerfile_dir)
     logger.info('--------------------------------------------')
     logger.info('[*] Building %s with tag %s...', dockerfile, image_tag)
     logger.info('--------------------------------------------')
     check_call('docker build --rm -t %s -f %s %s' % (image_tag,
                                                      dockerfile,
-                                                     dockerfile_dir),
+                                                     project_dir),
                shell=True)
     logger.info(check_output(['docker', 'images']))
