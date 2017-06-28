@@ -1,5 +1,6 @@
 generic: &generic
   _template: chainer-1.x.x.jinja
+  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:v1-py2
