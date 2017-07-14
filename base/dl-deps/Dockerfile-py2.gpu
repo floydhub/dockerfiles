@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
 		libopenblas-dev \
 		liblapack-dev \
         libpng12-dev \
+		libprotobuf-dev \
 		libsdl2-dev \
 		libtiff-dev \
 		libtiff5-dev \
@@ -37,6 +38,7 @@ RUN apt-get update && apt-get install -y \
 		net-tools \
 		openmpi-bin \
 		pkg-config \
+		protobuf-compiler \
 		python-dev \
 		python-opengl \
 		python-software-properties \
