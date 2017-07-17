@@ -13,7 +13,7 @@ dockerfile_name_re = re.compile(
     '(_(?P<cloud>(aws)))?')
 
 docker_tag_re = re.compile(
-    '(?P<project>[a-z\/]+)'
+    '(?P<project>[a-z\-\/]+)'
     ':(?P<version>[0-9.]+)'
     '(-(?P<arch>gpu))?'
     '-(?P<env>[^_]+)'
@@ -136,7 +136,7 @@ def gen_target_env_from_tag(img_tag):
     sample input: 'tensorflow:1.0.1-gpu-py3'
     sample output: ('1.0.1', 'py3.gpu')
 
-    sample input: 'tensorflow:1.0.1-gpu-py3_aws'
+    sample input: 'floydhub/tensorflow:1.0.1-gpu-py3_aws'
     sample output: ('1.0.1', 'py3.gpu_aws')
     """
     match = docker_tag_re.match(img_tag)

@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:v1-gpu-py3
+FROM floydhub/dl-base:1.0.0-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG CAFFE_VERSION=1.0
@@ -10,9 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libhdf5-serial-dev \
         libleveldb-dev \
         liblmdb-dev \
-        libprotobuf-dev \
-        libsnappy-dev \
-        protobuf-compiler && \
+        libsnappy-dev && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CAFFE_ROOT=/opt/caffe

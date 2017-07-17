@@ -8,19 +8,19 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:v1-py2
+    baseimg: floydhub/dl-base:1.0.0-py2
     cpver: cp27-none
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:v1-py3
+    baseimg: floydhub/dl-base:1.0.0-py3
     cpver: cp35-cp35m
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:v1-gpu-py2
+    baseimg: floydhub/dl-base:1.0.0-gpu-py2
     cpver: cp27-none
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:v1-gpu-py3
+    baseimg: floydhub/dl-base:1.0.0-gpu-py3
     cpver: cp35-cp35m
     _lasagne_version: e71bc59b509d2c0cf67622b0d94c69f51b588bd4
 

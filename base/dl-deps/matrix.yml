@@ -1,0 +1,28 @@
+generic: &generic
+  _template: dl-deps.generic.jinja
+  _test: tests/run.sh
+  py2:
+    cpver: cp2
+    arch: cpu
+    baseimg: floydhub/python-base:v1-py2
+  py3:
+    cpver: cp3
+    arch: cpu
+    baseimg: floydhub/python-base:v1-py3
+  py2.gpu:
+    cpver: cp2
+    arch: gpu
+    baseimg: floydhub/python-base:v1-gpu-py2
+  py3.gpu:
+    cpver: cp3
+    arch: gpu
+    baseimg: floydhub/python-base:v1-gpu-py3
+
+# end of templates
+
+1.0.0:
+  <<: *generic
+  _version: 1.0.0
+
+$render:
+  - 1.0.0

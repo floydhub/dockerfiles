@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:v1-gpu-py2
+FROM floydhub/dl-base:1.0.0-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG THEANO_VERSION=rel-0.9.0

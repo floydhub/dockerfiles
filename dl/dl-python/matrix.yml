@@ -1,0 +1,22 @@
+1.0.0:
+  _template: dl-python-1.x.jinja
+  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-deps:1.0.0-py2
+    cpver: cp2
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-deps:1.0.0-py3
+    cpver: cp3
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-deps:1.0.0-gpu-py2
+    cpver: cp2
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-deps:1.0.0-gpu-py3
+    cpver: cp3
+
+$render:
+  - 1.0.0
