@@ -17,7 +17,7 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 
 # This updates the global environment for the root user
 RUN echo "LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
-RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs" >> /etc/environment
+RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/environment
 
 {% else %}
 {% set EXTRA_BUILD_CFG = '' -%}
