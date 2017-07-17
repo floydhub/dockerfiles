@@ -1,4 +1,4 @@
-FROM floydhub/dl-python:latest-gpu-py3
+FROM floydhub/dl-python:1.0.0-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG OPENCV_VERSION=3.2.0

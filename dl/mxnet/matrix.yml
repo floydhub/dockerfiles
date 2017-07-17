@@ -3,11 +3,11 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:v1-py2
+    baseimg: floydhub/dl-base:1.0.0-py2
     extra_makefile_flags: ''
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:v1-gpu-py2
+    baseimg: floydhub/dl-base:1.0.0-gpu-py2
     extra_makefile_flags: USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1
 
 # end of templates

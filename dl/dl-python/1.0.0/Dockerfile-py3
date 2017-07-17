@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:latest-gpu-py3
+FROM floydhub/dl-deps:1.0.0-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \
@@ -22,7 +22,7 @@ RUN pip --no-cache-dir install \
 
 # Set up our notebook config.
 COPY jupyter_notebook_config_py3.py /root/.jupyter/
-RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py 
+RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py
 
 # Jupyter has issues with being run directly:
 #   https://github.com/ipython/ipython/issues/7062

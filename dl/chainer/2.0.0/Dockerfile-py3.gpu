@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:v1-gpu-py3
+FROM floydhub/dl-base:1.0.0-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG CHAINER_VERSION=2.0.0
