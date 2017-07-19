@@ -13,6 +13,11 @@ ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 
+# This updates the global environment for the root user
+# TODO: move to buildpack-deps
+RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
+RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/environment
+
 
 
 # NOTE: This command uses special flags to build an optimized image for AWS machines.
