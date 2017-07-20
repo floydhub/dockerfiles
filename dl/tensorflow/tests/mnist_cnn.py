@@ -13,6 +13,10 @@ import time
 
 import tensorflow as tf
 
+# patch older version of tensorflow to use new download mirror
+if tf.__version__.startswith('0.12') or tf.__version__.startswith('1.0'):
+    import tensorflow.contrib.learn.python.learn.datasets.mnist
+    tensorflow.contrib.learn.datasets.mnist.SOURCE_URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
