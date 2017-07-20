@@ -85,13 +85,13 @@ tensorflow_aws: &tensorflow_aws
   - <<: *tensorflow_aws
     _version: 1.1.0
 
-1.2.0:
+1.2.1:
   - <<: *tensorflow_aws
-    _version: 1.2.0
+    _version: 1.2.1
 
 
 $render:
   - 0.12.1
   - 1.0.1
   - 1.1.0
-  - 1.2.0
+  - 1.2.1
