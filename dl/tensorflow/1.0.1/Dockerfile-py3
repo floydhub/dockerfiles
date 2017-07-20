@@ -3,7 +3,7 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=1.0.1
 ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
-ARG KERAS_VERSION=2.0.4
+ARG KERAS_VERSION=2.0.6
 
 RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}
 
