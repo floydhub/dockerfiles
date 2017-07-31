@@ -21,10 +21,10 @@
 
 # end of templates
 
-0.1.11:
+'0.1':
   <<: *0_x_x
-  _version: 0.1.11
+  _version: 0.1.12
 
 
 $render:
-  - 0.1.11
+  - '0.1'
