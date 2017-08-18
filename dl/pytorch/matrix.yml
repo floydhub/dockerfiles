@@ -1,30 +1,64 @@
-0.x.x: &0_x_x
+0.1.x: &0_1_x
+  _platform: linux
   _template: pytorch-0.x.x.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py2
+    baseimg: floydhub/dl-base:1.0.0-py2.6
     cpver: cp27-none
-    _test: tests/py2_test.sh
+    _test: tests/test.sh
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py3
+    baseimg: floydhub/dl-base:1.0.0-py3.6
     cpver: cp35-cp35m
+    _test: tests/test.sh
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py2
+    baseimg: floydhub/dl-base:1.0.0-gpu-py2.6
     cpver: cp27-none
-    _test: tests/py2_test.sh
+    _test: tests/test.sh
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py3
+    baseimg: floydhub/dl-base:1.0.0-gpu-py3.6
     cpver: cp35-cp35m
+    _test: tests/test.sh
+
+
+0.2.x: &0_2_x
+  _platform: manylinux1
+  _template: pytorch-0.x.x.jinja
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:1.0.0-py2.6
+    cpver: cp27-cp27mu
+    _test: tests/test.sh
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:1.0.0-py3.6
+    cpver: cp35-cp35m
+    _test: tests/test.sh
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:1.0.0-gpu-py2.6
+    cpver: cp27-cp27mu
+    _test: tests/test.sh
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-base:1.0.0-gpu-py3.6
+    cpver: cp35-cp35m
+    _test: tests/test.sh
 
 # end of templates
 
-'0.1':
-  <<: *0_x_x
-  _version: 0.1.12
+'0.1.12':
+  <<: *0_1_x
+  _version: 0.1.12.post1
+
+
+'0.2.0':
+  <<: *0_2_x
+  _version: 0.2.0.post2
 
 
 $render:
-  - '0.1'
+  - '0.1.12'
+  - '0.2.0'
