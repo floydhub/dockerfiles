@@ -1,6 +1,6 @@
-{% extends "base.jinja" %}
+FROM floydhub/dl-deps:1.0.0-py2
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
 RUN pip --no-cache-dir install \
         Cython \
         h5py \
@@ -8,9 +8,6 @@ RUN pip --no-cache-dir install \
         jupyter \
         matplotlib \
         numpy \
-{%- if arch == 'gpu' %}
-        cupy \
-{%- endif %}
         pandas \
         path.py \
         pyyaml \
@@ -24,13 +21,8 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 # Set up our notebook config.
-{%- if cpver == 'cp2' %}
 COPY jupyter_notebook_config_py2.py /root/.jupyter/
 RUN mv /root/.jupyter/jupyter_notebook_config_py2.py /root/.jupyter/jupyter_notebook_config.py
-{%- else %}
-COPY jupyter_notebook_config_py3.py /root/.jupyter/
-RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py
-{%- endif %}
 
 # Jupyter has issues with being run directly:
 #   https://github.com/ipython/ipython/issues/7062
@@ -42,4 +34,3 @@ RUN chmod +x /run_jupyter.sh
 EXPOSE 8888
 
 CMD ["/run_jupyter.sh"]
-{%- endblock %}

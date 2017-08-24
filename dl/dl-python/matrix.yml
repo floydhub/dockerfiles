@@ -1,4 +1,4 @@
-1.0.0:
+1.1.0:
   _template: dl-python-1.x.jinja
   _test: tests/run.sh
   py2:
@@ -19,4 +19,4 @@
     cpver: cp3
 
 $render:
-  - 1.0.0
+  - 1.1.0
