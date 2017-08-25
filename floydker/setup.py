@@ -12,7 +12,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "click>=6.7",
-        "click-log",
+        "click-log==0.2.0",
         "pyyaml",
         "jinja2",
     ],

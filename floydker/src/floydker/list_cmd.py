@@ -13,6 +13,7 @@ from .utils import (
 )
 
 logger = logging.getLogger(__name__)
+click_log.basic_config(logger)
 
 
 @click.command()
@@ -20,8 +21,7 @@ logger = logging.getLogger(__name__)
 @click.option('--tag-only/--no-tag-only',
               help='only display image tags',
               default=False)
-@click_log.simple_verbosity_option()
-@click_log.init(__name__)
+@click_log.simple_verbosity_option(logger)
 def tag(search_root, tag_only):
     """
     When --tag-only is not set, list all tags indented under project.
@@ -56,8 +56,7 @@ def tag(search_root, tag_only):
 @click.option('--file-only/--no-file-only',
               help='only display dockerfile names',
               default=False)
-@click_log.simple_verbosity_option()
-@click_log.init(__name__)
+@click_log.simple_verbosity_option(logger)
 def dockerfile(search_root, file_only):
     """
     When --file-only is not set, list all dockerfiles indented under project.

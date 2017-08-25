@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:3.2.0-py3
+FROM floydhub/dl-opencv:3.2.0-py3.6
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \

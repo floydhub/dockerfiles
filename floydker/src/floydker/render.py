@@ -13,6 +13,7 @@ import logging
 from .utils import gen_target_cfg_items, gen_target_env_cfg
 
 logger = logging.getLogger(__name__)
+click_log.basic_config(logger)
 
 
 class FilesLoader(jinja2.BaseLoader):
@@ -131,8 +132,7 @@ def render_matrix(jinja2_env, matrix_dir):
 @click.command()
 @click.argument('search_root')
 @click.option('--project', help='only render project matches the given name')
-@click_log.simple_verbosity_option()
-@click_log.init(__name__)
+@click_log.simple_verbosity_option(logger)
 def render(search_root, project):
     template_paths = []
     matrix_dirs = []

@@ -3,19 +3,19 @@
   py2:
     cpver: py2
     arch: cpu
-    baseimg: floydhub/dl-opencv:3.2.0-py2
+    baseimg: floydhub/dl-opencv:3.2.0-py2.6
   py2.gpu:
     cpver: py2
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.2.0-gpu-py2
+    baseimg: floydhub/dl-opencv:3.2.0-gpu-py2.6
   py3:
     cpver: py3
     arch: cpu
-    baseimg: floydhub/dl-opencv:3.2.0-py3
+    baseimg: floydhub/dl-opencv:3.2.0-py3.6
   py3.gpu:
     cpver: py3
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.2.0-gpu-py3
+    baseimg: floydhub/dl-opencv:3.2.0-gpu-py3.6
 
 
 # we only added cupy to dl-opencv 3.3.0, so no change to CPU images
@@ -24,11 +24,11 @@
   py2.gpu:
     cpver: py2
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.3.0-gpu-py2
+    baseimg: floydhub/dl-opencv:3.2.0-gpu-py2.9
   py3.gpu:
     cpver: py3
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.3.0-gpu-py3
+    baseimg: floydhub/dl-opencv:3.2.0-gpu-py3.9
 
 
 $render:

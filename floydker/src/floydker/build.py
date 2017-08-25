@@ -9,6 +9,7 @@ import click_log
 from .utils import assert_image_tag_from_dockerfile
 
 logger = logging.getLogger(__name__)
+click_log.basic_config(logger)
 
 
 @click.command()
@@ -16,8 +17,7 @@ logger = logging.getLogger(__name__)
 @click.option('--show-tag-only/--no-show-tag-only',
               help='skip build, only print out image tag name',
               default=False)
-@click_log.simple_verbosity_option()
-@click_log.init(__name__)
+@click_log.simple_verbosity_option(logger)
 def build(dockerfile, show_tag_only):
     image_tag = assert_image_tag_from_dockerfile(logger, dockerfile)
     if show_tag_only:

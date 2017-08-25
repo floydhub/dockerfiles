@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:3.2.0-gpu-py2
+FROM floydhub/dl-opencv:3.2.0-gpu-py2.6
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \

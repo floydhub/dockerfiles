@@ -18,6 +18,7 @@ from .utils import (
 )
 
 logger = logging.getLogger(__name__)
+click_log.basic_config(logger)
 
 
 @click.command()
@@ -27,8 +28,7 @@ logger = logging.getLogger(__name__)
               default=False)
 @click.option('--extra-docker-args',
               help='Extra arguments pass to docker run command')
-@click_log.simple_verbosity_option()
-@click_log.init(__name__)
+@click_log.simple_verbosity_option(logger)
 def test(dockerfile, use_nvidia_driver, extra_docker_args):
     image_tag = assert_image_tag_from_dockerfile(logger, dockerfile)
     matrix_yml_path = find_matrix_from_dockerfile(dockerfile)

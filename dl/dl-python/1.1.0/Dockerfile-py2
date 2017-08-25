@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:1.0.0-py2
+FROM floydhub/dl-deps:1.0.0-py2.6
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install \
