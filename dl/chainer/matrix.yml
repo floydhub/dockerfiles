@@ -1,6 +1,5 @@
 generic: &generic
   _template: chainer-1.x.x.jinja
-  _test: tests/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:1.0.0-py2.6
@@ -19,10 +18,12 @@ generic: &generic
 1.23.0:
   <<: *generic
   _version: 1.23.0
+  _test: tests/run.sh
 
 2.0.0:
   <<: *generic
   _version: 2.0.0
+  _test: tests/run2.sh
 
 $render:
   - 1.23.0
