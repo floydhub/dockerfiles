@@ -26,19 +26,15 @@ tensorflow_aws: &tensorflow_aws
   py2_aws:
     arch: cpu
     baseimg: floydhub/dl-base:1.0.0-py2
-    cpver: cp27-none
   py3_aws:
     arch: cpu
     baseimg: floydhub/dl-base:1.0.0-py3
-    cpver: cp35-cp35m
   py2.gpu_aws:
     arch: gpu
     baseimg: floydhub/dl-base:1.0.0-gpu-py2
-    cpver: cp27-none
   py3.gpu_aws:
     arch: gpu
     baseimg: floydhub/dl-base:1.0.0-gpu-py3
-    cpver: cp35-cp35m
 
 # end of templates
 
@@ -89,9 +85,20 @@ tensorflow_aws: &tensorflow_aws
   - <<: *tensorflow_aws
     _version: 1.2.1
 
+1.3.0:
+  - <<: *tensorflow_aws
+    _version: 1.3.0
+    # cpu image stays the same, GPU image needs to change to cudnn6
+    py2.gpu_aws:
+      arch: gpu
+      baseimg: floydhub/dl-base:2.0.0-gpu-py2
+    py3.gpu_aws:
+      arch: gpu
+      baseimg: floydhub/dl-base:2.0.0-gpu-py3
 
 $render:
   - 0.12.1
   - 1.0.1
   - 1.1.0
   - 1.2.1
+  - 1.3.0
