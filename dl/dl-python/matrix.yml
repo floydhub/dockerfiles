@@ -20,15 +20,26 @@
 
 2.0.0:
   _template: dl-python.jinja
-  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-deps:2.0.0-py2
+    cpver: cp2
+    _test: tests/run.sh
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-deps:2.0.0-py3
+    cpver: cp3
+    _test: tests/run.sh
   py2.gpu:
     arch: gpu
     baseimg: floydhub/dl-deps:2.0.0-gpu-py2
     cpver: cp2
+    _test: tests/gpu_run.sh
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-deps:2.0.0-gpu-py3
     cpver: cp3
+    _test: tests/gpu_run.sh
 
 $render:
   - 1.1.0
