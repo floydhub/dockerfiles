@@ -59,9 +59,6 @@ RUN set -ex \
 	&& make -j$(nproc) \
 	&& make install \
 	&& ldconfig \
-	\
-	&& apt-get purge -y --auto-remove $buildDeps \
-	\
 	&& find /usr/local -depth \
 		\( \
 			\( -type d -a -name test -o -name tests \) \
