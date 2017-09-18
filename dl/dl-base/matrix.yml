@@ -30,7 +30,32 @@
     arch: gpu
     baseimg: floydhub/dl-opencv:3.2.0-gpu-py3.9
 
+# we only moved to cudnn6 in python-base, so no change to CPU images
+2.0.0: &2_x_x
+  _template: dl-base-1.x.x.jinja
+  py2:
+    cpver: py2
+    arch: cpu
+    baseimg: floydhub/dl-opencv:3.2.0.1-py2.12
+  py3:
+    cpver: py3
+    arch: cpu
+    baseimg: floydhub/dl-opencv:3.2.0.1-py3.12
+  py2.gpu:
+    cpver: py2
+    arch: gpu
+    baseimg: floydhub/dl-opencv:3.2.0.1-gpu-py2.12
+  py3.gpu:
+    cpver: py3
+    arch: gpu
+    baseimg: floydhub/dl-opencv:3.2.0.1-gpu-py3.12
+
+2.1.0:
+  - <<: *2_x_x
+    _template: dl-base-2.x.x.jinja
 
 $render:
-  - 1.0.0
-  - 1.1.0
+  # - 1.0.0
+  # - 1.1.0
+  # - 2.0.0
+  - 2.1.0

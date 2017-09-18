@@ -1,13 +1,8 @@
-FROM floydhub/dl-base:1.0.0-gpu-py3
+FROM floydhub/dl-base:1.0.0-gpu-py3.6
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=1.0.1
 ARG TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
-
-# This updates the global environment for the root user
-# TODO: move to buildpack-deps
-RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
-RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/environment
 ARG KERAS_VERSION=2.0.6
 
 RUN pip --no-cache-dir install --upgrade ${TF_BINARY_URL}

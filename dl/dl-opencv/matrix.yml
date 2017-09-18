@@ -1,5 +1,6 @@
-3.x.x: &3_x_x
+3.2.0:
   _template: dl-opencv-3.x.x.jinja
+  _version: '3.2.0'
   py2:
     arch: cpu
     baseimg: floydhub/dl-python:1.0.0-py2
@@ -13,11 +14,24 @@
     arch: gpu
     baseimg: floydhub/dl-python:1.1.0-gpu-py3
 
-# end of templates
 
-3.2.0:
-  <<: *3_x_x
-  _version: 3.2.0
+3.2.0.1:
+  _template: dl-opencv-3.x.x.jinja
+  _version: '3.2.0'
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-python:2.0.0-py2
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-python:2.0.0-py3
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-python:2.0.0-gpu-py2
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-python:2.0.0-gpu-py3
+
 
 $render:
   - 3.2.0
+  - 3.2.0.1
