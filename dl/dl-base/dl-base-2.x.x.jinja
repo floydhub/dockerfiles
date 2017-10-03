@@ -23,7 +23,12 @@ RUN pip --no-cache-dir install \
         scikit-image \
         spacy \
         tqdm \
-        wheel
+        wheel \
+        # kaggle-cli requires a fix from cliff to support distributions without top_level.txt file
+        git+https://github.com/openstack/cliff.git@a9719bc23ea3ad90cbad9ab743e678f491e85f0a \
+        kaggle-cli \
+    && rm -rf /tmp/* /var/tmp/*
+
 
 # Install OpenAI Universe
 RUN git clone --branch v0.21.3 https://github.com/openai/universe.git \
@@ -48,4 +53,10 @@ RUN git clone --recursive https://github.com/dmlc/xgboost \
     && python setup.py install \
     && cd ../.. \
     && rm -rf xgboost
+
+# Install Anaconda
+# RUN wget https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh \
+#     && bash Anaconda3-5.0.0-Linux-x86_64.sh -b \
+#     && rm Anaconda3-5.0.0-Linux-x86_64.sh
+
 {%- endblock %}
