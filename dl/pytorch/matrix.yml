@@ -28,22 +28,22 @@
   _template: pytorch-0.x.x.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py2.6
+    baseimg: floydhub/dl-base:2.1.0-py2
     cpver: cp27-cp27mu
     _test: tests/test.sh
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py3.6
+    baseimg: floydhub/dl-base:2.1.0-py3
     cpver: cp35-cp35m
     _test: tests/test.sh
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py2.6
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2
     cpver: cp27-cp27mu
     _test: tests/test.sh
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py3.6
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3
     cpver: cp35-cp35m
     _test: tests/test.sh
 
@@ -56,7 +56,7 @@
 
 '0.2.0':
   <<: *0_2_x
-  _version: 0.2.0.post2
+  _version: 0.2.0.post3
 
 
 $render:
