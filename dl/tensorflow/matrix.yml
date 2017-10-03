@@ -21,7 +21,7 @@ tensorflow_pip: &tensorflow_pip
 
 tensorflow_aws: &tensorflow_aws
   _template: tensorflow-bazel_aws.jinja
-  _keras_version: 2.0.6
+  _keras_version: 2.0.8
   _test: tests/run.sh
   py2_aws:
     arch: cpu
@@ -85,25 +85,25 @@ tensorflow_aws: &tensorflow_aws
   - <<: *tensorflow_aws
     _version: 1.2.1
 
-1.3.0:
+1.3.1:
   _template: tensorflow-bazel_aws.jinja
-  _keras_version: 2.0.6
+  _keras_version: 2.0.8
   _test: tests/run.sh
-  _version: 1.3.0
+  _version: 1.3.1
   # bump cpu base for py36
   py2_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.0.0-py2
+    baseimg: floydhub/dl-base:2.1.0-py2
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.0.0-py3
+    baseimg: floydhub/dl-base:2.1.0-py3
   # bump gpu base for py36 and cudnn6
   py2.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:2.0.0-gpu-py2.12
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2
   py3.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:2.0.0-gpu-py3.12
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3
 
 
 $render:
@@ -111,4 +111,4 @@ $render:
   - 1.0.1
   - 1.1.0
   - 1.2.1
-  - 1.3.0
+  - 1.3.1
