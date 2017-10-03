@@ -9,7 +9,12 @@ python -c "import gym"
 echo "nltk"
 python -c "import nltk"
 echo "pattern"
-python -c "import pattern"
+TEST_PATTERN="
+import sys
+if sys.version_info[0] < 3:
+    import pattern
+"
+python -c "${TEST_PATTERN}"
 echo "scikit-image"
 python -c "import skimage"
 echo "spacy"
@@ -18,3 +23,5 @@ echo "universe"
 python -c "import universe"
 echo "xgboost"
 python -c "import xgboost"
+echo "test kaggle-cli"
+kg config
