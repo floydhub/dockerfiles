@@ -34,7 +34,7 @@
   py3:
     arch: cpu
     baseimg: floydhub/dl-base:2.1.0-py3
-    cpver: cp35-cp35m
+    cpver: cp36-cp36m
     _test: tests/test.sh
   py2.gpu:
     arch: gpu
@@ -44,7 +44,7 @@
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:2.1.0-gpu-py3
-    cpver: cp35-cp35m
+    cpver: cp36-cp36m
     _test: tests/test.sh
 
 # end of templates
