@@ -2,26 +2,34 @@
 set -euo pipefail
 
 echo "Running tests..."
-echo "OpenCV"
+echo "Testing OpenCV..."
 python -c "import cv2"
-echo "gym"
+
+echo "Testing gym..."
 python -c "import gym"
-echo "nltk"
+
+echo "Testing nltk..."
 python -c "import nltk"
-echo "pattern"
+
+echo "Testing pattern..."
 TEST_PATTERN="
 import sys
 if sys.version_info[0] < 3:
     import pattern
 "
 python -c "${TEST_PATTERN}"
-echo "scikit-image"
+
+echo "Testing scikit-image..."
 python -c "import skimage"
-echo "spacy"
+
+echo "Testing spacy..."
 python -c "import spacy"
-echo "universe"
+
+echo "Testing universe..."
 python -c "import universe"
-echo "xgboost"
+
+echo "Testing xgboost..."
 python -c "import xgboost"
-echo "test kaggle-cli"
+
+echo "Testing kaggle-cli..."
 kg config
