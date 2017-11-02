@@ -12,6 +12,7 @@ ENV CI_BUILD_PYTHON python
 {% set EXTRA_BUILD_CFG = '--config=cuda ' -%}
 # Configure the build for our CUDA configuration.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+ENV TF_CUDA_VERSION 8.0
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 
@@ -27,11 +28,21 @@ RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/enviro
 # NOTE: This command uses special flags to build an optimized image for AWS machines.
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
+{%- if arch == 'gpu' %}
+RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 \
+    && tensorflow/tools/ci_build/builds/configured {{ arch | upper }} \
+{%- else %}
 RUN tensorflow/tools/ci_build/builds/configured {{ arch | upper }} \
+{%- endif %}
     && bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 \
-        --copt=-mfma {{ EXTRA_BUILD_CFG }}tensorflow/tools/pip_package:build_pip_package \
+        --copt=-mfma \
+{%- if arch == 'gpu' %}
+        --config=monolithic \
+{%- endif %}
+        {{ EXTRA_BUILD_CFG }}tensorflow/tools/pip_package:build_pip_package \
     && bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip \
     && pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl \
+    && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache \
     && cd / && rm -rf tensorflow
@@ -49,6 +60,7 @@ WORKDIR /
 # Install Keras and tflearn
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
         tflearn==0.3.2 \
+    && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 {%- endblock %}
