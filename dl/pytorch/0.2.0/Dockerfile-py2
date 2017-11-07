@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:2.1.0-py2
+FROM floydhub/dl-base:2.1.0-py2.13
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl
