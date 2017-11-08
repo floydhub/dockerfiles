@@ -1,7 +1,7 @@
 FROM floydhub/dl-base:2.1.0-py2.13
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-ARG TENSORFLOW_VERSION=v1.4.0-rc1
+ARG TENSORFLOW_VERSION=v1.4.0
 ARG KERAS_VERSION=2.0.8
 
 RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch

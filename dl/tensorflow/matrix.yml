@@ -108,7 +108,7 @@ tensorflow_aws: &tensorflow_aws
 
 1.4.0:
   - <<: *tensorflow_aws_py26
-    _version: 1.4.0-rc1
+    _version: 1.4.0
 
 
 $render:
