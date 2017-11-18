@@ -59,7 +59,7 @@
 
 3.0.0:
   _test: tests/run.sh
-  _template: dl-base-1.x.x.jinja
+  _template: dl-base-2.x.x.jinja
   py2:
     cpver: py2
     arch: cpu
