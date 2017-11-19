@@ -9,13 +9,13 @@ import copy
 dockerfile_name_re = re.compile(
     'Dockerfile'
     '-(?P<env>[^.]+)'
-    '(\.(?P<arch>(gpu)))?'
+    '(\.(?P<arch>(gpu(\.[a-z0-9]+)?)))?'
     '(_(?P<cloud>(aws)))?')
 
 docker_tag_re = re.compile(
     '(?P<project>[a-z\-\/]+)'
     ':(?P<version>[0-9.]+)'
-    '(-(?P<arch>gpu))?'
+    '(-(?P<arch>gpu(\.[a-z0-9]+)?))?'
     '-(?P<env>[^._]+)'
     '(_(?P<cloud>(aws)))?')
 
@@ -75,8 +75,13 @@ def find_project_dirs(search_root):
 
 
 def gen_tag_from_filepath(dockerfile_path):
-    # sample input: dl/tensorflow/1.0.1/Dockerfile-py3.gpu
-    # sample output: floydhub/tensorflow:1.0.1-gpu-py3
+    '''
+    sample input: dl/tensorflow/1.0.1/Dockerfile-py3.gpu
+    sample output: floydhub/tensorflow:1.0.1-gpu-py3
+
+    sample input: dl/tensorflow/1.4.0/Dockerfile-py3.gpu.cuda9cudnn7_aws
+    sample output: floydhub/tensorflow:1.4.0-gpu.cuda9cudnn7-py3_aws
+    '''
     abs_path = os.path.realpath(dockerfile_path)
 
     path_parts = abs_path.split(os.sep)

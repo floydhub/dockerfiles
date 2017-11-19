@@ -12,7 +12,8 @@ ENV CI_BUILD_PYTHON python
 {% set EXTRA_BUILD_CFG = '--config=cuda ' -%}
 # Configure the build for our CUDA configuration.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-ENV TF_CUDA_VERSION 8.0
+ENV TF_CUDA_VERSION {{ cuda_version }}
+ENV TF_CUDNN_VERSION {{ cudnn_version }}
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7,7.0
 
