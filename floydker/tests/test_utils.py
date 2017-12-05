@@ -20,6 +20,10 @@ def test_gen_tag_from_filepath():
         'dl/../dl/tensorflow/1.0.1/Dockerfile-py2_aws')
     assert tag == 'floydhub/tensorflow:1.0.1-py2_aws'
 
+    tag = gen_tag_from_filepath(
+        'dl/tensorflow/1.4.0/Dockerfile-py3.gpu.cuda9cudnn7_aws')
+    assert tag == 'floydhub/tensorflow:1.4.0-gpu.cuda9cudnn7-py3_aws'
+
 
 def test_find_matrix_from_dockerfile():
     from floydker.utils import find_matrix_from_dockerfile
@@ -43,3 +47,7 @@ def test_gen_target_env_from_tag():
     target, env = gen_target_env_from_tag('floydhub/tensorflow:1.0.1-py2_aws')
     assert target == '1.0.1'
     assert env == 'py2_aws'
+
+    target, env = gen_target_env_from_tag('floydhub/tensorflow:1.0.1-gpu.cuda11cudnn10-py2_aws')
+    assert target == '1.0.1'
+    assert env == 'py2.gpu.cuda11cudnn10_aws'

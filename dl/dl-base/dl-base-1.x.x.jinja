@@ -25,7 +25,15 @@ RUN git clone --branch v0.21.3 https://github.com/openai/universe.git \
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
+{%- if arch == 'gpu' %}
+    && mkdir build \
+    && cd build \
+    && cmake .. -DUSE_CUDA=ON \
     && make -j$(nproc) \
+    && cd .. \
+{%- else %}
+    && make -j$(nproc) \
+{%- endif %}
     && cd python-package \
     && python setup.py install \
     && cd ../.. \

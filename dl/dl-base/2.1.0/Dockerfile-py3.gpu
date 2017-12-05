@@ -20,7 +20,10 @@ RUN pip --no-cache-dir install \
         scikit-image \
         spacy \
         tqdm \
-        wheel
+        wheel \
+        kaggle-cli \
+    && rm -rf /tmp/* /var/tmp/*
+
 
 # Install OpenAI Universe
 RUN git clone --branch v0.21.3 https://github.com/openai/universe.git \
@@ -32,8 +35,17 @@ RUN git clone --branch v0.21.3 https://github.com/openai/universe.git \
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DUSE_CUDA=ON \
     && make -j$(nproc) \
+    && cd .. \
     && cd python-package \
     && python setup.py install \
     && cd ../.. \
     && rm -rf xgboost
+
+# Install Anaconda
+# RUN wget https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh \
+#     && bash Anaconda3-5.0.0-Linux-x86_64.sh -b \
+#     && rm Anaconda3-5.0.0-Linux-x86_64.sh

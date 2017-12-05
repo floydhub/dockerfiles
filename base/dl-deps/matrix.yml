@@ -19,7 +19,7 @@
     baseimg: floydhub/python-base:v1-gpu-py3
 
 
-generic: &generic
+2.0.0:
   _template: dl-deps.generic.jinja
   _test: tests/run.sh
   py2:
@@ -40,11 +40,20 @@ generic: &generic
     baseimg: floydhub/python-base:2.0.0-gpu-py3
 
 
-# end of templates
+3.0.0:
+  _template: dl-deps.generic.jinja
+  _test: tests/run.sh
+  py2.gpu:
+    cpver: cp2
+    arch: gpu
+    baseimg: floydhub/python-base:3.0.0-gpu-py2
+  py3.gpu:
+    cpver: cp3
+    arch: gpu
+    baseimg: floydhub/python-base:3.0.0-gpu-py3
 
-2.0.0:
-  <<: *generic
 
 $render:
   - 1.0.0
   - 2.0.0
+  - 3.0.0
