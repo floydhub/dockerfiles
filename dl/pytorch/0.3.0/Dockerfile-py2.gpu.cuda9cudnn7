@@ -1,7 +1,7 @@
-{% extends "base.jinja" %}
+FROM floydhub/dl-base:3.0.0-gpu-py2.16
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
-RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/{{ cuda_version }}/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl
+RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
 
 # install torch vision from source for dataloader bug fix
 # ref: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/63
@@ -11,5 +11,3 @@ RUN git clone https://github.com/pytorch/vision \
     && python setup.py install \
     && cd .. \
     && rm -rf vision
-
-{%- endblock %}

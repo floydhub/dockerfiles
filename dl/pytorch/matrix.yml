@@ -5,21 +5,25 @@
     arch: cpu
     baseimg: floydhub/dl-base:1.0.0-py2.6
     cpver: cp27-none
+    cuda_version: cu80
     _test: tests/test.sh
   py3:
     arch: cpu
     baseimg: floydhub/dl-base:1.0.0-py3.6
     cpver: cp35-cp35m
+    cuda_version: cu80
     _test: tests/test.sh
   py2.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:1.0.0-gpu-py2.6
     cpver: cp27-none
+    cuda_version: cu80
     _test: tests/test.sh
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:1.0.0-gpu-py3.6
     cpver: cp35-cp35m
+    cuda_version: cu80
     _test: tests/test.sh
 
 
@@ -30,21 +34,25 @@
     arch: cpu
     baseimg: floydhub/dl-base:2.1.0-py2.13
     cpver: cp27-cp27mu
+    cuda_version: cu80
     _test: tests/test.sh
   py3:
     arch: cpu
     baseimg: floydhub/dl-base:2.1.0-py3.13
     cpver: cp36-cp36m
+    cuda_version: cu80
     _test: tests/test.sh
   py2.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
     cpver: cp27-cp27mu
+    cuda_version: cu80
     _test: tests/test.sh
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
     cpver: cp36-cp36m
+    cuda_version: cu80
     _test: tests/test.sh
 
 # end of templates
@@ -59,6 +67,49 @@
   _version: 0.2.0.post3
 
 
+'0.3.0':
+  _platform: linux
+  _template: pytorch-0.x.x.jinja
+  _version: 0.3.0.post4
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:2.1.0-py2.13
+    cpver: cp27-cp27mu
+    cuda_version: cu80
+    _test: tests/test.sh
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:2.1.0-py3.13
+    cpver: cp36-cp36m
+    cuda_version: cu80
+    _test: tests/test.sh
+  py2.gpu.cuda8cudnn6:
+    arch: gpu
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
+    cpver: cp27-cp27mu
+    cuda_version: cu80
+    _test: tests/test.sh
+  py3.gpu.cuda8cudnn6:
+    arch: gpu
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
+    cpver: cp36-cp36m
+    cuda_version: cu80
+    _test: tests/test.sh
+  py2.gpu.cuda9cudnn7:
+    arch: gpu
+    baseimg: floydhub/dl-base:3.0.0-gpu-py2.16
+    cpver: cp27-cp27mu
+    cuda_version: cu90
+    _test: tests/test.sh
+  py3.gpu.cuda9cudnn7:
+    arch: gpu
+    baseimg: floydhub/dl-base:3.0.0-gpu-py3.16
+    cpver: cp36-cp36m
+    cuda_version: cu90
+    _test: tests/test.sh
+
+
 $render:
   - '0.1.12'
   - '0.2.0'
+  - '0.3.0'
