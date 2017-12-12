@@ -1,4 +1,4 @@
-FROM floydhub/buildpack-deps:cuda9-cudnn7-1.0
+FROM floydhub/buildpack-deps:cuda9-cudnn7-1.1
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # From https://github.com/docker-library/python/blob/master/3.6./Dockerfile

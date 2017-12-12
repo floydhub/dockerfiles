@@ -1,6 +1,7 @@
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 MAINTAINER FloydHub "support@floydhub.com"
+LABEL nvidia_cuda_docker_commit=213ac67c2d76b0d2694454c4276cd4fdfe3a9832
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
