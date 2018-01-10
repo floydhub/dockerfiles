@@ -2,19 +2,19 @@
   _template: caffe-1.x.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py2
+    baseimg: floydhub/dl-base:2.1.0-py2.13
     cpver: cp27-none
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py3
+    baseimg: floydhub/dl-base:2.1.0-py3.13
     cpver: cp35-cp35m
-  py2.gpu:
+  py2.gpu.cuda8cudnn6:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py2
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
     cpver: cp27-none
-  py3.gpu:
+  py3.gpu.cuda8cudnn6:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py3
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
     cpver: cp35-cp35m
 
 # end of templates
