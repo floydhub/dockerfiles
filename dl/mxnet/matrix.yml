@@ -1,4 +1,5 @@
-0.x.x: &0_x_x
+0.0.10.0:
+  _version: 0.10.0
   _template: mxnet-0.x.x.jinja
   _test: tests/run.sh
   py2:
@@ -10,11 +11,35 @@
     baseimg: floydhub/dl-base:1.0.0-gpu-py2
     extra_makefile_flags: USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1
 
-# end of templates
 
-0.10.0:
-  <<: *0_x_x
-  _version: 0.10.0
+1.0.0:
+  _version: 1.0.0
+  _template: mxnet-1.x.x.jinja
+  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/dl-base:2.1.0-py2.13
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-base:2.1.0-py3.13
+  # py2.gpu.cuda8cudnn6:
+  #   arch: gpu
+  #   cuda_version: 'cu80'
+  #   baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
+  # py3.gpu.cuda8cudnn6:
+  #   arch: gpu
+  #   cuda_version: 'cu80'
+  #   baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
+  py2.gpu.cuda9cudnn7:
+    arch: gpu
+    cuda_version: 'cu90'
+    baseimg: floydhub/dl-base:3.0.0-gpu-py2.18
+  py3.gpu.cuda9cudnn7:
+    arch: gpu
+    cuda_version: 'cu90'
+    baseimg: floydhub/dl-base:3.0.0-gpu-py3.18
+
 
 $render:
-  - 0.10.0
+  # - 0.10.0
+  - 1.0.0

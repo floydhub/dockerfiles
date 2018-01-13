@@ -1,0 +1,5 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+RUN pip --no-cache-dir install mxnet{% if arch == "gpu"  %}-{{ cuda_version }}{% endif %}=={{ _version }}
+{%- endblock %}

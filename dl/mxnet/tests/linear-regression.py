@@ -8,6 +8,8 @@
 #
 # To begin, the following code imports the necessary packages we'll need for this exercise.
 
+from __future__ import print_function
+
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -19,13 +21,13 @@ import numpy as np
 # In MXNet, data is input via **Data Iterators**. Here we will illustrate
 # how to encode a dataset into an iterator that MXNet can use. The data used in the example is made up of 2D data points with corresponding integer labels.
 
-print 'Generating traning data...'
+print('Generating traning data...')
 #Training data
 train_data = np.random.uniform(0, 1, [100, 2])
 train_label = np.array([train_data[i][0] + 2 * train_data[i][1] for i in range(100)])
 batch_size = 1
 
-print 'Generating evaluation data...'
+print('Generating evaluation data...')
 #Evaluation Data
 eval_data = np.array([[7,2],[6,10],[12,2]])
 eval_label = np.array([11,26,16])
@@ -81,7 +83,7 @@ eval_iter = mx.io.NDArrayIter(eval_data, eval_label, batch_size, shuffle=False)
 # one symbol serving as input to the next to build the network topology. More information
 # about the different types of symbols can be found [here](http://mxnet.io/api/python/symbol.html).
 
-print 'Building model...'
+print('Building model...')
 X = mx.sym.Variable('data')
 Y = mx.symbol.Variable('lin_reg_label')
 fully_connected_layer  = mx.sym.FullyConnected(data=X, name='fc1', num_hidden = 1)
@@ -129,7 +131,7 @@ model = mx.mod.Module(
 # parameters of the model to fit the training data. This is accomplished using the
 # `fit()` function of the `Module` class.
 
-print 'Training model...'
+print('Training model...')
 
 import sys
 sys.stdout.flush()
@@ -144,5 +146,5 @@ model.fit(train_iter, eval_iter,
 # Once we have a trained model, we can do a couple of things with it - we can either
 # use it for inference or we can evaluate the trained model on test data. The latter is shown below:
 
-print 'Inference with trained model on test data...'
-print model.predict(eval_iter).asnumpy()
+print('Inference with trained model on test data...')
+print(model.predict(eval_iter).asnumpy())
