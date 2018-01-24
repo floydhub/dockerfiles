@@ -56,5 +56,4 @@ RUN cd ~/ && \
     make install && \
     ldconfig && \
  # Remove the opencv folders to reduce image size
-    rm -rf ~/opencv* && \
-    echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
+    rm -rf ~/opencv*
