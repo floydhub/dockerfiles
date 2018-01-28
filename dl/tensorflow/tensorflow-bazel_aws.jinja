@@ -29,7 +29,8 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
 RUN tensorflow/tools/ci_build/builds/configured {{ arch | upper }} \
-    && bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 \
+    && bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 \
+        --copt=-mavx --copt=-mavx2 \
         --copt=-mfma \
 {%- if arch == 'gpu' %}
         --config=monolithic \
@@ -41,14 +42,6 @@ RUN tensorflow/tools/ci_build/builds/configured {{ arch | upper }} \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache \
     && cd / && rm -rf tensorflow
-
-# Add Tensorboard
-RUN apt-get update && apt-get install -y supervisor \
-  && apt-get clean \
-  && apt-get autoremove \
-  && rm -rf /var/cache/apt/archives/* \
-  && rm -rf /var/lib/apt/lists/*
-COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
 
 WORKDIR /
 
