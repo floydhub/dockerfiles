@@ -1,6 +1,14 @@
 {% extends "base.jinja" %}
 
 {% block content %}
+# Add Tensorboard
+RUN apt-get update && apt-get install -y supervisor \
+  && apt-get clean \
+  && apt-get autoremove \
+  && rm -rf /var/cache/apt/archives/* \
+  && rm -rf /var/lib/apt/lists/*
+COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
+
 RUN pip --no-cache-dir install \
         dlib \
         gym[all] \

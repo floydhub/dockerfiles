@@ -63,19 +63,19 @@
   py2:
     cpver: py2
     arch: cpu
-    baseimg: floydhub/dl-opencv:3.3.1.1-py2
+    baseimg: floydhub/dl-opencv:3.4.0-py2
   py3:
     cpver: py3
     arch: cpu
-    baseimg: floydhub/dl-opencv:3.3.1.1-py3
+    baseimg: floydhub/dl-opencv:3.4.0-py3
   py2.gpu:
     cpver: py2
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.3.1.1-gpu-py2
+    baseimg: floydhub/dl-opencv:3.4.0-gpu-py2
   py3.gpu:
     cpver: py3
     arch: gpu
-    baseimg: floydhub/dl-opencv:3.3.1.1-gpu-py3
+    baseimg: floydhub/dl-opencv:3.4.0-gpu-py3
 
 $render:
   # - 1.0.0

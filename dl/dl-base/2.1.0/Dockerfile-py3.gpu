@@ -1,6 +1,14 @@
 FROM floydhub/dl-opencv:3.2.0.1-gpu-py3.12
 MAINTAINER Floyd Labs "support@floydhub.com"
 
+# Add Tensorboard
+RUN apt-get update && apt-get install -y supervisor \
+  && apt-get clean \
+  && apt-get autoremove \
+  && rm -rf /var/cache/apt/archives/* \
+  && rm -rf /var/lib/apt/lists/*
+COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
+
 # graphviz for visualization
 RUN apt-get update && apt-get install -y \
         graphviz \
