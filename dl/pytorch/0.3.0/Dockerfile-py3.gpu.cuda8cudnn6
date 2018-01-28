@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:2.1.0-gpu-py3.13
+FROM floydhub/dl-base:2.1.0-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu80/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl

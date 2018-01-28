@@ -73,37 +73,37 @@
   _version: 0.3.0.post4
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py2.13
+    baseimg: floydhub/dl-base:2.1.0-py2
     cpver: cp27-cp27mu
     cuda_version: cu80
     _test: tests/test.sh
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py3.13
+    baseimg: floydhub/dl-base:2.1.0-py3
     cpver: cp36-cp36m
     cuda_version: cu80
     _test: tests/test.sh
   py2.gpu.cuda8cudnn6:
     arch: gpu
-    baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2
     cpver: cp27-cp27mu
     cuda_version: cu80
     _test: tests/test.sh
   py3.gpu.cuda8cudnn6:
     arch: gpu
-    baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3
     cpver: cp36-cp36m
     cuda_version: cu80
     _test: tests/test.sh
   py2.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/dl-base:3.0.0-gpu-py2.16
+    baseimg: floydhub/dl-base:3.0.0-gpu-py2
     cpver: cp27-cp27mu
     cuda_version: cu90
     _test: tests/test.sh
   py3.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/dl-base:3.0.0-gpu-py3.16
+    baseimg: floydhub/dl-base:3.0.0-gpu-py3
     cpver: cp36-cp36m
     cuda_version: cu90
     _test: tests/test.sh
