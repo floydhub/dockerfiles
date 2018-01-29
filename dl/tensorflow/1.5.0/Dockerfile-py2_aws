@@ -15,9 +15,11 @@ ENV CI_BUILD_PYTHON python
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
 RUN tensorflow/tools/ci_build/builds/configured CPU \
-    && bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 \
+    bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 \
         --copt=-mavx --copt=-mavx2 \
         --copt=-mfma \
+        --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" \
+         \
         tensorflow/tools/pip_package:build_pip_package \
     && bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip \
     && pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl \
