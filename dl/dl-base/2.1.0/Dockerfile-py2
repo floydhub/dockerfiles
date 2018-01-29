@@ -21,9 +21,9 @@ RUN apt-get update && apt-get install -y \
 RUN pip --no-cache-dir install \
         pydot \
         dlib \
-        gym[all] \
         incremental \
         nltk \
+        gym[atari,box2d,classic_control] \
         pattern \
         textacy \
         scikit-image \
