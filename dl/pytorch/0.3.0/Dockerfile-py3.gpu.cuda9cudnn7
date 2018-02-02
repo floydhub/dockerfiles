@@ -1,7 +1,8 @@
 FROM floydhub/dl-base:3.0.0-gpu-py3
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl
+RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl \
+    tensorboardX
 
 # install torch vision from source for dataloader bug fix
 # ref: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/63

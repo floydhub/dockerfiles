@@ -1,4 +1,5 @@
 FROM floydhub/dl-base:3.0.0-gpu-py2.18
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-RUN pip --no-cache-dir install mxnet-cu90==1.0.0
+RUN pip --no-cache-dir install mxnet-cu90==1.0.0 \
+    tensorboardX

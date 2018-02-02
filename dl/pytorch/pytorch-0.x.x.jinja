@@ -1,7 +1,8 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/{{ cuda_version }}/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl
+RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/{{ cuda_version }}/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+    tensorboardX
 
 # install torch vision from source for dataloader bug fix
 # ref: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/63
