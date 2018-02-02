@@ -144,30 +144,30 @@ tensorflow_aws: &tensorflow_aws
   _test: tests/run.sh
   py2_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py2.13
+    baseimg: floydhub/dl-base:2.1.0-py2.22
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py3.13
+    baseimg: floydhub/dl-base:2.1.0-py3.22
   py2.gpu.cuda8cudnn6_aws:
     arch: gpu
     cuda_version: '8.0'
     cudnn_version: '6'
-    baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2.22
   py3.gpu.cuda8cudnn6_aws:
     arch: gpu
     cuda_version: '8.0'
     cudnn_version: '6'
-    baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3.22
   py2.gpu.cuda9cudnn7_aws:
     arch: gpu
     cuda_version: '9.0'
     cudnn_version: '7'
-    baseimg: floydhub/dl-base:3.0.0-gpu-py2.18
+    baseimg: floydhub/dl-base:3.0.0-gpu-py2.22
   py3.gpu.cuda9cudnn7_aws:
     arch: gpu
     cuda_version: '9.0'
     cudnn_version: '7'
-    baseimg: floydhub/dl-base:3.0.0-gpu-py3.18
+    baseimg: floydhub/dl-base:3.0.0-gpu-py3.22
 
 
 $render:

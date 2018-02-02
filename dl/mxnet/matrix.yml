@@ -18,10 +18,10 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py2.13
+    baseimg: floydhub/dl-base:2.1.0-py2.22
   py3:
     arch: cpu
-    baseimg: floydhub/dl-base:2.1.0-py3.13
+    baseimg: floydhub/dl-base:2.1.0-py3.22
   # py2.gpu.cuda8cudnn6:
   #   arch: gpu
   #   cuda_version: 'cu80'
@@ -33,11 +33,11 @@
   py2.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu90'
-    baseimg: floydhub/dl-base:3.0.0-gpu-py2.18
+    baseimg: floydhub/dl-base:3.0.0-gpu-py2.22
   py3.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu90'
-    baseimg: floydhub/dl-base:3.0.0-gpu-py3.18
+    baseimg: floydhub/dl-base:3.0.0-gpu-py3.22
 
 
 $render:

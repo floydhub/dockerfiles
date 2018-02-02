@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:3.0.0-gpu-py2.18
+FROM floydhub/dl-base:3.0.0-gpu-py2.22
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install mxnet-cu90==1.0.0 \
