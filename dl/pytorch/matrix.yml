@@ -71,6 +71,7 @@
   _platform: linux
   _template: pytorch-0.x.x.jinja
   _version: 0.3.0.post4
+  _vision_version: 0.2.0
   py2:
     arch: cpu
     baseimg: floydhub/dl-base:2.1.0-py2.22
