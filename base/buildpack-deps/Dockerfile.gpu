@@ -1,7 +1,6 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cudagl:9.1-devel-ubuntu16.04
 
 MAINTAINER FloydHub "support@floydhub.com"
-LABEL nvidia_cuda_docker_commit=213ac67c2d76b0d2694454c4276cd4fdfe3a9832
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -63,7 +62,10 @@ RUN apt-get update \
             echo 'libmysqlclient-dev'; \
             fi \
         ) \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/archives/*
 
 # This updates the global environment for the root user
 RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
