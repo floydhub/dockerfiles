@@ -77,9 +77,30 @@
     arch: gpu
     baseimg: floydhub/dl-opencv:3.4.0-gpu-py3
 
+3.1.0:
+  _test: tests/run.sh
+  _template: dl-base-2.x.x.jinja
+  py2:
+    cpver: py2
+    arch: cpu
+    baseimg: floydhub/dl-opencv:3.4.1-py2
+  py3:
+    cpver: py3
+    arch: cpu
+    baseimg: floydhub/dl-opencv:3.4.1-py3
+  py2.gpu:
+    cpver: py2
+    arch: gpu
+    baseimg: floydhub/dl-opencv:3.4.1-gpu-py2
+  py3.gpu:
+    cpver: py3
+    arch: gpu
+    baseimg: floydhub/dl-opencv:3.4.1-gpu-py3
+
 $render:
   # - 1.0.0
   # - 1.1.0
   # - 2.0.0
   - 2.1.0
-  - 3.0.0
+  # - 3.0.0
+  - 3.1.0

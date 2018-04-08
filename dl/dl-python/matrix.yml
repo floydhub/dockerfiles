@@ -41,16 +41,16 @@
     cpver: cp3
     _test: tests/gpu_run.sh
 
-3.0.0:
+3.1.0:
   _template: dl-python.jinja
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-deps:3.0.0-gpu-py2
+    baseimg: floydhub/dl-deps:3.1.0-gpu-py2
     cpver: cp2
     _test: tests/gpu_run.sh
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-deps:3.0.0-gpu-py3
+    baseimg: floydhub/dl-deps:3.1.0-gpu-py3
     cpver: cp3
     _test: tests/gpu_run.sh
 
@@ -58,4 +58,4 @@
 $render:
   - 1.1.0
   - 2.0.0
-  - 3.0.0
+  - 3.1.0
