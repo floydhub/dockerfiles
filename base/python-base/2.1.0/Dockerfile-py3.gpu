@@ -44,6 +44,8 @@ RUN set -ex \
 	&& gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
 	&& ./configure \
 		--build="$gnuArch" \
+		--with-tcltk-includes='-I/usr/include/tk -I/usr/include/tcl' \
+		--with-tcltk-libs='/usr/lib/x86_64-linux-gnu/libtcl.so /usr/lib/x86_64-linux-gnu/libtk.so' \
 		--enable-loadable-sqlite-extensions \
 		--enable-shared \
 		--with-system-expat \

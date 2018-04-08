@@ -39,10 +39,6 @@ RUN apt-get update && apt-get install -y \
         openmpi-bin \
         pkg-config \
         protobuf-compiler \
-        python-dev \
-        python-opengl \
-        python-tk \
-        python-software-properties \
         rsync \
         software-properties-common \
         swig \
@@ -57,6 +53,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/cache/apt/archives/* \
 # Link BLAS library to use OpenBLAS using the alternatives mechanism (https://www.scipy.org/scipylib/building/linux.html#debian-ubuntu)
     && update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3
+
+RUN pip --no-cache-dir install \
+        PyOpenGL PyOpenGL_accelerate \
+    && rm -rf /tmp/* /var/tmp/*
 
 # Install Git LFS
 RUN apt-get update \
