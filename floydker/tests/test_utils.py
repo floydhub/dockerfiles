@@ -24,6 +24,9 @@ def test_gen_tag_from_filepath():
         'dl/tensorflow/1.4.0/Dockerfile-py3.gpu.cuda9cudnn7_aws')
     assert tag == 'floydhub/tensorflow:1.4.0-gpu.cuda9cudnn7-py3_aws'
 
+    tag = gen_tag_from_filepath(
+        'base/dl-deps/3.1.0/Dockerfile-gpu')
+    assert tag == 'floydhub/dl-deps:3.1.0-gpu'
 
 def test_find_matrix_from_dockerfile():
     from floydker.utils import find_matrix_from_dockerfile

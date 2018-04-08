@@ -8,7 +8,7 @@ import copy
 
 dockerfile_name_re = re.compile(
     'Dockerfile'
-    '-(?P<env>[^.]+)'
+    '-(?P<env>[^.]+)?'
     '(\.(?P<arch>(gpu(\.[a-z0-9]+)?)))?'
     '(_(?P<cloud>(aws)))?')
 
@@ -81,6 +81,9 @@ def gen_tag_from_filepath(dockerfile_path):
 
     sample input: dl/tensorflow/1.4.0/Dockerfile-py3.gpu.cuda9cudnn7_aws
     sample output: floydhub/tensorflow:1.4.0-gpu.cuda9cudnn7-py3_aws
+
+    sample input: base/dl-deps/3.1.0/Dockerfile-gpu
+    sample output: floydhub/dl-deps:3.1.0-gpu
     '''
     abs_path = os.path.realpath(dockerfile_path)
 
@@ -102,7 +105,9 @@ def gen_tag_from_filepath(dockerfile_path):
 
     if match.group('arch'):
         tag_components.append(match.group('arch'))
-    tag_components.append(match.group('env'))
+    env = match.group('env')
+    if env:
+        tag_components.append(env)
     tag = '-'.join(tag_components)
     if match.group('cloud'):
         tag += '_' + match.group('cloud')
