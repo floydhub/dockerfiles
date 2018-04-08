@@ -1,7 +1,17 @@
-FROM floydhub/dl-deps:3.1.0-gpu-py2
+FROM floydhub/dl-deps:3.1.0-gpu
 MAINTAINER Floyd Labs "support@floydhub.com"
 
+RUN  apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		python-pip \
+	&& apt-get clean \
+	&& apt-get autoremove \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /var/cache/apt/archives/* \
+
 RUN pip --no-cache-dir install \
+        virtualenv \
+        PyOpenGL PyOpenGL_accelerate \
         Cython \
         h5py \
         ipykernel \
@@ -18,8 +28,9 @@ RUN pip --no-cache-dir install \
         sympy \
         Pillow \
         zmq \
-        && \
-    python -m ipykernel.kernelspec
+        opencv-contrib-python==3.4.0.12 \
+    && rm -rf /tmp/* /var/tmp/* \
+    && python -m ipykernel.kernelspec
 
 # Set up our notebook config.
 COPY jupyter_notebook_config_py2.py /root/.jupyter/

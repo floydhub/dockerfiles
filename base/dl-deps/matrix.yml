@@ -43,15 +43,13 @@
 3.1.0:
   _template: dl-deps.generic.jinja
   _test: tests/run.sh
-  py2.gpu:
-    cpver: cp2
+  _opencv_version: '3.4.0'
+  cpu:
+    arch: cpu
+    baseimg: floydhub/buildpack-deps:v1
+  gpu:
     arch: gpu
-    baseimg: floydhub/python-base:3.1.0-gpu-py2
-  py3.gpu:
-    cpver: cp3
-    arch: gpu
-    baseimg: floydhub/python-base:3.1.0-gpu-py3
-
+    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-gl-2.0
 
 $render:
   - 1.0.0

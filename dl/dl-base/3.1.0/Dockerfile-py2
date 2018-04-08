@@ -1,4 +1,4 @@
-FROM floydhub/dl-opencv:3.4.1-py2
+FROM floydhub/dl-python:3.1.0-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Add Tensorboard
