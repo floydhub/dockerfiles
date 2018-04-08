@@ -34,13 +34,6 @@ RUN pip --no-cache-dir install \
     && rm -rf /tmp/* /var/tmp/*
 
 
-# Install OpenAI Universe
-RUN git clone --branch v0.21.3 https://github.com/openai/universe.git \
-    && cd universe \
-    && pip install . \
-    && cd .. \
-    && rm -rf universe
-
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \

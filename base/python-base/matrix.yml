@@ -31,52 +31,52 @@
 
 
 # 2.0.0 uses cudnn6
-2.0.0:
+2.1.0:
   _template: python-base.jinja
   py2:
     gpg_release_signing_key: 'C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF'
-    python_version: 2.7.13
+    python_version: 2.7.14
     cpver: cp2
     arch: cpu
     baseimg: floydhub/buildpack-deps:v1
   py3:
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
-    python_version: 3.6.2
+    python_version: 3.6.5
     cpver: cp3
     arch: cpu
     baseimg: floydhub/buildpack-deps:v1
   py2.gpu:
     gpg_release_signing_key: 'C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF'
-    python_version: 2.7.13
+    python_version: 2.7.14
     cpver: cp2
     arch: gpu
     baseimg: floydhub/buildpack-deps:cuda8-cudnn6-1.0
   py3.gpu:
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
-    python_version: 3.6.2
+    python_version: 3.6.5
     cpver: cp3
     arch: gpu
     baseimg: floydhub/buildpack-deps:cuda8-cudnn6-1.0
 
 
-# 3.0.0 uses cuda9 cudnn7
-3.0.0:
+# 3.x.x uses cuda9 cudnn7
+3.1.0:
   _template: python-base.jinja
   py2.gpu:
     gpg_release_signing_key: 'C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF'
-    python_version: 2.7.13
+    python_version: 2.7.14
     cpver: cp2
     arch: gpu
-    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-1.1
+    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-gl-2.0
   py3.gpu:
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
-    python_version: 3.6.2
+    python_version: 3.6.5
     cpver: cp3
     arch: gpu
-    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-1.1
+    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-gl-2.0
 
 
 $render:
   - 1.0.0
-  - 2.0.0
-  - 3.0.0
+  - 2.1.0
+  - 3.1.0
