@@ -85,24 +85,28 @@ def test(dockerfile, use_nvidia_driver, extra_docker_args):
         sys.exit(0)
 
     test_script = os.path.abspath(test_script)
-    if not os.path.exists(test_script):
-        logger.info('Defined test script (%s) not found for image %s.',
-                    test_script, image_tag)
-        sys.exit(1)
+    if isinstance(test_script, str):
+        test_script = [test_script]
 
-    logger.info('--------------------------------------------')
-    logger.info('[*] Testing image %s with script %s...',
-                image_tag, test_script)
-    logger.info('--------------------------------------------')
+    for script in test_script:
+        if not os.path.exists(script):
+            logger.info('Defined test script (%s) not found for image %s.',
+                        script, image_tag)
+            sys.exit(1)
 
-    # Spin up a docker container to test the given image. Here, we mount the
-    # directory where the test files live into /build_test path inside the
-    # container (-v) so the container has access to all test files
-    cmds = ['docker', 'run', '--rm',
-            '-v', '%s:/build_test' % os.path.dirname(test_script)]
-    cmds += extra_args
-    cmds += [image_tag,
-             'bash', '-c',
-             'cd /build_test && bash %s' % os.path.basename(test_script)]
-    logger.info('running test docker command: %s', cmds)
-    check_call(cmds)
+        logger.info('--------------------------------------------')
+        logger.info('[*] Testing image %s with script %s...',
+                    image_tag, script)
+        logger.info('--------------------------------------------')
+
+        # Spin up a docker container to test the given image. Here, we mount the
+        # directory where the test files live into /build_test path inside the
+        # container (-v) so the container has access to all test files
+        cmds = ['docker', 'run', '--rm',
+                '-v', '%s:/build_test' % os.path.dirname(script)]
+        cmds += extra_args
+        cmds += [image_tag,
+                 'bash', '-c',
+                 'cd /build_test && bash %s' % os.path.basename(script)]
+        logger.info('running test docker command: %s', cmds)
+        check_call(cmds)
