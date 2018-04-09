@@ -1,5 +1,4 @@
-FROM nvidia/cudagl:9.1-devel-ubuntu16.04
-
+FROM nvidia/cuda:9.1-cudnn7-devel-ubuntu16.04
 MAINTAINER FloydHub "support@floydhub.com"
 
 RUN apt-get update \

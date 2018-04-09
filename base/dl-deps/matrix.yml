@@ -49,7 +49,7 @@
     baseimg: floydhub/buildpack-deps:v1
   gpu:
     arch: gpu
-    baseimg: floydhub/buildpack-deps:cuda9-cudnn7-gl-2.0
+    baseimg: floydhub/buildpack-deps:cuda9.1-cudnn7-1.0
 
 $render:
   - 1.0.0
