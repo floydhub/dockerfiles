@@ -45,13 +45,13 @@
   _template: dl-python.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-deps:3.1.0-py2
+    baseimg: floydhub/dl-deps:3.1.0-cpu
     python_version: 2.7.12
     cpver: cp2
     _test: tests/run.sh
   py3:
     arch: cpu
-    baseimg: floydhub/dl-deps:3.1.0-py3
+    baseimg: floydhub/dl-deps:3.1.0-cpu
     cpver: cp3
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.5

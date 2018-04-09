@@ -169,15 +169,27 @@ tensorflow_aws: &tensorflow_aws
     cudnn_version: '7'
     baseimg: floydhub/dl-base:3.0.0-gpu-py3.22
 
-1.6.0:
-  - <<: *aws_cuda9
-    _version: 1.6.0
-    _keras_version: 2.1.4
-
 1.7.0:
-  - <<: *aws_cuda9
-    _version: 1.7.0
-    _keras_version: 2.1.5
+  _version: 1.7.0
+  _keras_version: 2.1.5
+  _template: tensorflow-bazel_aws.jinja
+  _test: tests/run.sh
+  py2_aws:
+    arch: cpu
+    baseimg: floydhub/dl-base:3.1.0-py2.25
+  py3_aws:
+    arch: cpu
+    baseimg: floydhub/dl-base:3.1.0-py3.25
+  py2.gpu.cuda9cudnn7_aws:
+    arch: gpu
+    cuda_version: '9.1'
+    cudnn_version: '7'
+    baseimg: floydhub/dl-base:3.1.0-gpu-py2.25
+  py3.gpu.cuda9cudnn7_aws:
+    arch: gpu
+    cuda_version: '9.1'
+    cudnn_version: '7'
+    baseimg: floydhub/dl-base:3.1.0-gpu-py3.25
 
 $render:
   # - 0.12.1
