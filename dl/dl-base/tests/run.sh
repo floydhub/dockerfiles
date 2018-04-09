@@ -25,9 +25,6 @@ python -c "import skimage"
 echo "Testing spacy..."
 python -c "import spacy"
 
-echo "Testing universe..."
-python -c "import universe"
-
 echo "Testing xgboost..."
 python -c "import xgboost"
 
