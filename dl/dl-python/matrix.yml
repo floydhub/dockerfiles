@@ -52,6 +52,7 @@
   py3.gpu:
     arch: gpu
     baseimg: floydhub/dl-deps:3.1.0-gpu
+    gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.5
     cpver: cp3
     _test: tests/gpu_run.sh
