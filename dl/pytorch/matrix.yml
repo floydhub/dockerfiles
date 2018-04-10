@@ -117,27 +117,27 @@
   _vision_version: 0.2.0
   py2:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.5.0-py2_aws.22
+    baseimg: floydhub/tensorflow:1.7.0-py2_aws.25
     cpver: cp27-cp27mu
-    cuda_version: cu90
+    cuda_version: cu91
     _test: tests/test.sh
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.5.0-py3_aws.22
+    baseimg: floydhub/tensorflow:1.7.0-py3_aws.25
     cpver: cp36-cp36m
-    cuda_version: cu90
+    cuda_version: cu91
     _test: tests/test.sh
   py2.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.5.0-gpu.cuda9cudnn7-py2_aws.22
+    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.25
     cpver: cp27-cp27mu
-    cuda_version: cu90
+    cuda_version: cu91
     _test: tests/test.sh
   py3.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.5.0-gpu.cuda9cudnn7-py3_aws.22
+    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py3_aws.25
     cpver: cp36-cp36m
-    cuda_version: cu90
+    cuda_version: cu91
     _test: tests/test.sh
 
 $render:
