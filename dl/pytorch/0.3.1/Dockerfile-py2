@@ -1,0 +1,6 @@
+FROM floydhub/tensorflow:1.5.0-py2_aws.22
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu90/torch-0.3.1-cp27-cp27mu-linux_x86_64.whl \
+    tensorboardX \
+    torchvision==0.2.0
