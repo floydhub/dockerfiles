@@ -84,11 +84,11 @@ def test(dockerfile, use_nvidia_driver, extra_docker_args):
         logger.info('No test found for image %s, skipped.', dockerfile)
         sys.exit(0)
 
-    test_script = os.path.abspath(test_script)
     if isinstance(test_script, str):
         test_script = [test_script]
 
     for script in test_script:
+        script = os.path.abspath(script)
         if not os.path.exists(script):
             logger.info('Defined test script (%s) not found for image %s.',
                         script, image_tag)
