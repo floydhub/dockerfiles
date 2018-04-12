@@ -19,7 +19,7 @@ ENV TF_CUDNN_VERSION {{ cudnn_version }}
 ENV TF_NEED_CUDA 1
 {#- taken from https://developer.nvidia.com/cuda-gpus #}
 {%- if cuda_version.startswith('9') %}
-ENV TF_CUDA_COMPUTE_CAPABILITIES=7.0
+ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7,7.0
 {%- else %}
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 {%- endif %}
