@@ -211,7 +211,7 @@ def main(argv):
   print("Eager execution:\t {}".format(tf.executing_eagerly()))
   print("Dataset:\t MNIST")
   print("Model:\t CNN")
-  print('Device:\t {}'.format(device)
+  print('Device:\t {}'.format(device))
 
   if data_format == 'channels_first':
     print("Data format:\t NCHW (channel first)")
