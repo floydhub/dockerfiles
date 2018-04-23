@@ -65,6 +65,7 @@
 '0.2.0':
   <<: *0_2_x
   _version: 0.2.0.post3
+  _test: tests/0.2.0/run.sh
 
 
 '0.3.0':
