@@ -1,6 +1,6 @@
 #! /bin/bash
 ######################
-# PYTORCH 0.3.1 TEST #
+# PYTORCH 0.2.0 TEST #
 ######################
 
 pip install psutil
