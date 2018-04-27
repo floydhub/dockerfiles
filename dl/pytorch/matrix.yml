@@ -65,6 +65,7 @@
 '0.2.0':
   <<: *0_2_x
   _version: 0.2.0.post3
+  _test: tests/0.2.0/run.sh
 
 
 '0.3.0':
@@ -115,30 +116,27 @@
   _template: pytorch-0.x.x.jinja
   _version: 0.3.1
   _vision_version: 0.2.0
+  _test: tests/0.3.1/run.sh
   py2:
     arch: cpu
     baseimg: floydhub/tensorflow:1.7.0-py2_aws.25
     cpver: cp27-cp27mu
     cuda_version: cu91
-    _test: tests/test.sh
   py3:
     arch: cpu
     baseimg: floydhub/tensorflow:1.7.0-py3_aws.25
     cpver: cp36-cp36m
     cuda_version: cu91
-    _test: tests/test.sh
   py2.gpu.cuda9cudnn7:
     arch: gpu
     baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.25
     cpver: cp27-cp27mu
     cuda_version: cu91
-    _test: tests/test.sh
   py3.gpu.cuda9cudnn7:
     arch: gpu
     baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py3_aws.25
     cpver: cp36-cp36m
     cuda_version: cu91
-    _test: tests/test.sh
 
 $render:
   #- '0.1.12'
