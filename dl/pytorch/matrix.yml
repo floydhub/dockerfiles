@@ -111,7 +111,7 @@
     _test: tests/test.sh
 
 # The new images are built from Tensorflow to support TensorboardX
-'0.3.1':
+'0.3.1': &pytorch_cuda_9_1
   _platform: linux
   _template: pytorch-0.x.x.jinja
   _version: 0.3.1
@@ -139,35 +139,14 @@
     cuda_version: cu91
 
 '0.4.0':
-  _platform: linux
-  _template: pytorch-0.x.x.jinja
-  _version: 0.4.0
-  _vision_version: 0.2.1
-  _test: tests/0.4.0/run.sh
-  py2:
-    arch: cpu
-    baseimg: floydhub/tensorflow:1.7.0-py2_aws.25
-    cpver: cp27-cp27mu
-    cuda_version: cu91
-  py3:
-    arch: cpu
-    baseimg: floydhub/tensorflow:1.7.0-py3_aws.25
-    cpver: cp36-cp36m
-    cuda_version: cu91
-  py2.gpu.cuda9cudnn7:
-    arch: gpu
-    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.27
-    cpver: cp27-cp27mu
-    cuda_version: cu91
-  py3.gpu.cuda9cudnn7:
-    arch: gpu
-    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py3_aws.27
-    cpver: cp36-cp36m
-    cuda_version: cu91
+  - <<: *pytorch_cuda_9_1
+    _version: 0.4.0
+    _vision_version: 0.2.1
+    _test: tests/0.4.0/run.sh
 
 $render:
   #- '0.1.12'
   #- '0.2.0'
   #- '0.3.0'
-  #- '0.3.1'
+  - '0.3.1'
   - '0.4.0'
