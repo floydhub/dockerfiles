@@ -2,5 +2,8 @@ FROM floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.27
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/torch-0.4.0-cp27-cp27mu-linux_x86_64.whl \
-    tensorboardX \
     torchvision==0.2.1
+
+
+
+RUN pip --no-cache-dir install --upgrade tensorboardX==1.2
