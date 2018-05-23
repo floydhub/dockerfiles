@@ -50,6 +50,7 @@ RUN {{ PRE_CFG_CMD }}tensorflow/tools/ci_build/builds/configured {{ arch | upper
 WORKDIR /
 
 # Install Keras and tflearn
+# TODO: move h5py into dl-python base
 RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
         tflearn==0.3.2 \ {%- if _version >= '1.7.0' %}
         h5py==2.8.0rc1 \ {% endif %}
