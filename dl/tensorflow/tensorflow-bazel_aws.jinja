@@ -29,6 +29,16 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 {% set PRE_CFG_CMD = '' -%}
 {% endif %}
 
+# install mock for py2 build
+RUN python --version 2>&1 | grep 'Python 2' \
+    && pip --no-cache-dir install \
+        mock \
+        && rm -rf /pip_pkg \
+        && rm -rf /tmp/* \
+        && rm -rf /root/.cache \
+    || true
+
+
 # NOTE: This command uses special flags to build an optimized image for AWS machines.
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
@@ -51,9 +61,10 @@ WORKDIR /
 
 # Install Keras and tflearn
 # TODO: move h5py into dl-python base
-RUN pip --no-cache-dir install git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
-        tflearn==0.3.2 \ {%- if _version >= '1.7.0' %}
-        h5py==2.8.0rc1 \ {% endif %}
+RUN pip --no-cache-dir install \
+        git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
+        tflearn==0.3.2 \
+        h5py==2.8.0rc1 \
     && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
