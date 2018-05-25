@@ -196,7 +196,7 @@ tensorflow_aws: &tensorflow_aws
   - <<: *aws_cuda9_1
     _version: 1.8.0
     _keras_version: 2.1.6
-    _test: tests/1.8.0/run.sh
+    _test: tests/1.7.0/run.sh
 
 $render:
   # - 0.12.1
