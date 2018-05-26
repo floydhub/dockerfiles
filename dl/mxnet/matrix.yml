@@ -22,14 +22,6 @@
   py3:
     arch: cpu
     baseimg: floydhub/dl-base:2.1.0-py3.22
-  # py2.gpu.cuda8cudnn6:
-  #   arch: gpu
-  #   cuda_version: 'cu80'
-  #   baseimg: floydhub/dl-base:2.1.0-gpu-py2.13
-  # py3.gpu.cuda8cudnn6:
-  #   arch: gpu
-  #   cuda_version: 'cu80'
-  #   baseimg: floydhub/dl-base:2.1.0-gpu-py3.13
   py2.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu90'
@@ -39,7 +31,28 @@
     cuda_version: 'cu90'
     baseimg: floydhub/dl-base:3.0.0-gpu-py3.22
 
+1.1.0:
+  _version: 1.1.0
+  _template: mxnet-1.x.x.jinja
+  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.7.0-py2_aws.25
+  py3:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.7.0-py3_aws.25
+  py2.gpu.cuda9cudnn7:
+    arch: gpu
+    # FIXME: no cuda91 build from mxnet
+    cuda_version: 'cu91'
+    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.25
+  py3.gpu.cuda9cudnn7:
+    arch: gpu
+    cuda_version: 'cu91'
+    baseimg: floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py3_aws.25
+
 
 $render:
   # - 0.10.0
-  - 1.0.0
+  # - 1.0.0
+  - 1.1.0

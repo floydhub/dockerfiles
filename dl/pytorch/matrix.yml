@@ -145,7 +145,7 @@
     _version: 0.4.0
     _vision_version: 0.2.1
     _tensorboardx_version: 1.2
-    _test: tests/0.4.0/run.sh
+    _test: tests/0.3.1/run.sh
 
 $render:
   #- '0.1.12'
