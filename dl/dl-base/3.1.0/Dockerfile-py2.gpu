@@ -1,8 +1,13 @@
 FROM floydhub/dl-python:3.1.0-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-# Add Tensorboard
-RUN apt-get update && apt-get install -y supervisor \
+
+# Script to install the NodeSource Node.js 8.x LTS Carbon
+# repo onto a Debian or Ubuntu system.
+RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
+
+# Install Nodejs and Add Tensorboard
+RUN apt-get update && apt-get install -y supervisor nodejs\
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /var/cache/apt/archives/* \
@@ -16,7 +21,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/archives/*
-
 
 RUN pip --no-cache-dir install \
         pydot \
@@ -35,6 +39,10 @@ RUN pip --no-cache-dir install \
         annoy \
     && rm -rf /tmp/* /var/tmp/*
 
+
+# Install and Enable jupyter-widgets
+# jupyterlab-manager@0.35 doesn't work on JL v0.31.12
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.34
 
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \
