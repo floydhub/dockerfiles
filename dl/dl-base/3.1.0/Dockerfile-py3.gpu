@@ -34,7 +34,6 @@ RUN pip --no-cache-dir install \
         spacy \
         tqdm \
         wheel \
-        kaggle-cli \
         kaggle \
         seaborn \
         plotly \
