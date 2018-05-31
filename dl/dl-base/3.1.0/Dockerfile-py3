@@ -35,6 +35,7 @@ RUN pip --no-cache-dir install \
         tqdm \
         wheel \
         kaggle \
+        h5py==2.8.0rc1 \
         seaborn \
         plotly \
         annoy \
