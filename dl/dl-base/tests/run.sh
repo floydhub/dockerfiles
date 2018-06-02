@@ -29,4 +29,4 @@ echo "Testing xgboost..."
 python -c "import xgboost"
 
 echo "Testing kaggle-cli..."
-kg config
+which kaggle

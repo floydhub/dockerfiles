@@ -1,4 +1,4 @@
-FROM floydhub/dl-python:3.1.0-gpu-py2
+FROM floydhub/dl-python:3.1.0-gpu-py2.25
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 
