@@ -1,5 +1,5 @@
 FROM floydhub/tensorflow:1.8.0-py2_aws.30
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-RUN pip --no-cache-dir install mxnet==1.0.0 \
+RUN pip --no-cache-dir install mxnet==1.2.0 \
     tensorboardX
