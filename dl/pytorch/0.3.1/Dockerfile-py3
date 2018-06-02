@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.7.0-py3_aws.29
+FROM floydhub/tensorflow:1.7.0-py3_aws.30
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/torch-0.3.1-cp36-cp36m-linux_x86_64.whl \
