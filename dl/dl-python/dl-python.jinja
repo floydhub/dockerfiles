@@ -67,7 +67,7 @@ RUN cd /usr/local/bin \
 
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 9.0.3
+ENV PYTHON_PIP_VERSION 10.0.1
 
 RUN set -ex; \
     \
@@ -134,6 +134,13 @@ RUN mv /root/.jupyter/jupyter_notebook_config_py2.py /root/.jupyter/jupyter_note
 COPY jupyter_notebook_config_py3.py /root/.jupyter/
 RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py
 {%- endif %}
+
+# Create the file configurations for IPython
+# and remove the default one.
+RUN ipython profile create && rm /root/.ipython/profile_default/ipython_config.py
+
+# Set up our IPython config.
+COPY ipython_config.py /root/.ipython/profile_default/ipython_config.py
 
 # Jupyter has issues with being run directly:
 #   https://github.com/ipython/ipython/issues/7062
