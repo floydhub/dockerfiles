@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:3.1.0-gpu
+FROM floydhub/dl-deps:3.1.0-gpu.25
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # From https://github.com/docker-library/python/blob/master/3.6./Dockerfile

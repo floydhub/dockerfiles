@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:3.1.0-cpu
+FROM floydhub/dl-deps:3.1.0-cpu.25
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN  apt-get update \

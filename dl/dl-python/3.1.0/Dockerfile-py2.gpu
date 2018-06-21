@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:3.1.0-gpu
+FROM floydhub/dl-deps:3.1.0-gpu.25
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN  apt-get update \
