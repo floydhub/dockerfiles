@@ -6,21 +6,19 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 # repo onto a Debian or Ubuntu system.
 RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
 
-# Install Nodejs and Add Tensorboard
-RUN apt-get update && apt-get install -y supervisor nodejs\
+# Install Nodejs and supervisor for tensorboard and jupyter lab
+# lua5.1 and libav-tools for gym retro
+# graphviz for visualization
+RUN apt-get update && apt-get install -y \
+        supervisor \
+        nodejs \
+        lua5.1 libav-tools \
+        graphviz \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/*
 COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
-
-# graphviz for visualization
-RUN apt-get update && apt-get install -y \
-        graphviz \
-    && apt-get clean \
-    && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/cache/apt/archives/*
 
 RUN pip --no-cache-dir install \
         pydot \
@@ -39,6 +37,8 @@ RUN pip --no-cache-dir install \
         seaborn \
         plotly \
         annoy \
+        gym-retro \
+        retrowrapper \
     && rm -rf /tmp/* /var/tmp/*
 
 
