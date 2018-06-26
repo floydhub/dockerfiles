@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
 COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
 
 RUN pip --no-cache-dir install \
+        floyd-cli \
+        flask==1.0.2 \
         uwsgi==2.0.17 \
         pydot \
         dlib \
