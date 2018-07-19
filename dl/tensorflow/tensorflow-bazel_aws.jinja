@@ -1,7 +1,7 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-ARG TENSORFLOW_VERSION=v{{ _version }}
+ARG TENSORFLOW_VERSION={{ _version }}
 ARG KERAS_VERSION={{ _keras_version }}
 
 RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
