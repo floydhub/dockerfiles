@@ -4,9 +4,6 @@ MAINTAINER Floyd Labs "support@floydhub.com"
 ARG TENSORFLOW_VERSION=r1.7
 ARG KERAS_VERSION=2.1.6
 
-RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
-WORKDIR /tensorflow
-
 ENV CI_BUILD_PYTHON python
 
 # Configure the build for our CUDA configuration.
@@ -31,22 +28,24 @@ RUN python --version 2>&1 | grep 'Python 2' \
 # NOTE: This command uses special flags to build an optimized image for AWS machines.
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
-RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 && LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH} tensorflow/tools/ci_build/builds/configured GPU \
-    bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 \
-        --copt=-mavx --copt=-mavx2 \
-        --copt=-mfma \
-        --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" \
-        --config=cuda --action_env=LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH} \
-        --verbose_failures \
-        tensorflow/tools/pip_package:build_pip_package \
+RUN git clone https://github.com/tensorflow/tensorflow.git \
+        --branch ${TENSORFLOW_VERSION} \
+        --single-branch \
+    && cd tensorflow \
+    && ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 && LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH} tensorflow/tools/ci_build/builds/configured GPU \
+        bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 \
+            --copt=-mavx --copt=-mavx2 \
+            --copt=-mfma \
+            --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" \
+            --config=cuda --action_env=LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LD_LIBRARY_PATH} \
+            --verbose_failures \
+            tensorflow/tools/pip_package:build_pip_package \
     && bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip \
     && pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl \
     && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache \
-    && cd / && rm -rf tensorflow
-
-WORKDIR /
+    && cd .. && rm -rf tensorflow
 
 # Install Keras and tflearn
 # TODO: move h5py into dl-python base
