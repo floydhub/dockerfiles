@@ -147,9 +147,17 @@
     _tensorboardx_version: 1.2
     _test: tests/0.3.1/run.sh
 
+'0.4.1':
+  - <<: *pytorch_cuda_9_1
+    _version: 0.4.1
+    _vision_version: 0.2.1
+    _tensorboardx_version: 1.2
+    _test: tests/0.3.1/run.sh
+
 $render:
   #- '0.1.12'
   #- '0.2.0'
   # - '0.3.0'
-  - '0.3.1'
-  - '0.4.0'
+  # - '0.3.1'
+  # - '0.4.0'
+  - '0.4.1'
