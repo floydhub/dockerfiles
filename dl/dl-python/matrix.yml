@@ -45,13 +45,13 @@
   _template: dl-python.jinja
   py2:
     arch: cpu
-    baseimg: floydhub/dl-deps:3.1.0-cpu.25
+    baseimg: floydhub/dl-deps:3.1.0-cpu.33
     python_version: 2.7.12
     cpver: cp2
     _test: tests/run.sh
   py3:
     arch: cpu
-    baseimg: floydhub/dl-deps:3.1.0-cpu.25
+    baseimg: floydhub/dl-deps:3.1.0-cpu.33
     cpver: cp3
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.5
@@ -59,13 +59,13 @@
 
   py2.gpu:
     arch: gpu
-    baseimg: floydhub/dl-deps:3.1.0-gpu.25
+    baseimg: floydhub/dl-deps:3.1.0-gpu.33
     python_version: 2.7.12
     cpver: cp2
     _test: tests/gpu_run.sh
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-deps:3.1.0-gpu.25
+    baseimg: floydhub/dl-deps:3.1.0-gpu.33
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.5
     cpver: cp3

@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.7.0-py2_aws.31
+FROM floydhub/tensorflow:1.9.0-py2_aws.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/torch-0.4.1-cp27-cp27mu-linux_x86_64.whl \
@@ -6,5 +6,10 @@ RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/to
 
 
 RUN pip --no-cache-dir install --upgrade \
-torchtext \
-tensorboardX==1.2
+        torchtext \
+{-% if _tensorboardx_version is defined %}
+        tensorboardX==1.2 \
+{-% endif %}
+        git+https://github.com/fastai/fastai.git \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache

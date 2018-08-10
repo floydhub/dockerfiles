@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.8.0-py2_aws.30
+FROM floydhub/tensorflow:1.9.0-py2_aws.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN \

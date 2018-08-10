@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:3.1.0-cpu.25
+FROM floydhub/dl-deps:3.1.0-cpu.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN  apt-get update \
@@ -17,6 +17,7 @@ RUN pip --no-cache-dir install \
         h5py \
         ipykernel \
         jupyter \
+        notebook==5.6.0 \
         matplotlib \
         numpy \
         pandas \
