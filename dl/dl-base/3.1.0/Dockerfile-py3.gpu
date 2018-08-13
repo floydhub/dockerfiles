@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
         lua5.1 libav-tools \
         nginx \
         graphviz \
+        axel \
+        imagemagick \
   && apt-get clean \
   && apt-get autoremove \
   && rm -rf /var/cache/apt/archives/* \
@@ -34,6 +36,7 @@ RUN pip --no-cache-dir install \
         gym[atari,box2d,classic_control] \
         textacy \
         scikit-image \
+        scikit-umfpack \
         spacy \
         tqdm \
         wheel \
@@ -42,6 +45,9 @@ RUN pip --no-cache-dir install \
         seaborn \
         plotly \
         annoy \
+        pynvrtc \
+        menpo \
+        cupy-cuda91 \
         gym-retro \
         retrowrapper \
     && rm -rf /tmp/* /var/tmp/*
