@@ -1,4 +1,4 @@
-FROM floydhub/buildpack-deps:cuda9.1-cudnn7-1.0
+FROM floydhub/buildpack-deps:cuda9.1-cudnn7-1.1
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # Add Bazel distribution URI as a package source
