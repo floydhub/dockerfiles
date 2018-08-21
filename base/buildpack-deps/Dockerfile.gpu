@@ -66,6 +66,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/archives/*
 
+# setup libnccl links for tensorflow build
+# see: https://github.com/tensorflow/tensorflow/commit/1fda7645d132b71b9084b01945795e97e582adcd#diff-ade1d3e4b7c35655f854151d899df62bR1134
+RUN cd /usr/local/cuda-* \
+    && ln -sf lib64 lib \
+    && ln -sf /usr/lib/x86_64-linux-gnu/libnccl.so ./lib/libnccl.so.2 \
+    && ln -sf /usr/include/nccl.h ./include/nccl.h
+
 # This updates the global environment for the root user
 RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
 RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/environment
