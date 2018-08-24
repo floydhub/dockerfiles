@@ -1,9 +1,12 @@
-FROM floydhub/tensorflow:1.7.0-py3_aws.31
+FROM floydhub/tensorflow:1.9.0-py3_aws.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/torch-0.3.1-cp36-cp36m-linux_x86_64.whl \
     torchvision==0.2.0
 
 
-
-RUN pip --no-cache-dir install --upgrade tensorboardX==1.1
+RUN pip --no-cache-dir install --upgrade \
+        torchtext \
+        tensorboardX==1.1 \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache

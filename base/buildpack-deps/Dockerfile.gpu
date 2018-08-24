@@ -1,6 +1,9 @@
 FROM nvidia/cuda:9.1-cudnn7-devel-ubuntu16.04
 MAINTAINER FloydHub "support@floydhub.com"
 
+ENV LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         sudo \
@@ -74,5 +77,5 @@ RUN cd /usr/local/cuda-* \
     && ln -sf /usr/include/nccl.h ./include/nccl.h
 
 # This updates the global environment for the root user
-RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment
 RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/environment
+RUN echo "LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> /etc/environment

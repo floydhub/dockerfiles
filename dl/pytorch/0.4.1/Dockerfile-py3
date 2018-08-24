@@ -7,9 +7,6 @@ RUN pip --no-cache-dir install --upgrade http://download.pytorch.org/whl/cu91/to
 
 RUN pip --no-cache-dir install --upgrade \
         torchtext \
-{-% if _tensorboardx_version is defined %}
         tensorboardX==1.2 \
-{-% endif %}
-        git+https://github.com/fastai/fastai.git \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
