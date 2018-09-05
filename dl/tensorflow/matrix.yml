@@ -170,9 +170,9 @@ tensorflow_aws: &tensorflow_aws
     _keras_version: 2.2.0
     _test: tests/1.7.0/run.sh
 
-1.10.0:
+'1.10':
   - <<: *aws_cuda9_1
-    _version: v1.10.0
+    _version: v1.10.1
     _keras_version: 2.2.2
     _test: tests/1.7.0/run.sh
 
@@ -187,4 +187,4 @@ $render:
   - 1.7.0
   - 1.8.0
   - 1.9.0
-  - 1.10.0
+  - '1.10'
