@@ -11,6 +11,7 @@ RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
 # graphviz for visualization
 RUN apt-get update && apt-get install -y \
         supervisor \
+        binutils \
         nodejs \
         lua5.1 libav-tools \
         nginx \

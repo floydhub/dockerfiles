@@ -124,19 +124,19 @@
   _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
   py2:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py2_aws.33
+    baseimg: floydhub/tensorflow:1.9.0-py2_aws.35
     cpver: cp27-cp27mu
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py3_aws.33
+    baseimg: floydhub/tensorflow:1.9.0-py3_aws.35
     cpver: cp36-cp36m
   py2.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.33
+    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.35
     cpver: cp27-cp27mu
   py3.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.33
+    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
     cpver: cp36-cp36m
 
 '0.4.0':
@@ -149,11 +149,11 @@
     py2.gpu.cuda9cudnn7:
       _template: pytorch-0.x.x_from_source.jinja
       arch: gpu
-      baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.33
+      baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.35
     py3.gpu.cuda9cudnn7:
       _template: pytorch-0.x.x_from_source.jinja
       arch: gpu
-      baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.33
+      baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
 
 
 $render:

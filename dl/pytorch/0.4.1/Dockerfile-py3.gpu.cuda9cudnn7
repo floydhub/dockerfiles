@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.33
+FROM floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ENV TORCH_CUDA_ARCH_LIST="3.5;5.2;6.0;6.1;6.2;7.0"
