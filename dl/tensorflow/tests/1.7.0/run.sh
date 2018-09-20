@@ -42,6 +42,17 @@ if test $ISGPU -eq 1; then
 		python tf_cnn_benchmarks.py --device=cpu  --kmp_blocktime=0 --nodistortions --model=alexnet --data_format=NHWC --batch_size=64  --num_inter_threads=1 --num_intra_threads=$NCORE --init_learning_rate=0.00001
 	fi
 else
+	GPU_DEV_NAME=$(python -c 'from __future__ import print_function; import tensorflow as tf; print(tf.test.gpu_device_name())' 2> /dev/null)
+	case ${GPU_DEV_NAME} in
+	/device:GPU:*)
+		echo "GPU load test passed. Device found: ${GPU_DEV_NAME}"
+		;;
+	*)
+		echo "ERROR: Tensorflow not able to find GPU device! Device found: ${GPU_DEV_NAME}"
+		exit 1
+		;;
+	esac
+
 	# GPU or GPU2?
 	nvidia-smi | grep -q V100
 	ISV100=$?

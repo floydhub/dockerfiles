@@ -26,6 +26,14 @@ if test $ISGPU -eq 1; then
         python benchmark.py --batch-size=64
 	fi
 else
+	HAS_GPU=$(python -c 'from __future__ import print_function; import torch; print(torch.cuda.is_available())')
+	if [ "${HAS_GPU}" = "True" ]; then
+		echo "GPU load test passed."
+	else
+		echo "ERROR: Not able to load GPU in Pytorch"
+		exit 1
+	fi
+
 	# GPU or GPU2?
 	nvidia-smi | grep -q V100
 	ISV100=$?
