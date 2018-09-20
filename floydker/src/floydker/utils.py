@@ -13,11 +13,13 @@ dockerfile_name_re = re.compile(
     '(_(?P<cloud>(aws)))?')
 
 docker_tag_re = re.compile(
+    '(?P<repo>floydhub\/)?'
     '(?P<project>[a-z\-\/]+)'
     ':(?P<version>[0-9.]+)'
     '(-(?P<arch>gpu(\.[a-z0-9]+)?))?'
     '-(?P<env>[^._]+)'
-    '(_(?P<cloud>(aws)))?')
+    '(_(?P<cloud>(aws)))?'
+    '(?P<release>\.[0-9]+)?')
 
 
 def gen_target_cfg_items(target_cfg):
@@ -158,3 +160,25 @@ def gen_target_env_from_tag(img_tag):
     if match.group('cloud'):
         target_env += '_' + match.group('cloud')
     return match.group('version'), target_env
+
+
+def gen_dockerfile_path_from_tag(img_tag):
+    """
+    sample input: 'tensorflow:1.0.1-gpu-py3'
+    sample output: 'dl/tensorflow/1.0.1/Dockerfile-py3.gpu'
+    """
+    match = docker_tag_re.match(img_tag)
+    if not match:
+        return None
+
+    path_list = ['dl', match.group('project'), match.group('version')]
+    filename = 'Dockerfile-' + match.group('env')
+    arch = match.group('arch')
+    if arch:
+        filename += '.' + arch
+    cloud = match.group('cloud')
+    if cloud:
+        filename += '_' + cloud
+
+    path_list.append(filename)
+    return os.path.sep.join(path_list)

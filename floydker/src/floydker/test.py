@@ -14,7 +14,8 @@ from .utils import (
     find_matrix_from_dockerfile,
     gen_target_env_from_tag,
     gen_target_cfg_items,
-    gen_target_env_cfg
+    gen_target_env_cfg,
+    gen_dockerfile_path_from_tag,
 )
 
 logger = logging.getLogger(__name__)
@@ -22,16 +23,22 @@ click_log.basic_config(logger)
 
 
 @click.command()
-@click.argument('dockerfile')
+@click.argument('dockerfile_or_tag')
 @click.option('--use-nvidia-driver/--no-use-nvidia-driver',
               help='Run test with nvidia docker driver (required for GPU image)',
               default=False)
 @click.option('--extra-docker-args',
               help='Extra arguments pass to docker run command')
 @click_log.simple_verbosity_option(logger)
-def test(dockerfile, use_nvidia_driver, extra_docker_args):
-    image_tag = assert_image_tag_from_dockerfile(logger, dockerfile)
-    matrix_yml_path = find_matrix_from_dockerfile(dockerfile)
+def test(dockerfile_or_tag, use_nvidia_driver, extra_docker_args):
+    if ':' in dockerfile_or_tag:
+        image_tag = dockerfile_or_tag
+        dockerfile_path = gen_dockerfile_path_from_tag(image_tag)
+    else:
+        image_tag = assert_image_tag_from_dockerfile(logger, dockerfile_or_tag)
+        dockerfile_path = dockerfile_or_tag
+
+    matrix_yml_path = find_matrix_from_dockerfile(dockerfile_path)
     project_dir = os.path.dirname(matrix_yml_path)
 
     if not os.path.exists(matrix_yml_path):

@@ -54,3 +54,15 @@ def test_gen_target_env_from_tag():
     target, env = gen_target_env_from_tag('floydhub/tensorflow:1.0.1-gpu.cuda11cudnn10-py2_aws')
     assert target == '1.0.1'
     assert env == 'py2.gpu.cuda11cudnn10_aws'
+
+
+def test_gen_dockerfile_path_from_tag():
+    from floydker.utils import gen_dockerfile_path_from_tag
+    path = gen_dockerfile_path_from_tag('tensorflow:1.0.1-gpu-py3.33')
+    assert path == 'dl/tensorflow/1.0.1/Dockerfile-py3.gpu'
+
+    path = gen_dockerfile_path_from_tag('floydhub/tensorflow:1.7.0-gpu.cuda9cudnn7-py2_aws.31')
+    assert path == 'dl/tensorflow/1.7.0/Dockerfile-py2.gpu.cuda9cudnn7_aws'
+
+    path = gen_dockerfile_path_from_tag('floydhub/pytorch:0.4.1-gpu.cuda9cudnn7-py2.34')
+    assert path == 'dl/pytorch/0.4.1/Dockerfile-py2.gpu.cuda9cudnn7'
