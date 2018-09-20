@@ -46,7 +46,7 @@ def test(dockerfile_or_tag, use_nvidia_driver, extra_docker_args):
         sys.exit(1)
 
     extra_args = []
-    if use_nvidia_driver:
+    if use_nvidia_driver or 'gpu' in image_tag:
         conn = httplib.HTTPConnection('localhost:3476')
         conn.request('GET', '/v1.0/docker/cli')
         data = conn.getresponse().read()
