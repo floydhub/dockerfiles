@@ -23,6 +23,7 @@ RUN pip --no-cache-dir install --upgrade \
         torchvision=={{ _vision_version }} \
         tensorboardX=={{ _tensorboardx_version }} \
         torchtext \
+        fastai \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 
