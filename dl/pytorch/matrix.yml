@@ -150,10 +150,12 @@
       _template: pytorch-0.x.x_from_source.jinja
       arch: gpu
       baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.35
+      cpver: cp27-cp27mu
     py3.gpu.cuda9cudnn7:
       _template: pytorch-0.x.x_from_source.jinja
       arch: gpu
       baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
+      cpver: cp36-cp36m
 
 '1.0.0':
   - <<: *pytorch_cuda_9_1_from_source

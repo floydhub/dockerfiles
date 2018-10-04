@@ -1,0 +1,15 @@
+FROM floydhub/tensorflow:1.9.0-py2_aws.35
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+RUN pip --no-cache-dir install --upgrade \
+        torchvision==0.2.1 \
+        pip \
+        torchtext \
+        tensorboardX==1.2 \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
+
+RUN pip --no-cache-dir install --upgrade \
+        torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache

@@ -1,9 +1,7 @@
-{% extends "base.jinja" %}
+FROM floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
-{%- if _cuda_virtual_arch_feature_list is defined %}
-ENV TORCH_CUDA_ARCH_LIST="{{ _cuda_virtual_arch_feature_list }}"
-{%- endif %}
+ENV TORCH_CUDA_ARCH_LIST="3.5;5.2;6.0;6.1;6.2;7.0"
 
 RUN pip install \
         typing \
@@ -14,19 +12,15 @@ RUN pip install \
 RUN export MAX_JOBS=`expr $(nproc) + 1` \
     && git clone https://github.com/pytorch/pytorch \
     && cd pytorch \
-    && git checkout v{{ _version }} \
+    && git checkout v1.0rc1 \
     && git submodule update --init \
     && python setup.py install \
     && cd .. && rm -rf pytorch
 
 RUN pip --no-cache-dir install --upgrade \
-        torchvision=={{ _vision_version }} \
-        tensorboardX=={{ _tensorboardx_version }} \
+        torchvision==0.2.1 \
+        tensorboardX==1.2 \
         torchtext \
-{%- if cpver.startswith('cp3') %}
         fastai \
-{%- endif %}
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
-
-{%- endblock %}
