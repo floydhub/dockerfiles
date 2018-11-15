@@ -11,6 +11,12 @@ RUN pip install \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 
+{%- if _magma_cuda_url is defined %}
+RUN wget -q -O magma.tar.bz2 "{{ _magma_cuda_url }}" \
+    && mkdir /usr/local/magma \
+    && tar xjf magma.tar.bz2 -C /usr/local/magma
+{%- endif %}
+
 RUN export MAX_JOBS=`expr $(nproc) + 1` \
     && git clone https://github.com/pytorch/pytorch \
     && cd pytorch \
