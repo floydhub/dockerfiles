@@ -3,7 +3,10 @@
 
 from subprocess import check_call
 import sys
-import httplib
+try:
+    import httplib
+except:
+    import http.client as httplib
 import os
 import logging
 import yaml

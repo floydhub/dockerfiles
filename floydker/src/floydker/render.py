@@ -38,7 +38,7 @@ class FilesLoader(jinja2.BaseLoader):
         for template_file in self.files:
             if os.path.basename(template_file) == template:
                 with open(template_file) as f:
-                    contents = f.read().decode('utf-8')
+                    contents = f.read()
                 mtime = os.path.getmtime(template_file)
                 return (contents,
                         template_file,

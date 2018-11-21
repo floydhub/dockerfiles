@@ -46,7 +46,7 @@ def populate_target_env_cfg(target_cfg, target_env):
     # we need to do deepcopy here because yaml extend operation is not a
     # deepcopy and we will be injecting new keys in the following for loop
     target_env_cfg = copy.deepcopy(target_cfg[target_env])
-    for dkey, dval in target_cfg.iteritems():
+    for dkey, dval in target_cfg.items():
         if dkey.startswith('_') and dkey not in target_env_cfg:
             target_env_cfg[dkey] = dval
     return target_env_cfg
