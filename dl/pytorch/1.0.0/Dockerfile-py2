@@ -2,14 +2,16 @@ FROM floydhub/tensorflow:1.9.0-py2_aws.35
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \
-        torchvision==0.2.1 \
         pip \
+        torchvision_nightly \
         torchtext \
         tensorboardX==1.2 \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
-
-RUN pip --no-cache-dir install --upgrade \
+RUN pip --no-cache-dir install \
         torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
+# TODO: build and install magma in base
+RUN mkdir /usr/local/magma \
+    && curl -L "https://anaconda.org/soumith/magma-cuda91/2.3.0/download/linux-64/magma-cuda91-2.3.0-1.tar.bz2" | tar xjv -C /usr/local/magma

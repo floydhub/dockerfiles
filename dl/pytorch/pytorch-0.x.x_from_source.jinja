@@ -11,10 +11,9 @@ RUN pip install \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 
-{%- if _magma_cuda_url is defined %}
-RUN wget -q -O magma.tar.bz2 "{{ _magma_cuda_url }}" \
-    && mkdir /usr/local/magma \
-    && tar xjf magma.tar.bz2 -C /usr/local/magma
+{% if _magma_cuda_url is defined %}
+RUN mkdir /usr/local/magma \
+    && curl -L "{{ _magma_cuda_url }}" | tar xjv -C /usr/local/magma
 {%- endif %}
 
 RUN export MAX_JOBS=`expr $(nproc) + 1` \

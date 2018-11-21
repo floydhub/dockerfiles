@@ -9,6 +9,8 @@ RUN pip install \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 
+
+
 RUN export MAX_JOBS=`expr $(nproc) + 1` \
     && git clone https://github.com/pytorch/pytorch \
     && cd pytorch \
@@ -21,5 +23,6 @@ RUN pip --no-cache-dir install --upgrade \
         torchvision==0.2.1 \
         tensorboardX==1.2 \
         torchtext \
+        fastai \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
