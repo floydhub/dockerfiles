@@ -8,11 +8,14 @@ RUN pip install \
         mkl mkl-devel \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
+RUN wget -q -O magma.tar.bz2 "https://anaconda.org/soumith/magma-cuda91/2.3.0/download/linux-64/magma-cuda91-2.3.0-1.tar.bz2" \
+    && mkdir /usr/local/magma \
+    && tar xjf magma.tar.bz2 -C /usr/local/magma
 
 RUN export MAX_JOBS=`expr $(nproc) + 1` \
     && git clone https://github.com/pytorch/pytorch \
     && cd pytorch \
-    && git checkout v1.0rc1 \
+    && git checkout v1.0.0 \
     && git submodule update --init \
     && python setup.py install \
     && cd .. && rm -rf pytorch
