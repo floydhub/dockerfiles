@@ -16,7 +16,7 @@ RUN mkdir /usr/local/magma \
 RUN export MAX_JOBS=`expr $(nproc) + 1` \
     && git clone https://github.com/pytorch/pytorch \
     && cd pytorch \
-    && git checkout v1.0 \
+    && git checkout v1.0.0 \
     && git submodule update --init \
     && python setup.py install \
     && cd .. && rm -rf pytorch

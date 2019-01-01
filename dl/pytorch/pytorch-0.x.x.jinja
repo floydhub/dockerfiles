@@ -20,22 +20,4 @@ RUN pip --no-cache-dir install --upgrade \
 {%- endif %}
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
-
-{%- if _version == '1.0rc1' %}
-RUN pip --no-cache-dir install \
-{%-   if arch == 'gpu' %}
-        torch_nightly -f https://download.pytorch.org/whl/nightly/{{ _cuda_version }}/torch_nightly.html \
-{%-   else %}
-        torch_nightly -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html \
-{%-   endif %}
-    && rm -rf /tmp/* \
-    && rm -rf /root/.cache
-{%- endif %}
-
-{%- if _magma_cuda_url is defined %}
-# TODO: build and install magma in base
-RUN mkdir /usr/local/magma \
-    && curl -L "{{ _magma_cuda_url }}" | tar xjv -C /usr/local/magma
-{%- endif %}
-
 {%- endblock %}
