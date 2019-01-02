@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.9.0-py2_aws.35
+FROM floydhub/tensorflow:1.12-py2_aws.39
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \

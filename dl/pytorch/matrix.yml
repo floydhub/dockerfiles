@@ -157,10 +157,38 @@
       baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
       cpver: cp36-cp36m
 
+'0.4.1': &pytorch_cuda_9_2
+  _platform: linux
+  _template: pytorch-0.x.x.jinja
+  _version: 0.4.1
+  _vision_version: 0.2.1
+  _tensorboardx_version: 1.2
+  _test: tests/0.3.1/run.sh
+  _cuda_version: 92
+  # see: https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html#virtual-architecture-feature-list
+  _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
+  py2:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.12-py2_aws.39
+    cpver: cp27-cp27mu
+  py3:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.12-py3_aws.39
+    cpver: cp36-cp36m
+  py2.gpu.cuda9cudnn7:
+    arch: gpu
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py2_aws.39
+    cpver: cp27-cp27mu
+  py3.gpu.cuda9cudnn7:
+    arch: gpu
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.39
+    cpver: cp36-cp36m
+
 '1.0.0':
-  - <<: *pytorch_cuda_9_1_from_source
+  - <<: *pytorch_cuda_9_2
     _version: 1.0.0
-    _magma_cuda_url: https://anaconda.org/soumith/magma-cuda91/2.3.0/download/linux-64/magma-cuda91-2.3.0-1.tar.bz2
+    # possibly a bug in pytorch's official build url naming, should have been 92
+    _cuda_version: 90
 
 $render:
   #- '0.1.12'

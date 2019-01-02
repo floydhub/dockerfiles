@@ -1,9 +1,26 @@
 FROM floydhub/python-base:v1-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
+ENV BAZEL_VERSION 0.16.1
+
 # Add Bazel distribution URI as a package source
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list \
     && curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+
+# install older version of bazel because it breaks TF build on every releasae :(
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        default-jdk-headless \
+        bash-completion \
+        g++ \
+        zlib1g-dev \
+    && curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
+    && dpkg -i bazel_*.deb \
+    && rm bazel_*.deb \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/archives/*
+
 
 # Install some dependencies
 RUN apt-get update && apt-get install -y \
@@ -11,7 +28,7 @@ RUN apt-get update && apt-get install -y \
         tk \
         ant \
         apt-utils \
-        bazel \
+        bazel=0.16.1 \
         bc \
         build-essential \
         cmake \

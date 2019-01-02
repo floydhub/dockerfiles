@@ -15,14 +15,18 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7,7.0
 
 
 
-# install mock for py2 build
-RUN python --version 2>&1 | grep 'Python 2' \
-    && pip --no-cache-dir install \
+# install deps for tf build :(
+RUN pip --no-cache-dir install \
+        funcsigs \
+        pbr \
         mock \
-        && rm -rf /pip_pkg \
-        && rm -rf /tmp/* \
-        && rm -rf /root/.cache \
-    || true
+        wheel \
+        keras_applications \
+        keras_preprocessing \
+        --no-deps \
+    && rm -rf /pip_pkg \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
 
 
 # NOTE: This command uses special flags to build an optimized image for AWS machines.

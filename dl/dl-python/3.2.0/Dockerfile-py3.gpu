@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:3.1.0-cpu.33
+FROM floydhub/dl-deps:3.2.0-gpu.39
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # From https://github.com/docker-library/python/blob/master/3.6./Dockerfile
@@ -95,6 +95,7 @@ RUN pip --no-cache-dir install \
         jupyter \
         notebook==5.6.0 \
         numpy \
+        cupy \
         pandas \
         matplotlib \
         ipykernel \

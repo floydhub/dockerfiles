@@ -103,17 +103,20 @@ RUN pip --no-cache-dir install \
         PyOpenGL PyOpenGL_accelerate \
         Cython \
         h5py \
-        ipykernel \
         jupyter \
         notebook==5.6.0 \
-        matplotlib \
         numpy \
 {%- if arch == 'gpu' %}
         cupy \
 {%- endif %}
         pandas \
 {%- if cpver == 'cp2' %}
+        ipykernel==4.9.0 \
         ipython==5.6.0 \
+        matplotlib==2.2.3 \
+{%- else %}
+        matplotlib \
+        ipykernel \
 {%- endif %}
         path.py \
         pyyaml \

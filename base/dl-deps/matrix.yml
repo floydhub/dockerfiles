@@ -40,7 +40,7 @@
     baseimg: floydhub/python-base:2.0.0-gpu-py3
 
 
-3.1.0:
+3.2.0:
   _template: dl-deps.generic.jinja
   _opencv_version: '3.4.0'
   cpu:
@@ -52,9 +52,9 @@
       - tests/run.sh
       - tests/gpu.sh
     arch: gpu
-    baseimg: floydhub/buildpack-deps:cuda9.1-cudnn7-1.1
+    baseimg: floydhub/buildpack-deps:cuda9.2-cudnn7-1.0
 
 $render:
   - 1.0.0
   - 2.0.0
-  - 3.1.0
+  - 3.2.0

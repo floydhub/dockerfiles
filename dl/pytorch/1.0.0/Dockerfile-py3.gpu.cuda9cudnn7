@@ -1,30 +1,11 @@
-FROM floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
+FROM floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.39
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-ENV TORCH_CUDA_ARCH_LIST="3.5;5.2;6.0;6.1;6.2;7.0"
-
-RUN pip install \
-        typing \
-        mkl mkl-devel \
-    && rm -rf /tmp/* \
-    && rm -rf /root/.cache
-
-
-RUN mkdir /usr/local/magma \
-    && curl -L "https://anaconda.org/soumith/magma-cuda91/2.3.0/download/linux-64/magma-cuda91-2.3.0-1.tar.bz2" | tar xjv -C /usr/local/magma
-
-RUN export MAX_JOBS=`expr $(nproc) + 1` \
-    && git clone https://github.com/pytorch/pytorch \
-    && cd pytorch \
-    && git checkout v1.0.0 \
-    && git submodule update --init \
-    && python setup.py install \
-    && cd .. && rm -rf pytorch
-
 RUN pip --no-cache-dir install --upgrade \
+        http://download.pytorch.org/whl/cu90/torch-1.0.0-cp36-cp36m-linux_x86_64.whl \
         torchvision==0.2.1 \
-        tensorboardX==1.2 \
         torchtext \
+        tensorboardX==1.2 \
         fastai \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache

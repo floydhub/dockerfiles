@@ -15,14 +15,14 @@ RUN pip --no-cache-dir install \
         PyOpenGL PyOpenGL_accelerate \
         Cython \
         h5py \
-        ipykernel \
         jupyter \
         notebook==5.6.0 \
-        matplotlib \
         numpy \
         cupy \
         pandas \
+        ipykernel==4.9.0 \
         ipython==5.6.0 \
+        matplotlib==2.2.3 \
         path.py \
         pyyaml \
         scipy \

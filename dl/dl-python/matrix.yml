@@ -72,7 +72,25 @@
     _test: tests/gpu_run.sh
 
 
+3.2.0:
+  _template: dl-python.jinja
+  py2.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-deps:3.2.0-gpu.39
+    python_version: 2.7.12
+    cpver: cp2
+    _test: tests/gpu_run.sh
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-deps:3.2.0-gpu.39
+    gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
+    python_version: 3.6.5
+    cpver: cp3
+    _test: tests/gpu_run.sh
+
+
 $render:
   # - 1.1.0
   # - 2.0.0
   - 3.1.0
+  - 3.2.0

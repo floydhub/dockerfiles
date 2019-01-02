@@ -1,4 +1,4 @@
-FROM floydhub/python-base:2.0.0-py2
+FROM floydhub/buildpack-deps:v1
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ENV BAZEL_VERSION 0.16.1
@@ -86,7 +86,7 @@ RUN apt-get update \
 
 
 # Install opencv
-ARG OPENCV_VERSION=
+ARG OPENCV_VERSION=3.4.0
 
 RUN apt-get update && apt-get install -y \
         libavcodec-dev \

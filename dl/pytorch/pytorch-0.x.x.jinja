@@ -2,17 +2,12 @@
 
 {% block content %}
 RUN pip --no-cache-dir install --upgrade \
-{%- if _version == '1.0rc1' %}
-        pip \
-        torchvision_nightly \
-{%- else %}
 {%-   if arch == 'gpu' %}
         http://download.pytorch.org/whl/cu{{ _cuda_version | replace(".", "") }}/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
 {%-   else %}
         http://download.pytorch.org/whl/cpu/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
 {%-   endif %}
         torchvision=={{ _vision_version }} \
-{%- endif %}
         torchtext \
         tensorboardX=={{ _tensorboardx_version }} \
 {%- if cpver.startswith('cp3') %}
