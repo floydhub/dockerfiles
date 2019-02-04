@@ -51,8 +51,28 @@
     cuda_version: 'cu91'
     baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
 
+1.3.0:
+  _version: 1.3.1
+  _template: mxnet-1.x.x.jinja
+  _test: tests/run.sh
+  py2:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.12.0-py2_aws.39
+  py3:
+    arch: cpu
+    baseimg: floydhub/tensorflow:1.12.0-py3_aws.39
+  py2.gpu.cuda9cudnn7:
+    arch: gpu
+    cuda_version: 'cu92'
+    baseimg: floydhub/tensorflow:1.12.0-gpu.cuda9cudnn7-py2_aws.39
+  py3.gpu.cuda9cudnn7:
+    arch: gpu
+    cuda_version: 'cu92'
+    baseimg: floydhub/tensorflow:1.12.0-gpu.cuda9cudnn7-py3_aws.39
+
 
 $render:
   # - 0.10.0
-  - 1.0.0
-  - 1.2.0
+  # - 1.0.0
+  # - 1.2.0
+  - 1.3.0
