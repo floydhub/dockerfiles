@@ -33,7 +33,7 @@ RUN pip --no-cache-dir install \
         dlib \
         incremental \
         nltk \
-        jupyterlab==0.33.12 \
+        jupyterlab==0.35.4 \
         gym[atari,box2d,classic_control] \
 {%- if cpver == 'py2' %}
         pattern \
@@ -45,7 +45,7 @@ RUN pip --no-cache-dir install \
         tqdm \
         wheel \
         kaggle \
-        h5py==2.8.0 \
+        h5py \
         seaborn \
         plotly \
         annoy \
@@ -53,6 +53,8 @@ RUN pip --no-cache-dir install \
         menpo \
 {%- if arch == 'gpu' %}
         cupy-{{ cuda_version }} \
+        cuml-{{ cuda_version }} \  # RAPIDS
+        cudf-{{ cuda_version }} \  # RAPIDS
 {%- endif %}
 {%- if cpver != 'py2' %}
         gym-retro \
@@ -62,8 +64,8 @@ RUN pip --no-cache-dir install \
 
 
 # Install and Enable jupyter-widgets
-# jupyterlab-manager@0.35 doesn't work on JL v0.31.12
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36.2
+# For JupyterLab 0.35.x, use jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
 
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \

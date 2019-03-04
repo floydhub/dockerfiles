@@ -105,12 +105,12 @@
   py2.gpu:
     cpver: py2
     arch: gpu
-    cuda_version: cuda91
+    cuda_version: cuda92
     baseimg: floydhub/dl-python:3.2.0-gpu-py2.39
   py3.gpu:
     cpver: py3
     arch: gpu
-    cuda_version: cuda91
+    cuda_version: cuda92
     baseimg: floydhub/dl-python:3.2.0-gpu-py3.39
 
 
