@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.39
+FROM floydhub/tensorflow:1.13-gpu.cuda9cudnn7-py3_aws.41
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \
