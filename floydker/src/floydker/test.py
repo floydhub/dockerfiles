@@ -50,11 +50,15 @@ def test(dockerfile_or_tag, use_nvidia_driver, extra_docker_args):
 
     extra_args = []
     if use_nvidia_driver or 'gpu' in image_tag:
-        conn = httplib.HTTPConnection('localhost:3476')
-        conn.request('GET', '/v1.0/docker/cli')
-        data = conn.getresponse().read()
-        conn.close()
-        extra_args += data.split(' ')
+        try:
+            conn = httplib.HTTPConnection('localhost:3476')
+            conn.request('GET', '/v1.0/docker/cli')
+            data = conn.getresponse().read()
+            conn.close()
+            extra_args += data.split(' ')
+        except:
+            # nvidia-docker2
+            extra_args.append('--runtime=nvidia')
 
     if extra_docker_args:
         extra_args += extra_docker_args.split(' ')
