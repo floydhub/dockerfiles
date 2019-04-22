@@ -1,4 +1,4 @@
-FROM floydhub/dl-python:3.2.0-gpu-py3.39
+FROM floydhub/dl-python:3.1.0-py3.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 
@@ -48,9 +48,6 @@ RUN pip --no-cache-dir install \
         annoy \
         pynvrtc \
         menpo \
-        cupy-cuda92 \
-        cuml-cuda92 \
-        cudf-cuda92 \
         gym-retro \
         retrowrapper \
     && rm -rf /tmp/* /var/tmp/*
@@ -63,11 +60,7 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
 # Install xgboost
 RUN git clone --branch v0.81 --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
-    && mkdir build \
-    && cd build \
-    && cmake .. -DUSE_CUDA=ON \
     && make -j$(nproc) \
-    && cd .. \
     && cd python-package \
     && python setup.py install \
     && cd ../.. \

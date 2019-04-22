@@ -68,7 +68,7 @@ RUN pip --no-cache-dir install \
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
 
 # Install xgboost
-RUN git clone --recursive https://github.com/dmlc/xgboost \
+RUN git clone --branch v0.81 --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
 {%- if arch == 'gpu' %}
     && mkdir build \
