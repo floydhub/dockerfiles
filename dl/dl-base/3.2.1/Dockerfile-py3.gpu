@@ -49,8 +49,8 @@ RUN pip --no-cache-dir install \
         pynvrtc \
         menpo \
         cupy-cuda92 \
-        cuml-cuda92 \  # RAPIDS
-        cudf-cuda92 \  # RAPIDS
+        cuml-cuda92 \
+        cudf-cuda92 \
         gym-retro \
         retrowrapper \
     && rm -rf /tmp/* /var/tmp/*

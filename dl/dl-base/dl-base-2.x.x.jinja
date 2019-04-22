@@ -53,8 +53,8 @@ RUN pip --no-cache-dir install \
         menpo \
 {%- if arch == 'gpu' %}
         cupy-{{ cuda_version }} \
-        cuml-{{ cuda_version }} \  # RAPIDS
-        cudf-{{ cuda_version }} \  # RAPIDS
+        cuml-{{ cuda_version }} \  {#- RAPIDS #}
+        cudf-{{ cuda_version }} \  {#- RAPIDS #}
 {%- endif %}
 {%- if cpver != 'py2' %}
         gym-retro \
