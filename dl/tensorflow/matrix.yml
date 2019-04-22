@@ -189,22 +189,22 @@ tensorflow_aws: &tensorflow_aws
   _test: tests/1.7.0/run.sh
   py2_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:3.2.0-py2.41 
+    baseimg: floydhub/dl-base:3.2.1-py2.41
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:3.2.0-py3.41 
+    baseimg: floydhub/dl-base:3.2.1-py3.41
   py2.gpu.cuda9cudnn7_aws:
     arch: gpu
     cuda_version: '9.2'
     cudnn_version: '7'
-    baseimg: floydhub/dl-base:3.2.0-gpu-py2.41
+    baseimg: floydhub/dl-base:3.2.1-gpu-py2.41
   py3.gpu.cuda9cudnn7_aws:
     arch: gpu
     cuda_version: '9.2'
     cudnn_version: '7'
-    baseimg: floydhub/dl-base:3.2.0-gpu-py3.41
+    baseimg: floydhub/dl-base:3.2.1-gpu-py3.41
 
-'1.13': 
+'1.13':
   - <<: *aws_cuda9_2
     _version: v1.13.1
     _keras_version: 2.2.4

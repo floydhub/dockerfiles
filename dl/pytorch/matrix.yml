@@ -184,9 +184,9 @@
     baseimg: floydhub/tensorflow:1.13.0-gpu.cuda9cudnn7-py3_aws.41
     cpver: cp36-cp36m
 
-'1.0.0':
+'1.0.1':
   - <<: *pytorch_cuda_9_2
-    _version: 1.0.0
+    _version: 1.0.1.post2
     # possibly a bug in pytorch's official build url naming, should have been 92
     _cuda_version: 90
 
@@ -197,4 +197,4 @@ $render:
   # - '0.3.1'
   # - '0.4.0'
   - '0.4.1'
-  - '1.0.0'
+  - '1.0.1'

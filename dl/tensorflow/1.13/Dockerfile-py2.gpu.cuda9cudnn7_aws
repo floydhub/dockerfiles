@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:3.2.0-gpu-py2.41
+FROM floydhub/dl-base:3.2.1-gpu-py2.41
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=v1.13.1

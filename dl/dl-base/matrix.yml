@@ -99,7 +99,7 @@
     cuda_version: cuda91
     baseimg: floydhub/dl-python:3.1.0-gpu-py3.33
 
-3.2.0:
+3.2.1:
   _test: tests/run.sh
   _template: dl-base-2.x.x.jinja
   py2.gpu:
@@ -121,4 +121,4 @@ $render:
   # - 2.1.0
   # - 3.0.0
   # - 3.1.0
-  - 3.2.0
+  - 3.2.1
