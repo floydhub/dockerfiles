@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:1.13.0-gpu.cuda9cudnn7-py2_aws.41
+FROM floydhub/tensorflow:1.13.0-gpu.cuda9cudnn7-py2_aws.42
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN \
