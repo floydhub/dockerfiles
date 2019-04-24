@@ -1,6 +1,13 @@
 FROM floydhub/dl-python:3.2.0-gpu-py3.39
 MAINTAINER Floyd Labs "support@floydhub.com"
 
+# TODO: merge bazel update to dl-deps
+ENV BAZEL_VERSION 0.19.2
+
+RUN curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
+    && dpkg --force-confnew -i bazel_*.deb \
+    && apt-get clean \
+    && rm bazel_*.deb
 
 # Script to install the NodeSource Node.js 8.x LTS Carbon
 # repo onto a Debian or Ubuntu system.

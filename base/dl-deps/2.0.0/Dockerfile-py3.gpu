@@ -28,7 +28,6 @@ RUN apt-get update && apt-get install -y \
         tk \
         ant \
         apt-utils \
-        bazel=0.16.1 \
         bc \
         build-essential \
         cmake \
