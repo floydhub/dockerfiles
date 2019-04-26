@@ -57,11 +57,11 @@
   _test: tests/run.sh
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.13.0-py3_aws.42
+    baseimg: floydhub/tensorflow:1.13-py3_aws.42
   py3.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu92'
-    baseimg: floydhub/tensorflow:1.13.0-gpu.cuda9cudnn7-py3_aws.42
+    baseimg: floydhub/tensorflow:1.13-gpu.cuda9cudnn7-py3_aws.42
 
 
 $render:

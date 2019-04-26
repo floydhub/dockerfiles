@@ -196,11 +196,11 @@
   _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.13.0-py3_aws.42
+    baseimg: floydhub/tensorflow:1.13-py3_aws.42
     cpver: cp36-cp36m
   py3.gpu.cuda9cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.13.0-gpu.cuda9cudnn7-py3_aws.42
+    baseimg: floydhub/tensorflow:1.13-gpu.cuda9cudnn7-py3_aws.42
     cpver: cp36-cp36m
 
 
