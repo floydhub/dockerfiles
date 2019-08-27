@@ -2,7 +2,7 @@ FROM floydhub/dl-python:3.1.0-py3.33
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # TODO: merge bazel update to dl-deps
-ENV BAZEL_VERSION 0.19.2
+ENV BAZEL_VERSION 0.24.1
 
 RUN curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
     && dpkg --force-confnew -i bazel_*.deb \
@@ -34,13 +34,13 @@ COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
 
 RUN pip --no-cache-dir install \
         floyd-cli \
-        flask==1.0.2 \
-        uwsgi==2.0.17 \
+        flask==1.1.0 \
+        uwsgi==2.0.18 \
         pydot \
         dlib \
         incremental \
         nltk \
-        jupyterlab==0.35.4 \
+        jupyterlab==1.0.9 \
         gym[atari,box2d,classic_control] \
         textacy \
         scikit-image \
@@ -62,7 +62,7 @@ RUN pip --no-cache-dir install \
 
 # Install and Enable jupyter-widgets
 # For JupyterLab 0.35.x, use jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0
 
 # Install xgboost
 RUN git clone --branch v0.81 --recursive https://github.com/dmlc/xgboost \
