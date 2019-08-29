@@ -1,4 +1,4 @@
-FROM floydhub/dl-base:3.2.1-py3.42
+FROM floydhub/dl-base:3.2.1-py3.43
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=v1.14.0
