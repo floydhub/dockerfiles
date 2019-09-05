@@ -99,7 +99,7 @@ def train(epoch):
         if args.cuda:
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data), Variable(target)
-        # resize data from (batch_size, 1, 28, 28) to (batch_size, 28*28)
+        # Resize data from (batch_size, 1, 28, 28) to (batch_size, 28*28)
         data = data.view(-1, 28*28)
         optimizer.zero_grad()
         output = model(data)
@@ -119,11 +119,11 @@ def test():
         if args.cuda:
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
-        # resize data from (batch_size, 1, 28, 28) to (batch_size, 28*28)
+        # Resize data from (batch_size, 1, 28, 28) to (batch_size, 28*28)
         data = data.view(-1, 28*28)
         output = model(data)
-        test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
-        pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
+        test_loss += F.nll_loss(output, target, size_average=False).data[0]()  # Sum up batch loss
+        pred = output.data.max(1, keepdim=True)[1]  # Get the index of the max log-probability
         correct += pred.eq(target.data.view_as(pred)).long().cpu().sum()
 
     test_loss /= len(test_loader.dataset)
