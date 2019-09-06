@@ -4,11 +4,13 @@
 RUN pip --no-cache-dir install --upgrade \
 {%-   if arch == 'gpu' %}
         http://download.pytorch.org/whl/cu{{ _cuda_version | replace(".", "") }}/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+        torchvision=={{ _vision_version }} \
 {%-   else %}
         http://download.pytorch.org/whl/cpu/torch-{{ _version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+        # Torchvision is now built with CUDA https://github.com/pytorch/vision/issues/946 
+        https://download.pytorch.org/whl/cpu/torchvision-{{ _vision_version }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
 {%-   endif %}
-        torchvision=={{ _vision_version }} \
-        torchtext \
+        torchtext=={{ _text_version }} \
         tensorboardX=={{ _tensorboardx_version }} \
 {%- if cpver.startswith('cp3') %}
         fastai \

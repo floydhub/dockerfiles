@@ -109,7 +109,7 @@ def train(epoch):
         if batch_idx % args.log_interval == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader), loss.data[0]))
+                100. * batch_idx / len(train_loader), loss.item()))
 
 def test():
     model.eval()
@@ -122,7 +122,7 @@ def test():
         # Resize data from (batch_size, 1, 28, 28) to (batch_size, 28*28)
         data = data.view(-1, 28*28)
         output = model(data)
-        test_loss += F.nll_loss(output, target, size_average=False).data[0]()  # Sum up batch loss
+        test_loss += F.nll_loss(output, target, size_average=False).item()  # Sum up batch loss
         pred = output.data.max(1, keepdim=True)[1]  # Get the index of the max log-probability
         correct += pred.eq(target.data.view_as(pred)).long().cpu().sum()
 
