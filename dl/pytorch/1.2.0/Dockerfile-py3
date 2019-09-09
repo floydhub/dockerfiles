@@ -1,0 +1,12 @@
+FROM floydhub/tensorflow:1.14-py3_aws.44
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+
+pip install --no-cache-dir --upgrade -f https://download.pytorch.org/whl/torch_stable.html
+        torch==1.2.0+cpu \
+        torchvision==0.4.0+cpu \
+    torchtext==0.4.0 \
+    tensorboardX==1.8 \
+        fastai \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache

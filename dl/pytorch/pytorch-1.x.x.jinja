@@ -1,0 +1,20 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+
+pip install --no-cache-dir --upgrade -f https://download.pytorch.org/whl/torch_stable.html
+    {%-   if arch == 'cpu' %}
+        torch=={{ _version }}+cpu \
+        torchvision=={{ _vision_version }}+cpu \
+    {%-   else %}
+        torch=={{ _version }}+cu{{ _cuda_version | replace(".", "") }} \
+        torchvision=={{ _vision_version }}+cu{{ _cuda_version | replace(".", "") }} \
+    {%- endif %}
+    torchtext=={{ _text_version }} \
+    tensorboardX=={{ _tensorboardx_version }} \
+    {%- if cpver.startswith('cp3') %}
+        fastai \
+    {%- endif %}
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
+{%- endblock %}
