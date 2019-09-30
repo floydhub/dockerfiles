@@ -54,7 +54,23 @@
     arch: gpu
     baseimg: floydhub/buildpack-deps:cuda9.2-cudnn7-1.0
 
+4.0.0:
+  _template: dl-deps.generic.jinja
+  _opencv_version: '4.1.1'
+  _bazel_version: '0.24.1'
+  cpu:
+    _test: tests/run.sh
+    arch: cpu
+    baseimg: floydhub/buildpack-deps:v1
+  gpu:
+    _test:
+      - tests/run.sh
+      - tests/gpu.sh
+    arch: gpu
+    baseimg: floydhub/buildpack-deps:cuda10.1-cudnn7-1.0
+
 $render:
-  - 1.0.0
-  - 2.0.0
-  - 3.2.0
+  #- 1.0.0
+  #- 2.0.0
+  #- 3.2.0
+  - 4.0.0

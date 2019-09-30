@@ -1,7 +1,7 @@
-{% extends "base.jinja" %}
+FROM floydhub/buildpack-deps:v1
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
-ENV BAZEL_VERSION {{ _bazel_version }}
+ENV BAZEL_VERSION 0.24.1
 
 # Add Bazel distribution URI as a package source
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list \
@@ -85,7 +85,7 @@ RUN apt-get update \
 
 
 # Install opencv
-ARG OPENCV_VERSION={{ _opencv_version }}
+ARG OPENCV_VERSION=4.1.1
 
 RUN apt-get update && apt-get install -y \
         libavcodec-dev \
@@ -126,15 +126,7 @@ RUN cd ~/ && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
-        {%- if arch == 'gpu' %}
-        -D WITH_CUDA=ON \
-        -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
-        {%- endif %}
         -D ENABLE_FAST_MATH=1 \
-        {%- if arch == 'gpu' %}
-        -D CUDA_FAST_MATH=1 \
-        -D WITH_CUBLAS=1 \
-        {%- endif %}
         -DFORCE_VTK=ON \
         -DWITH_TBB=ON \
         -DWITH_GDAL=ON \
@@ -147,4 +139,3 @@ RUN cd ~/ && \
     ldconfig && \
  # Remove the opencv folders to reduce image size
     rm -rf ~/opencv*
-{%- endblock %}
