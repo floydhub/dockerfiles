@@ -67,7 +67,7 @@
       - tests/run.sh
       - tests/gpu.sh
     arch: gpu
-    baseimg: floydhub/buildpack-deps:cuda10.1-cudnn7-1.0
+    baseimg: floydhub/buildpack-deps:cuda10.0-cudnn7-1.0
 
 $render:
   #- 1.0.0
