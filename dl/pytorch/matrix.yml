@@ -238,7 +238,7 @@
     arch: cpu
     baseimg: floydhub/tensorflow:2.0-py3_aws.46
     cpver: cp36-cp36m
-  py3.gpu.cuda9cudnn7:
+  py3.gpu.cuda10cudnn7:
     arch: gpu
     baseimg: floydhub/tensorflow:2.0-gpu.cuda10cudnn7-py3_aws.46
     cpver: cp36-cp36m
