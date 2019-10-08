@@ -191,16 +191,16 @@
   _vision_version: 0.2.1
   _tensorboardx_version: 1.2
   _test: tests/0.3.1/run.sh
-  # possibly a bug in pytorch's official build url naming, should have been 92
-  _cuda_version: 90
+  # you can find the stable versions here: https://download.pytorch.org/whl/torch_stable.html
+  _cuda_version: 10.0
   _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
   py3:
     arch: cpu
     baseimg: floydhub/tensorflow:1.13-py3_aws.42
     cpver: cp36-cp36m
-  py3.gpu.cuda9cudnn7:
+  py3.gpu.cuda10cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.13-gpu.cuda9cudnn7-py3_aws.42
+    baseimg: floydhub/tensorflow:1.13-gpu.cuda10cudnn7-py3_aws.46
     cpver: cp36-cp36m
 
 
@@ -212,16 +212,15 @@
   _text_version: 0.4.0
   _tensorboardx_version: 1.8
   _test: tests/1.0.0/run.sh
-  # possibly a bug in pytorch's official build url naming, should have been 92
-  _cuda_version: 90
+  _cuda_version: 10.0
   _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
   py3:
     arch: cpu
     baseimg: floydhub/tensorflow:1.14-py3_aws.44
     cpver: cp36-cp36m
-  py3.gpu.cuda9cudnn7:
+  py3.gpu.cuda10cudnn7:
     arch: gpu
-    baseimg: floydhub/tensorflow:1.14-gpu.cuda9cudnn7-py3_aws.44
+    baseimg: floydhub/tensorflow:1.14-gpu.cuda10cudnn7-py3_aws.46
     cpver: cp36-cp36m
 
 '1.2.0':
@@ -251,6 +250,6 @@ $render:
   # - '0.3.1'
   # - '0.4.0'
   # - '0.4.1'
-  # - '1.0.1'
-  # - '1.1.0'
+  - '1.0.1'
+  - '1.1.0'
   - '1.2.0'

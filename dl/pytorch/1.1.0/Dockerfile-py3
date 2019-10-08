@@ -8,5 +8,6 @@ RUN pip --no-cache-dir install --upgrade \
         torchtext==0.4.0 \
         tensorboardX==1.8 \
         fastai \
+        transformers \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
