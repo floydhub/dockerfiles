@@ -235,13 +235,13 @@ tensorflow_aws: &tensorflow_aws
 '1.15':
   - <<: *aws_cuda10_0_py3_only
     _version: v1.15.0
-    _keras_version: 2.3.0
+    _keras_version: 2.3.1
 
 
 '2.0':
   - <<: *aws_cuda10_0_py3_only
     _version: v2.0.0
-    _keras_version: 2.3.0
+    _keras_version: 2.3.1
 
 $render:
   # - 0.12.1
