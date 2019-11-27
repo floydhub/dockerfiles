@@ -1,4 +1,4 @@
-FROM floydhub/buildpack-deps:v1
+FROM floydhub/buildpack-deps:v2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ENV BAZEL_VERSION 0.24.1
@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y \
         gfortran \
         golang \
         iptables \
-        libav-tools \
         libboost-all-dev \
         libeigen3-dev \
         libfreetype6-dev \
@@ -45,7 +44,6 @@ RUN apt-get update && apt-get install -y \
         liblcms2-dev \
         libopenblas-dev \
         liblapack-dev \
-        libpng12-dev \
         libprotobuf-dev \
         libsdl2-dev \
         libtiff-dev \

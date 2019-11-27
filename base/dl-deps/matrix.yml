@@ -61,7 +61,7 @@
   cpu:
     _test: tests/run.sh
     arch: cpu
-    baseimg: floydhub/buildpack-deps:v1
+    baseimg: floydhub/buildpack-deps:v2
   gpu:
     _test:
       - tests/run.sh
