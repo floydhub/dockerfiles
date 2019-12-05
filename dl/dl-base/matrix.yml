@@ -117,19 +117,19 @@
   _test: tests/run.sh
   _template: dl-base-2.x.x.jinja
   _bazel_version: '0.24.1'
-  _jupyterlab_version: '1.1.4'
+  _jupyterlab_version: '1.2.3'
   _flask_version: '1.1.1'
   _uwsgi_version: '2.0.18'
   _xgboost_version: '0.90'
   py3:
     cpver: py3
     arch: cpu
-    baseimg: floydhub/dl-python:4.0.0-py3.46
+    baseimg: floydhub/dl-python:4.0.0-py3.50
   py3.gpu:
     cpver: py3
     arch: gpu
     cuda_version: cuda100
-    baseimg: floydhub/dl-python:4.0.0-gpu-py3.46
+    baseimg: floydhub/dl-python:4.0.0-gpu-py3.50
 
 
 $render:

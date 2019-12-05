@@ -1,4 +1,4 @@
-FROM floydhub/dl-python:4.0.0-py3.46
+FROM floydhub/dl-python:4.0.0-py3.50
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # TODO: merge bazel update to dl-deps
@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
         supervisor \
         binutils \
         nodejs \
-        lua5.1 libav-tools \
+        lua5.1 \
         nginx \
         graphviz \
         axel \
@@ -40,7 +40,7 @@ RUN pip --no-cache-dir install \
         dlib \
         incremental \
         nltk \
-        jupyterlab==1.1.4 \
+        jupyterlab==1.2.3 \
         gym[atari,box2d,classic_control] \
         textacy \
         scikit-learn \
@@ -62,7 +62,7 @@ RUN pip --no-cache-dir install \
 
 
 # Install and Enable jupyter-widgets
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1
 
 # Install xgboost
 RUN git clone --branch v0.90 --recursive https://github.com/dmlc/xgboost \

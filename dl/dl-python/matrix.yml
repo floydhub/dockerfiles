@@ -93,14 +93,14 @@
   _template: dl-python.jinja
   py3:
     arch: cpu
-    baseimg: floydhub/dl-deps:4.0.0-cpu.46
+    baseimg: floydhub/dl-deps:4.0.0-cpu.50
     cpver: cp3
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.9
     _test: tests/run.sh
   py3.gpu:
     arch: gpu
-    baseimg: floydhub/dl-deps:4.0.0-gpu.46
+    baseimg: floydhub/dl-deps:4.0.0-gpu.50
     gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
     python_version: 3.6.9
     cpver: cp3
