@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         bash-completion \
         g++ \
         zlib1g-dev \
+	unzip \
     && curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
     && dpkg -i bazel_*.deb \
     && rm bazel_*.deb \
@@ -23,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 # Install some dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         tcl \
         tk \
         ant \
@@ -36,7 +37,6 @@ RUN apt-get update && apt-get install -y \
         gfortran \
         golang \
         iptables \
-        libav-tools \
         libboost-all-dev \
         libeigen3-dev \
         libfreetype6-dev \
@@ -45,7 +45,7 @@ RUN apt-get update && apt-get install -y \
         liblcms2-dev \
         libopenblas-dev \
         liblapack-dev \
-        libpng12-dev \
+        libpng-dev \
         libprotobuf-dev \
         libsdl2-dev \
         libtiff-dev \
@@ -60,7 +60,6 @@ RUN apt-get update && apt-get install -y \
         rsync \
         software-properties-common \
         swig \
-        unzip \
         vim \
         webp \
         xorg-dev \
@@ -68,9 +67,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/cache/apt/archives/* \
-# Link BLAS library to use OpenBLAS using the alternatives mechanism (https://www.scipy.org/scipylib/building/linux.html#debian-ubuntu)
-    && update-alternatives --set libblas.so.3 /usr/lib/openblas-base/libblas.so.3
+    && rm -rf /var/cache/apt/archives/*
 
 # Install Git LFS
 RUN apt-get update \
@@ -85,12 +82,13 @@ RUN apt-get update \
 
 
 # Install opencv
-ARG OPENCV_VERSION=4.1.1
+ARG OPENCV_VERSION=4.1.2
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update \
+    && add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" \
+    && apt-get install -y \
         libavcodec-dev \
         libavformat-dev \
-        libav-tools \
         libavresample-dev \
         libdc1394-22-dev \
         libgdal-dev \
