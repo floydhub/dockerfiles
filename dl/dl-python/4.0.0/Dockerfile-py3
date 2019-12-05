@@ -1,4 +1,4 @@
-FROM floydhub/dl-deps:4.0.0-cpu.46
+FROM floydhub/dl-deps:4.0.0-cpu.50
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 # From https://github.com/docker-library/python/blob/master/3.6./Dockerfile
@@ -66,7 +66,7 @@ RUN cd /usr/local/bin \
 
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 10.0.1
+ENV PYTHON_PIP_VERSION 19.3.1
 
 RUN set -ex; \
     \
