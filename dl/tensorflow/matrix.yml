@@ -218,12 +218,12 @@ tensorflow_aws: &tensorflow_aws
   _test: tests/1.13/run.sh
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:3.2.1-py3.43
+    baseimg: floydhub/dl-base:4.0.0-py3.50
   py3.gpu.cuda10cudnn7_aws:
     arch: gpu
     cuda_version: '10.0'
     cudnn_version: '7'
-    baseimg: floydhub/dl-base:3.2.1-gpu-py3.43
+    baseimg: floydhub/dl-base:4.0.0-gpu-py3.50
 
 
 '1.14':
