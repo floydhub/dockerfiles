@@ -15,6 +15,7 @@ RUN pip --no-cache-dir install --upgrade \
 {%- if cpver.startswith('cp3') %}
         fastai \
         transformers \
+	tokenizers \
 {%- endif %}
     && rm -rf /tmp/* \
     && rm -rf /root/.cache

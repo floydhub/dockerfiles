@@ -2,11 +2,12 @@ FROM floydhub/tensorflow:2.0-gpu.cuda10cudnn7-py3_aws.50
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \
-        https://download.pytorch.org/whl/cu100/torch-1.3.1%2Bcu100-cp36-cp36m-linux_x86_64.whl \
-        https://download.pytorch.org/whl/cu100/torchvision-0.4.2%2Bcu100-cp36-cp36m-linux_x86_64.whl \
+        http://download.pytorch.org/whl/cu100/torch-1.3.1%2Bcu100-cp36-cp36m-linux_x86_64.whl \
+        http://download.pytorch.org/whl/cu100/torchvision-0.4.2%2Bcu100-cp36-cp36m-linux_x86_64.whl \
         torchtext==0.4.0 \
-        tensorboardX==1.8 \
+        tensorboardX==2.0 \
         fastai \
         transformers \
+	tokenizers \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
