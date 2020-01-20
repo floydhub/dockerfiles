@@ -1,7 +1,7 @@
-{% extends "base.jinja" %}
+FROM floydhub/buildpack-deps:v2
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
-ENV BAZEL_VERSION {{ _bazel_version }}
+ENV BAZEL_VERSION 0.24.1
 
 # Add Bazel distribution URI as a package source
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list \
@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         bash-completion \
         g++ \
         zlib1g-dev \
-	unzip \
     && curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
     && dpkg -i bazel_*.deb \
     && rm bazel_*.deb \
@@ -45,13 +44,13 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         liblcms2-dev \
         libopenblas-dev \
         liblapack-dev \
-        libpng-dev \
         libprotobuf-dev \
         libsdl2-dev \
         libtiff-dev \
         libtiff5-dev \
         libvncserver-dev \
         libzmq3-dev \
+	libpng-dev \
         nano \
         net-tools \
         openmpi-bin \
@@ -60,6 +59,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         rsync \
         software-properties-common \
         swig \
+        unzip \
         vim \
         webp \
         xorg-dev \
@@ -67,7 +67,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && apt-get clean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/cache/apt/archives/*
+    && rm -rf /var/cache/apt/archives/* 
 
 # Install Git LFS
 RUN apt-get update \
@@ -82,7 +82,7 @@ RUN apt-get update \
 
 
 # Install opencv
-ARG OPENCV_VERSION={{ _opencv_version }}
+ARG OPENCV_VERSION=4.1.2
 
 RUN apt-get update \
     && add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main" \
@@ -124,15 +124,7 @@ RUN cd ~/ && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
-        {%- if arch == 'gpu' %}
-        -D WITH_CUDA=ON \
-        -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
-        {%- endif %}
         -D ENABLE_FAST_MATH=1 \
-        {%- if arch == 'gpu' %}
-        -D CUDA_FAST_MATH=1 \
-        -D WITH_CUBLAS=1 \
-        {%- endif %}
         -DFORCE_VTK=ON \
         -DWITH_TBB=ON \
         -DWITH_GDAL=ON \
@@ -145,4 +137,3 @@ RUN cd ~/ && \
     ldconfig && \
  # Remove the opencv folders to reduce image size
     rm -rf ~/opencv*
-{%- endblock %}

@@ -15,7 +15,7 @@ ENV TF_CUDA_VERSION {{ cuda_version }}
 ENV TF_CUDNN_VERSION {{ cudnn_version }}
 ENV TF_NEED_CUDA 1
 {#- taken from https://developer.nvidia.com/cuda-gpus #}
-{%- if cuda_version.startswith('9') %}
+{%- if cuda_version.startswith('9') or cuda_version.startswith('10') %}
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7,7.0
 {%- else %}
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
@@ -62,10 +62,9 @@ RUN git clone https://github.com/tensorflow/tensorflow.git \
     && rm -rf /root/.cache \
     && cd .. && rm -rf tensorflow
 
-# Install Keras and tflearn
+# Install Keras
 RUN pip --no-cache-dir install \
         git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
-        tflearn==0.3.2 \
     && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache

@@ -1,12 +1,17 @@
-FROM floydhub/dl-base:3.1.0-py3.33
+FROM floydhub/dl-base:4.0.0-py3.50
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-ARG TENSORFLOW_VERSION=r1.6
-ARG KERAS_VERSION=2.1.6
+ARG TENSORFLOW_VERSION=v2.1.0
+ARG KERAS_VERSION=2.3.1
 
 ENV CI_BUILD_PYTHON python
 
+ENV BAZEL_VERSION 0.27.1
 
+RUN curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
+    && dpkg --force-confnew -i bazel_*.deb \
+    && apt-get clean \
+    && rm bazel_*.deb
 
 # install deps for tf build :(
 RUN pip --no-cache-dir install \
