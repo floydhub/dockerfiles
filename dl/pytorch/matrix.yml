@@ -263,6 +263,25 @@
     cpver: cp36-cp36m
 
 
+'1.4.0':
+  _platform: linux
+  _template: pytorch-0.x.x.jinja
+  _version: 1.4.0
+  _vision_version: 0.5.0
+  _text_version: 0.5.0
+  _tensorboardx_version: 2.0
+  _test: tests/1.0.0/run.sh
+  _cuda_version: 10.0
+  _cuda_virtual_arch_feature_list: '3.5;5.2;6.0;6.1;6.2;7.0'
+  py3:
+    arch: cpu
+    baseimg: floydhub/tensorflow:2.1-py3_aws.52
+    cpver: cp36-cp36m
+  py3.gpu.cuda10cudnn7:
+    arch: gpu
+    baseimg: floydhub/tensorflow:2.1-gpu.cuda10cudnn7-py3_aws.52
+    cpver: cp36-cp36m
+
 $render:
   #- '0.1.12'
   #- '0.2.0'
@@ -272,5 +291,6 @@ $render:
   # - '0.4.1'
   #- '1.0.1'
   #- '1.1.0'
-  - '1.2.0'
-  - '1.3.0'
+  #- '1.2.0'
+  #- '1.3.0'
+  - '1.4.0'
