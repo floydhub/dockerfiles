@@ -56,8 +56,9 @@ RUN pip --no-cache-dir install \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
 
-# Fix JupyterLab
-RUN pip --no-cache-dir install notebooks==6.0.3 \
+# Fix Jupyterlab - see https://github.com/jupyter/jupyter/issues/401
+# TODO: move this on dl-base
+RUN pip --no-cache-dir install --upgrade notebook \
     && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
