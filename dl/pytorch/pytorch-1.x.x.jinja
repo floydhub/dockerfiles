@@ -1,0 +1,32 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+RUN pip --no-cache-dir install --upgrade \
+{%-   if arch == 'gpu' %}
+        http://download.pytorch.org/whl/cu{{ _cuda_version | replace(".", "") }}/torch-{{ _version }}%2Bcu{{ _cuda_version | replace(".", "") }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+        http://download.pytorch.org/whl/cu{{ _cuda_version | replace(".", "") }}/torchvision-{{ _vision_version }}%2Bcu{{ _cuda_version | replace(".", "") }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+{%-   else %}
+        http://download.pytorch.org/whl/cpu/torch-{{ _version }}%2B{{ arch }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+        # Torchvision is now built with CUDA https://github.com/pytorch/vision/issues/946 
+        https://download.pytorch.org/whl/cpu/torchvision-{{ _vision_version }}%2B{{ arch }}-{{ cpver }}-{{ _platform }}_x86_64.whl \
+{%-   endif %}
+        torchtext=={{ _text_version }} \
+        tensorboardX=={{ _tensorboardx_version }} \
+{%- if cpver.startswith('cp3') %}
+        fastai \
+        transformers \
+	tokenizers \
+{%- endif %}
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
+
+# Fix Jupyterlab - see https://github.com/jupyter/jupyter/issues/401
+# TODO: move this on dl-base
+RUN pip --no-cache-dir install notebooks==6.0.3 \
+    && rm -rf /pip_pkg \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
+
+{%- endblock %}
+
+
