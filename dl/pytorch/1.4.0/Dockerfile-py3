@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:2.1-py3_aws.52
+FROM floydhub/tensorflow:2.1-py3_aws.54
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \
@@ -10,5 +10,12 @@ RUN pip --no-cache-dir install --upgrade \
         fastai \
         transformers \
 	tokenizers \
+    && rm -rf /tmp/* \
+    && rm -rf /root/.cache
+
+# Fix Jupyterlab - see https://github.com/jupyter/jupyter/issues/401
+# TODO: move this on dl-base
+RUN pip --no-cache-dir install --upgrade notebook \
+    && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache
