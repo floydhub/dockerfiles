@@ -88,8 +88,7 @@
     cpver: cp3
     _test: tests/gpu_run.sh
 
-
-4.0.0:
+4.0.0: &dl-python_cuda10
   _template: dl-python.jinja
   py3:
     arch: cpu
@@ -106,10 +105,19 @@
     cpver: cp3
     _test: tests/gpu_run.sh
 
+4.1.0: 
+  - <<: *dl-python_cuda10
+    py3:
+      baseimg: floydhub/dl-deps:4.1.0-cpu.55
+    py3.gpu:
+      baseimg: floydhub/dl-deps:4.1.0-gpu.55
+
 
 $render:
   # - 1.1.0
   # - 2.0.0
   # - 3.1.0
   # - 3.2.0
-  - 4.0.0
+  # - 4.0.0
+  - 4.1.0
+

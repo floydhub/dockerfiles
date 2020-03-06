@@ -26,13 +26,6 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 {% set PRE_CFG_CMD = '' -%}
 {% endif %}
 
-# TODO: move this on dl-base
-ENV BAZEL_VERSION 0.27.1
-RUN curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
-    && dpkg --force-confnew -i bazel_*.deb \
-    && apt-get clean \
-    && rm bazel_*.deb
-
 # install deps for tf build :(
 RUN pip --no-cache-dir install \
         funcsigs \
@@ -72,14 +65,7 @@ RUN git clone https://github.com/tensorflow/tensorflow.git \
 # Install Keras
 RUN pip --no-cache-dir install \
         git+git://github.com/fchollet/keras.git@${KERAS_VERSION} \
-    && rm -rf /pip_pkg \
-    && rm -rf /tmp/* \
-    && rm -rf /root/.cache
-
-
-# Fix Jupyterlab - see https://github.com/jupyter/jupyter/issues/401
-# TODO: move this on dl-base
-RUN pip --no-cache-dir install --upgrade notebook \
+        tensorflow-addons \
     && rm -rf /pip_pkg \
     && rm -rf /tmp/* \
     && rm -rf /root/.cache

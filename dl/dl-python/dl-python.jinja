@@ -68,7 +68,7 @@ RUN cd /usr/local/bin \
 
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 19.3.1
+ENV PYTHON_PIP_VERSION 20.0.2
 
 RUN set -ex; \
     \
@@ -105,7 +105,7 @@ RUN pip --no-cache-dir install \
         Cython \
         h5py \
         jupyter \
-        notebook==5.6.0 \
+        notebook \
         numpy \
 {%- if arch == 'gpu' %}
         cupy \
@@ -127,7 +127,7 @@ RUN pip --no-cache-dir install \
         sympy \
         Pillow \
         zmq \
-        opencv-contrib-python==3.4.0.12 \
+        opencv-contrib-python==4.2.0.32 \
     && rm -rf /tmp/* /var/tmp/* \
     && python -m ipykernel.kernelspec
 
