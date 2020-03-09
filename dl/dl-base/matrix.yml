@@ -130,15 +130,23 @@
     cuda_version: cuda100
     baseimg: floydhub/dl-python:4.0.0-gpu-py3.50
 
-4.1.0: 
-  - <<: *dl-base_cuda10
-    _bazel_version: '2.2.0'
-    _xgboost_version: '1.0.1'
-    py3:
-      baseimg: floydhub/dl-python:4.1.0-py3.55
-    py3.gpu:
-      cuda_version: cuda101
-      baseimg: floydhub/dl-python:4.1.0-gpu-py3.55
+4.1.0:
+  _test: tests/run.sh
+  _template: dl-base-2.x.x.jinja
+  _bazel_version: '2.2.0'
+  _jupyterlab_version: '2.0.0'
+  _flask_version: '1.1.1'
+  _uwsgi_version: '2.0.18'
+  _xgboost_version: '1.0.1'
+  py3:
+    cpver: py3
+    arch: cpu
+    baseimg: floydhub/dl-python:4.1.0-py3.55
+  py3.gpu:
+    cpver: py3
+    arch: gpu
+    cuda_version: cuda101
+    baseimg: floydhub/dl-python:4.1.0-gpu-py3.55
 
 
 $render:

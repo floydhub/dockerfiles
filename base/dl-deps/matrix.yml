@@ -70,11 +70,19 @@
     baseimg: floydhub/buildpack-deps:cuda10.0-cudnn7-1.0
 
 4.1.0:
-  - <<: *base_cuda10
-    _opencv_version: '4.2.0'
-    _bazel_version: '2.2.0'
-    gpu:
-      baseimg: floydhub/buildpack-deps:cuda10.1-cudnn7-1.0
+  _template: dl-deps.generic.jinja
+  _opencv_version: '4.2.0'
+  _bazel_version: '2.2.0'
+  cpu:
+    _test: tests/run.sh
+    arch: cpu
+    baseimg: floydhub/buildpack-deps:v2
+  gpu:
+    _test:
+      - tests/run.sh
+      - tests/gpu.sh
+    arch: gpu
+    baseimg: floydhub/buildpack-deps:cuda10.1-cudnn7-1.0
 
 
 $render:

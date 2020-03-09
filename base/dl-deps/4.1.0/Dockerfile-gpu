@@ -124,7 +124,11 @@ RUN cd ~/ && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -DWITH_QT=ON \
         -DWITH_OPENGL=ON \
+        -D WITH_CUDA=ON \
+        -D CUDA_CUDA_LIBRARY=/usr/local/cuda/lib64/stubs/libcuda.so \
         -D ENABLE_FAST_MATH=1 \
+        -D CUDA_FAST_MATH=1 \
+        -D WITH_CUBLAS=1 \
         -DFORCE_VTK=ON \
         -DWITH_TBB=ON \
         -DWITH_GDAL=ON \

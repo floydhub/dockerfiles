@@ -56,6 +56,8 @@ RUN pip --no-cache-dir install \
         annoy \
         pynvrtc \
         menpo \
+        cupy-cuda101 \
+        # TODO: Build RAPIDS from source
         gym-retro \
         retrowrapper \
     && rm -rf /tmp/* /var/tmp/*
@@ -63,12 +65,25 @@ RUN pip --no-cache-dir install \
 
 # Install and Enable jupyter-widgets - see https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2
+# Update Cmake to the latest version to build xgboost on CUDA
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc$
+  && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic m$
+  && apt-get update \
+  && apt-get install -y cmake \
+  && apt-get clean \
+  && apt-get autoremove -y \
+  && rm -rf /var/cache/apt/archives/* \
+  && rm -rf /var/lib/apt/lists/*
 
 
 # Install xgboost
 RUN git clone --branch v1.0.1 --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DUSE_CUDA=ON \
     && make -j$(nproc) \
+    && cd .. \
     && cd python-package \
     && python setup.py install \
     && cd ../.. \

@@ -106,11 +106,21 @@
     _test: tests/gpu_run.sh
 
 4.1.0: 
-  - <<: *dl-python_cuda10
-    py3:
-      baseimg: floydhub/dl-deps:4.1.0-cpu.55
-    py3.gpu:
-      baseimg: floydhub/dl-deps:4.1.0-gpu.55
+  _template: dl-python.jinja
+  py3:
+    arch: cpu
+    baseimg: floydhub/dl-deps:4.1.0-cpu.55
+    cpver: cp3
+    gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
+    python_version: 3.6.9
+    _test: tests/run.sh
+  py3.gpu:
+    arch: gpu
+    baseimg: floydhub/dl-deps:4.1.0-cpu.55
+    gpg_release_signing_key: '0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D'
+    python_version: 3.6.9
+    cpver: cp3
+    _test: tests/gpu_run.sh
 
 
 $render:
@@ -120,4 +130,3 @@ $render:
   # - 3.2.0
   # - 4.0.0
   - 4.1.0
-
