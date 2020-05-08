@@ -1,6 +1,6 @@
-{% extends "base.jinja" %}
+FROM floydhub/dl-python:4.1.0-py3.55
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
 # Script to install the NodeSource Node.js 8.x LTS Carbon
 # repo onto a Debian or Ubuntu system.
 RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
@@ -26,18 +26,15 @@ COPY tensorboard/tensorboard.conf /etc/supervisor/conf.d/
 
 RUN pip --no-cache-dir install \
         floyd-cli \
-        flask=={{ _flask_version}} \
-        uwsgi=={{ _uwsgi_version}} \
+        flask==1.1.2 \
+        uwsgi==2.0.18 \
         pydot \
         dlib \
         incremental \
         nltk \
         notebook \
-        jupyterlab=={{ _jupyterlab_version}} \
+        jupyterlab==2.1.2 \
         gym[atari,box2d,classic_control] \
-{%- if cpver == 'py2' %}
-        pattern \
-{%- endif %}
         textacy \
         scikit-learn \
         scikit-image \
@@ -52,45 +49,19 @@ RUN pip --no-cache-dir install \
         annoy \
         pynvrtc \
         menpo \
-{%- if arch == 'gpu' %}
-        cupy-{{ cuda_version }} \
-        # TOADD RAPIDS
-{%- endif %}
-{%- if cpver != 'py2' %}
         gym-retro \
         retrowrapper \
-{%- endif %}
     && rm -rf /tmp/* /var/tmp/*
 
 
 # Install and Enable jupyter-widgets - see https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1
 
-{%- if arch == 'gpu' %}
-# Update Cmake to the latest version to build xgboost on CUDA
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc$
-  && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic m$
-  && apt-get update \
-  && apt-get install -y cmake \
-  && apt-get clean \
-  && apt-get autoremove -y \
-  && rm -rf /var/cache/apt/archives/* \
-  && rm -rf /var/lib/apt/lists/*
-{%- endif %}
-
 
 # Install xgboost
-RUN git clone --branch v{{ _xgboost_version }} --recursive https://github.com/dmlc/xgboost \
+RUN git clone --branch v1.0.2 --recursive https://github.com/dmlc/xgboost \
     && cd xgboost \
-{%- if arch == 'gpu' %}
-    && mkdir build \
-    && cd build \
-    && cmake .. -DUSE_CUDA=ON \
     && make -j$(nproc) \
-    && cd .. \
-{%- else %}
-    && make -j$(nproc) \
-{%- endif %}
     && cd python-package \
     && python setup.py install \
     && cd ../.. \
@@ -100,5 +71,3 @@ RUN git clone --branch v{{ _xgboost_version }} --recursive https://github.com/dm
 # RUN wget https://repo.continuum.io/archive/Anaconda3-5.0.0-Linux-x86_64.sh \
 #     && bash Anaconda3-5.0.0-Linux-x86_64.sh -b \
 #     && rm Anaconda3-5.0.0-Linux-x86_64.sh
-
-{%- endblock %}
