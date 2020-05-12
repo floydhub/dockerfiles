@@ -1,9 +1,9 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-# Script to install the NodeSource Node.js 8.x LTS Carbon
+# Script to install the NodeSource Node.js 10.x LTS Dubnium
 # repo onto a Debian or Ubuntu system.
-RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
+RUN wget -qO- https://deb.nodesource.com/setup_10.x | bash -
 
 # Install Nodejs and supervisor for tensorboard and jupyter lab
 # lua5.1 and libav-tools for gym retro
@@ -41,7 +41,7 @@ RUN pip --no-cache-dir install \
         textacy \
         scikit-learn \
         scikit-image \
-        scikit-umfpack \
+        #scikit-umfpack=='0.3.1' \
         spacy \
         tqdm \
         wheel \
@@ -64,12 +64,12 @@ RUN pip --no-cache-dir install \
 
 
 # Install and Enable jupyter-widgets - see https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 
 {%- if arch == 'gpu' %}
 # Update Cmake to the latest version to build xgboost on CUDA
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc$
-  && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic m$
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add - \
+  && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main' \
   && apt-get update \
   && apt-get install -y cmake \
   && apt-get clean \

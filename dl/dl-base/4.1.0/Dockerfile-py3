@@ -1,9 +1,9 @@
 FROM floydhub/dl-python:4.1.0-py3.55
 MAINTAINER Floyd Labs "support@floydhub.com"
 
-# Script to install the NodeSource Node.js 8.x LTS Carbon
+# Script to install the NodeSource Node.js 10.x LTS Dubnium
 # repo onto a Debian or Ubuntu system.
-RUN wget -qO- https://deb.nodesource.com/setup_8.x | bash -
+RUN wget -qO- https://deb.nodesource.com/setup_10.x | bash -
 
 # Install Nodejs and supervisor for tensorboard and jupyter lab
 # lua5.1 and libav-tools for gym retro
@@ -38,7 +38,7 @@ RUN pip --no-cache-dir install \
         textacy \
         scikit-learn \
         scikit-image \
-        scikit-umfpack \
+        #scikit-umfpack=='0.3.1' \
         spacy \
         tqdm \
         wheel \
@@ -55,7 +55,7 @@ RUN pip --no-cache-dir install \
 
 
 # Install and Enable jupyter-widgets - see https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
 
 
 # Install xgboost

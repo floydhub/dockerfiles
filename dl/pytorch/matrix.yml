@@ -283,6 +283,7 @@
     cpver: cp36-cp36m
 
 
+# TODO: the cuda link has changed again, need to fix or create a new template
 '1.5.0':
   _platform: linux
   _template: pytorch-1.x.x.jinja
