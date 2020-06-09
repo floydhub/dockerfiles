@@ -1,8 +1,7 @@
-{% extends "base.jinja" %}
+FROM floydhub/dl-deps:4.1.0-gpu.55
+MAINTAINER Floyd Labs "support@floydhub.com"
 
-{% block content %}
-{%- if cpver == 'cp3' %}
-# From https://github.com/docker-library/python/blob/master/{{ python_version[0:4] }}/Dockerfile
+# From https://github.com/docker-library/python/blob/master/3.7./Dockerfile
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -11,8 +10,8 @@ ENV PATH /usr/local/bin:$PATH
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
 
-ENV GPG_KEY {{ gpg_release_signing_key }}
-ENV PYTHON_VERSION {{ python_version }}
+ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+ENV PYTHON_VERSION 3.7.7
 
 RUN set -ex \
 	&& apt-get update \
@@ -68,7 +67,7 @@ RUN cd /usr/local/bin \
 
 
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION {{ _python_pip_version }}
+ENV PYTHON_PIP_VERSION 20.1
 
 RUN set -ex; \
     \
@@ -88,16 +87,6 @@ RUN set -ex; \
             \( -type f -a \( -name '*.pyc' -o -name '*.pyo' \) \) \
         \) -exec rm -rf '{}' +; \
     rm -f get-pip.py
-{%- else %}
-RUN  apt-get update \
-    && apt-get install -y --no-install-recommends \
-        python-pip \
-        python-setuptools \
-    && apt-get clean \
-    && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /var/cache/apt/archives/*
-{%- endif %}
 
 RUN pip --no-cache-dir install \
         virtualenv \
@@ -107,18 +96,10 @@ RUN pip --no-cache-dir install \
         jupyter \
         notebook \
         numpy \
-{%- if arch == 'gpu' %}
         cupy \
-{%- endif %}
         pandas \
-{%- if cpver == 'cp2' %}
-        ipykernel==4.9.0 \
-        ipython==5.6.0 \
-        matplotlib==2.2.3 \
-{%- else %}
         matplotlib \
         ipykernel \
-{%- endif %}
         path.py \
         pyyaml \
         scipy \
@@ -127,17 +108,13 @@ RUN pip --no-cache-dir install \
         sympy \
         Pillow \
         zmq \
+        opencv-contrib-python \
     && rm -rf /tmp/* /var/tmp/* \
     && python -m ipykernel.kernelspec
 
 # Set up our notebook config.
-{%- if cpver == 'cp2' %}
-COPY jupyter_notebook_config_py2.py /root/.jupyter/
-RUN mv /root/.jupyter/jupyter_notebook_config_py2.py /root/.jupyter/jupyter_notebook_config.py
-{%- else %}
 COPY jupyter_notebook_config_py3.py /root/.jupyter/
 RUN mv /root/.jupyter/jupyter_notebook_config_py3.py /root/.jupyter/jupyter_notebook_config.py
-{%- endif %}
 
 # Create the file configurations for IPython
 # and remove the default one.
@@ -156,4 +133,3 @@ RUN chmod +x /run_jupyter.sh
 EXPOSE 8888
 
 CMD ["/run_jupyter.sh"]
-{%- endblock %}

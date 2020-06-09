@@ -250,6 +250,20 @@ tensorflow_aws: &tensorflow_aws
     _keras_version: 2.3.1
     _test: tests/2.0/run.sh
 
+'2.2': &aws_cuda10_2_py3_only
+  _version: v2.2.0
+  _keras_version:  2.3.1
+  _template: tensorflow-bazel_aws.jinja
+  _test: tests/2.0/run.sh
+  py3_aws:
+    arch: cpu
+    baseimg: floydhub/dl-base:4.1.0-py3.55
+  py3.gpu.cuda10cudnn7_aws:
+    arch: gpu
+    cuda_version: '10.2'
+    cudnn_version: '7'
+    baseimg: floydhub/dl-base:4.1.0-gpu-py3.55
+
 $render:
   # - 0.12.1
   # - 1.0.1
@@ -271,4 +285,5 @@ $render:
   #- '1.14'
   #- '1.15'
   #- '2.0'
-  - '2.1'
+  #- '2.1'
+  - '2.2'
