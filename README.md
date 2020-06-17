@@ -37,3 +37,14 @@ floydhub/PROJECT_NAME:VERSION-ENV-gpu
 ```
 
 Contains docker images for popular deep learning frameworks including: Tensorflow, PyTorch and Torch.
+
+## Repository's structure
+
+Add image from the blog & link
+
+TODO: Floydker link
+
+TODO: CI link?
+
+TODO: base & dl explanation (copy from the article)
+
