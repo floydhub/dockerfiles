@@ -64,7 +64,9 @@ RUN pip --no-cache-dir install \
 
 
 # Install and Enable jupyter-widgets - see https://github.com/jupyter-widgets/ipywidgets/tree/master/packages/jupyterlab-manager
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2.0
+RUN jupyter labextension install \
+        @jupyter-widgets/jupyterlab-manager@2.0 \
+        jupyterlab-plotly
 
 {%- if arch == 'gpu' %}
 # Update Cmake to the latest version to build xgboost on CUDA
