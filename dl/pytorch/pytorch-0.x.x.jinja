@@ -13,7 +13,7 @@ RUN pip --no-cache-dir install --upgrade \
         torchtext=={{ _text_version }} \
         tensorboardX=={{ _tensorboardx_version }} \
 {%- if cpver.startswith('cp3') %}
-        fastai \
+        fastai2 \
         transformers \
 	tokenizers \
 {%- endif %}

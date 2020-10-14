@@ -6,7 +6,7 @@ RUN pip --no-cache-dir install --upgrade \
         http://download.pytorch.org/whl/cu102/torchvision-0.7.0-cp37-cp37m-linux_x86_64.whl \
         torchtext==0.7.0 \
         tensorboardX==2.1 \
-        fastai \
+        fastai2 \
         transformers \
 	tokenizers \
     && rm -rf /tmp/* \

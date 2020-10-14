@@ -27,7 +27,7 @@ ENV TF_CUDA_COMPUTE_CAPABILITIES=3.7
 {% endif %}
 
 # Fix build
-ENV BAZEL_VERSION 2.0.0
+ENV BAZEL_VERSION 3.1.0
 RUN curl -LO "https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel_${BAZEL_VERSION}-linux-x86_64.deb" \
     && dpkg --force-confnew -i bazel_*.deb \
     && apt-get clean \
