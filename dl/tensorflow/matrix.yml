@@ -264,6 +264,13 @@ tensorflow_aws: &tensorflow_aws
     cudnn_version: '7'
     baseimg: floydhub/dl-base:4.1.0-gpu-py3.55
 
+'2.3':
+  - <<: *aws_cuda10_2_py3_only
+    _version: v2.3.1
+    _keras_version:  2.4.0
+
+ 
+
 $render:
   # - 0.12.1
   # - 1.0.1
@@ -286,4 +293,5 @@ $render:
   #- '1.15'
   #- '2.0'
   #- '2.1'
-  - '2.2'
+  #- '2.2'
+  - '2.3'
