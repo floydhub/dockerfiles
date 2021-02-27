@@ -2,8 +2,8 @@ FROM floydhub/tensorflow:2.4-gpu.cuda10cudnn7-py3_aws.57
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \
-        http://download.pytorch.org/whl/cu102/torch-1.7.1%2Bcu102-cp37-cp37m-linux_x86_64.whl \
-        http://download.pytorch.org/whl/cu102/torchvision-0.8.2%2Bcu102-cp37-cp37m-linux_x86_64.whl \
+        http://download.pytorch.org/whl/cu102/torch-1.7.1-cp37-cp37m-linux_x86_64.whl \
+        http://download.pytorch.org/whl/cu102/torchvision-0.8.2-cp37-cp37m-linux_x86_64.whl \
         torchtext==0.8.1 \
         tensorboardX==2.1 \
         fastai \

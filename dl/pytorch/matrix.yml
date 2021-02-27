@@ -324,7 +324,7 @@
     baseimg: floydhub/tensorflow:2.3-gpu.cuda10cudnn7-py3_aws.56
     cpver: cp37-cp37m
 
-
+# TODO: the cuda link has changed again, need to fix or create a new template
 '1.7.1':
   _platform: linux
   _template: pytorch-1.x.x.jinja
