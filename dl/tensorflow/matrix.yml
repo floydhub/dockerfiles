@@ -273,7 +273,7 @@ tensorflow_aws: &tensorflow_aws
 '2.4':
   - <<: *aws_cuda10_2_py3_only
     _version: v2.4.1
-    _keras_version:  2.4.3
+    _keras_version:  2.4.0
 
  
 

@@ -1,4 +1,4 @@
-FROM floydhub/tensorflow:2.3-py3_aws.57
+FROM floydhub/tensorflow:2.4-py3_aws.57
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 RUN pip --no-cache-dir install --upgrade \

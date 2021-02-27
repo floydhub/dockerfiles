@@ -2,7 +2,7 @@ FROM floydhub/dl-base:4.1.0-gpu-py3.55
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=v2.4.1
-ARG KERAS_VERSION=2.4.3
+ARG KERAS_VERSION=2.4.0
 
 ENV CI_BUILD_PYTHON python
 
